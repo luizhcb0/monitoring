@@ -17,3 +17,25 @@
  
  @import "bootstrap-sprockets";
  @import "bootstrap";
+ 
+ body {
+   color: #111;
+   // background-color: #f8fdff;
+   background-color: #E6E6E6;
+   text-align: center;
+   font-family: 'Futura', sans-serif;
+ }
+ 
+ .affix {
+ 	z-index: 4;
+   top: 0;
+   width: 100%;
+ }
+
+ .affix + .container-fluid {
+   margin-top: 60px;
+ }
+ 
+ .brand_logo {
+   height: 100%;
+ }

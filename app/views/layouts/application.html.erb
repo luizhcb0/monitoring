@@ -42,8 +42,7 @@
             <% else %>
               <ul class="nav navbar-nav">
                 <li class="<%= 'active' if current_page?(root_path) %>"><%= link_to 'Home', root_path %></li>
-                <li class="<%= 'active' if current_page?(startup_faq_path)  %>"><%= link_to 'Start up/FAQ', startup_faq_path %></li>
-                <li class="<%= 'active' if current_page?(contacts_path) %>"><%= link_to 'Contact Us', contacts_path %></li>
+                
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -58,7 +57,10 @@
         </div>
     </nav>
     
-    <%= yield %>
+    <section>
+      <%= yield %>
+    </section>
+    
     
   </body>
 </html>
