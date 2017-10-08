@@ -2,25 +2,25 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.menu_container {
+.menu-container {
   font-size: 120px;
   line-height: 90px;
   color: #bbb;
   height: 260px;
-  border:1px solid #ccc !important;
+  border:1px solid #ddd !important;
   border-radius: 2px;
-  box-shadow: 0px 0px 2px #bbb;
+  box-shadow: 0px 0px 2px #ccc;
   margin-bottom: 20px;
-  background-color: #f0f0f0;
+  background-color: #f8f8f8;
 }
 
-.menu_container:hover {
-  color: #57c;
+.menu-container:hover {
+  color: #49d;
   text-decoration: none;
 }
 
-.menu_label {
-  color: #57c;
+.menu-label {
+  color: #49d;
   font-size: 18px;
 }
 

@@ -1,0 +1,32 @@
+<div class="canvas">
+  <div class="row">  
+    <div class="col-sm-10 col-sm-offset-1">
+
+      <div class="device-canvas">
+        <div class="tank">
+          <div class="water"></div>
+        </div>
+        <button class="btn btn-primary" type="button" name="button" onclick="deviceInfo(this)">Voltar</button>
+      </div>
+
+      <div class="devices-canvas">
+
+        <div class="top-devices">
+          <% @top_devices.each do |l| %>
+            <div class="water-device" id="device-<%= l.id %>" onclick="deviceInfo(this)"></div>
+          <% end %>
+        </div>
+        
+        <div class="water-device-info"></div>
+      
+        <div class="bottom-devices">
+          <% @bottom_devices.each do |l| %>
+            <div class="water-device" id="device-<%= l.id %>" onclick="deviceInfo(this)"></div>
+          <% end %>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
