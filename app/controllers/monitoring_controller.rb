@@ -1,6 +1,8 @@
 class MonitoringController < ApplicationController
   include StrongParamsHolder
   
+  before_action :authenticate_user!
+  
   def index
     @top_devices = Device.get_top_devices
     @bottom_devices = Device.get_bottom_devices
