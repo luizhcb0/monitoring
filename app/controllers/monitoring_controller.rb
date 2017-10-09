@@ -1,8 +1,18 @@
 class MonitoringController < ApplicationController
+  include StrongParamsHolder
   
   def index
     @top_devices = Device.get_top_devices
     @bottom_devices = Device.get_bottom_devices
+  end
+  
+  def create
+    @level = Level.new(monitoring_params)
+    if @level.save
+      render json: @level, status: :created
+    else
+      render json: "error"
+    end
   end
   
   def render_current_level
