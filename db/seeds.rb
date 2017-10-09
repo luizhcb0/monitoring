@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.create(name: "admin", email: "admin@gmail.com", password: "111111")
+
 device1 = Device.create(resolution: 3, address: "http://192.168.0.22", position: "top", order: 1)
 device2 = Device.create(resolution: 3, address: "http://192.168.0.22", position: "top", order: 2)
 device3 = Device.create(resolution: 3, address: "http://192.168.0.22", position: "top", order: 3)
