@@ -1,6 +1,6 @@
 $updateRate = 1200;
 
-$(document).ready(function() {
+$(".monitoring.index").ready(function() {
   getLevels();
   // chart();
   $allTimer = setInterval(
