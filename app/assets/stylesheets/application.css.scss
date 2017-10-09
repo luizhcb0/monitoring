@@ -39,3 +39,14 @@
  .brand_logo {
    height: 100%;
  }
+ 
+ @media (min-width: 768px) {
+   .group {
+     margin-bottom: 50px !important;
+   }
+ }
+ 
+ .logo {
+   height: 200px;
+   margin-bottom: 30px;
+ }
