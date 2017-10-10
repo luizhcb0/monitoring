@@ -112,7 +112,7 @@ function updateDevices($level) {
   if ($percentage >= 0 && $percentage < 0.1) {
     $('#device-'+$level.device_id).removeClass( "low medium full" ).addClass('empty');
   }
-  else if ($percentage >= 0.2 && $percentage < 0.4) {
+  else if ($percentage >= 0.1 && $percentage < 0.4) {
     $('#device-'+$level.device_id).removeClass( "empty medium full" ).addClass('low');
   }
   else if ($percentage >= 0.4 && $percentage < 0.8) {
