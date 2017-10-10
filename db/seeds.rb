@@ -17,6 +17,14 @@ device6 = Device.create(resolution: 3, address: "http://192.168.0.22", position:
 device7 = Device.create(resolution: 3, address: "http://192.168.0.22", position: "bottom", order: 3)
 device8 = Device.create(resolution: 3, address: "http://192.168.0.22", position: "bottom", order: 4)
 
+Dimension.create(x: 2, y: 6, z: 2, device_id: 1)
+Dimension.create(x: 2, y: 6, z: 2, device_id: 2)
+Dimension.create(x: 2, y: 6, z: 2, device_id: 3)
+Dimension.create(x: 2, y: 6, z: 2, device_id: 4)
+Dimension.create(x: 2, y: 6, z: 2, device_id: 5)
+Dimension.create(x: 2, y: 6, z: 2, device_id: 6)
+Dimension.create(x: 2, y: 6, z: 2, device_id: 7)
+Dimension.create(x: 2, y: 6, z: 2, device_id: 8)
 
 Level.create(device_id: 1, level: 0)
 Level.create(device_id: 2, level: 0)

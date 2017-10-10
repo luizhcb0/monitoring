@@ -1,7 +1,10 @@
-$updateRate = 1200;
+$updateRate = 1000;
+$dimensions = [];
 
 $(".monitoring.index").ready(function() {
   getLevels();
+  getDevices();
+  
   // chart();
   $allTimer = setInterval(
     function() {
@@ -12,39 +15,47 @@ $(".monitoring.index").ready(function() {
   );
 });
 
+// function updateDevice($level) {
+//   switch ($level) {
+//     case 0:
+//     $('.water').animate({
+//           height: '5%'
+//       }, 1000);  
+//       break;
+//     
+//     case 1:
+//     $('.water').animate({
+//           height: '30%'
+//       }, 1000);
+//       break;
+//     
+//     case 2:
+//     $('.water').animate({
+//           height: '65%'
+//       }, 1000);
+//       break;
+//     
+//     case 3:
+//     $('.water').animate({
+//           height: '95%'
+//       }, 1000);
+//       break;    
+//   }
+// }
+
 function updateDevice($level) {
-  switch ($level) {
-    case 0:
-    $('.water').animate({
-          height: '5%'
-      }, 1000);  
-      break;
-    
-    case 1:
-    $('.water').animate({
-          height: '30%'
-      }, 1000);
-      break;
-    
-    case 2:
-    $('.water').animate({
-          height: '65%'
-      }, 1000);
-      break;
-    
-    case 3:
-    $('.water').animate({
-          height: '95%'
-      }, 1000);
-      break;    
-  }
+  $percentage = $level.y / $dimensions[$level.device_id - 1].y*100;
+  $percentage = Math.round($percentage).toFixed(2);
+  $litters = 1000 * $level.y * $dimensions[$level.device_id - 1].z * $dimensions[$level.device_id - 1].x
+  $(".tank_info").html("Nível de água: "+$percentage+"%<br>Volume: "+$litters+" litros");
+  $('.water').animate({
+    height: $percentage+'%'
+  }, 1000);
 }
 
 function deviceInfo($element) {
   if ($element.className.split(' ')[0] == 'water-device') {
     $device_id = $element.id.substr($element.id.length - 1);
-    $('.devices-canvas').css('display','none');
-    $('.device-canvas').css('display','block');
     clearInterval($allTimer);
     $oneTimer = setInterval(
       function() {
@@ -52,6 +63,8 @@ function deviceInfo($element) {
       },
       $updateRate
     );
+    $('.devices-canvas').css('display','none');
+    $('.device-canvas').css('display','block');
   }
   else {
     clearInterval($oneTimer);
@@ -72,25 +85,41 @@ function getLevel() {
     url: "/render_current_level/"+$device_id,
     dataType: "json",
     success: function(response){
-      updateDevice(response.level);
+      updateDevice(response);
     }
   });
 }
 
+// function updateDevices($level) {
+//   switch($level.level) {
+//     case 0:
+//       $('#device-'+$level.device_id).removeClass( "low medium full" ).addClass('empty');
+//       break;
+//     case 1:
+//       $('#device-'+$level.device_id).removeClass( "empty medium full" ).addClass('low');
+//       break;
+//     case 2:
+//       $('#device-'+$level.device_id).removeClass( "empty low full" ).addClass('medium');
+//       break;
+//     case 3:
+//       $('#device-'+$level.device_id).removeClass( "empty low medium" ).addClass('full');
+//       break;  
+//   }
+// }
+
 function updateDevices($level) {
-  switch($level.level) {
-    case 0:
-      $('#device-'+$level.device_id).removeClass( "low medium full" ).addClass('empty');
-      break;
-    case 1:
-      $('#device-'+$level.device_id).removeClass( "empty medium full" ).addClass('low');
-      break;
-    case 2:
-      $('#device-'+$level.device_id).removeClass( "empty low full" ).addClass('medium');
-      break;
-    case 3:
-      $('#device-'+$level.device_id).removeClass( "empty low medium" ).addClass('full');
-      break;  
+  $percentage = $level.y / $dimensions[$level.device_id - 1].y;
+  if ($percentage >= 0 && $percentage < 0.1) {
+    $('#device-'+$level.device_id).removeClass( "low medium full" ).addClass('empty');
+  }
+  else if ($percentage >= 0.2 && $percentage < 0.4) {
+    $('#device-'+$level.device_id).removeClass( "empty medium full" ).addClass('low');
+  }
+  else if ($percentage >= 0.4 && $percentage < 0.8) {
+    $('#device-'+$level.device_id).removeClass( "empty low full" ).addClass('medium');
+  }
+  else if ($percentage >= 0.8) {
+    $('#device-'+$level.device_id).removeClass( "empty low medium" ).addClass('full');
   }
 }
 
@@ -101,6 +130,17 @@ function getLevels() {
     dataType: "json",
     success: function(response){
       response.forEach(updateDevices);
+    }
+  });
+}
+
+function getDevices() {
+  $.ajax({
+    type: "GET",
+    url: "/get_all_dimensions",
+    dataType: "json",
+    success: function(response){
+      $dimensions = response;
     }
   });
 }

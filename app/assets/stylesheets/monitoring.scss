@@ -58,6 +58,13 @@
 // Device Focus
 // ********************************
 
+.tank_info {
+	margin-bottom: 24px;
+	color: #58d;
+	display: block;
+	height: 20px;
+}
+
 @media (min-width: 768px) {
 	.tank {
 		box-shadow: 2px 3px 3px #888;

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171009023311) do
+ActiveRecord::Schema.define(version: 20171010053719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,9 +26,21 @@ ActiveRecord::Schema.define(version: 20171009023311) do
     t.index ["user_id"], name: "index_devices_on_user_id", using: :btree
   end
 
+  create_table "dimensions", force: :cascade do |t|
+    t.integer  "device_id"
+    t.float    "x",          null: false
+    t.float    "y",          null: false
+    t.float    "z",          null: false
+    t.float    "volume"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["device_id"], name: "index_dimensions_on_device_id", using: :btree
+  end
+
   create_table "levels", force: :cascade do |t|
     t.integer  "device_id",  null: false
     t.float    "level",      null: false
+    t.float    "y"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["device_id"], name: "index_levels_on_device_id", using: :btree
@@ -55,5 +67,6 @@ ActiveRecord::Schema.define(version: 20171009023311) do
   end
 
   add_foreign_key "devices", "users", on_delete: :cascade
+  add_foreign_key "dimensions", "devices", on_delete: :cascade
   add_foreign_key "levels", "devices", on_delete: :cascade
 end
