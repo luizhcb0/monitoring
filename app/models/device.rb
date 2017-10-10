@@ -1,5 +1,6 @@
 class Device < ApplicationRecord
   has_many :levels
+  has_one :dimension
   belongs_to :user
   
   enum position: %w(top bottom)

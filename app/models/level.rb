@@ -1,6 +1,8 @@
 class Level < ApplicationRecord
   belongs_to :device
   
+  after_create :set_y
+  
   def self.get_current_level(device_id)
     where(device_id: device_id).maximum(:id)
   end
@@ -25,4 +27,10 @@ class Level < ApplicationRecord
     levels = where(device_id: device_id)
     return levels
   end
+  
+  private
+    def set_y
+      device = Device.find(self.device_id)
+      self.update_attributes(y: device.dimension.y - self.level)
+    end
 end
