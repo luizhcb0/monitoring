@@ -17,6 +17,14 @@ class MonitoringController < ApplicationController
     end
   end
   
+  def get_all_dimensions
+    @dimensions = Array.new
+    Device.all.each do |device|
+      @dimensions << device.dimension
+    end
+    render json: @dimensions
+  end
+  
   def render_current_level
     id = Level.get_current_level(params[:device_id])
     @level = Level.find(id)
