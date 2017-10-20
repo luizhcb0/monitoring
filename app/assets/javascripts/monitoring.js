@@ -1,51 +1,84 @@
 $updateRate = 1000;
 $dimensions = [];
+$chart = null;
+$options = {
+    chart: {
+        renderTo: 'graph-canvas',
+        type: 'line',
+        backgroundColor: '#f8f8f8'
+    },
+    title: {
+        text: 'Nível nos reservatórios'
+    },
+    plotOptions: {
+      series: {
+          animation: false
+      }
+    },
+    xAxis: {
+        title: {
+            text: 'Horário'
+        },
+        type: 'datetime',
+        labels: {
+          formatter: function () {
+              // return Highcharts.dateFormat('%a %d %b %H:%M', this.value);
+              return Highcharts.dateFormat('%H:%M', this.value);
+          },
+          dateTimeLabelFormats: {
+              minute: '%H:%M',
+              hour: '%H:%M',
+              day: '%e. %b',
+              week: '%e. %b',
+              month: '%b \'%y',
+              year: '%Y'
+          }
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'Nível'
+        },
+        labels: {
+          formatter: function () {
+              // return Highcharts.dateFormat('%a %d %b %H:%M', this.value);
+              return Highcharts.format(this.value + '%');
+          },
+        }
+    },
+    scrollbar: {
+        enabled: true
+    },
+    credits: {
+        enabled: true,
+        position: {
+          align: 'right',
+          x: -10,
+          verticalAlign: 'bottom',
+          y: -5
+        },
+        href: 'javascript:window.open("http://lcasystems.com.br/", "_blank")',
+        text: 'LCA®'
+    },
+    // series: $dados
+};
 
 $(".monitoring.index").ready(function() {
   getLevels();
   getDevices();
-  
-  // chart();
+  plotChart();
   $allTimer = setInterval(
     function() {
       getLevels();
-      //updatechart();
+      updateChart();
     },
     $updateRate
   );
 });
 
-// function updateDevice($level) {
-//   switch ($level) {
-//     case 0:
-//     $('.water').animate({
-//           height: '5%'
-//       }, 1000);  
-//       break;
-//     
-//     case 1:
-//     $('.water').animate({
-//           height: '30%'
-//       }, 1000);
-//       break;
-//     
-//     case 2:
-//     $('.water').animate({
-//           height: '65%'
-//       }, 1000);
-//       break;
-//     
-//     case 3:
-//     $('.water').animate({
-//           height: '95%'
-//       }, 1000);
-//       break;    
-//   }
-// }
 
 function updateDevice($level) {
-  $percentage = $level.y / $dimensions[$level.device_id - 1].y*100;
-  $percentage = Math.round($percentage).toFixed(2);
+  $percentage = $level.percentage;
   $litters = 1000 * $level.y * $dimensions[$level.device_id - 1].z * $dimensions[$level.device_id - 1].x
   $(".tank_info").html("Nível de água: "+$percentage+"%<br>Volume: "+$litters+" litros");
   $('.water').animate({
@@ -60,6 +93,7 @@ function deviceInfo($element) {
     $oneTimer = setInterval(
       function() {
         getLevel($device_id);
+        updateChart();
       },
       $updateRate
     );
@@ -71,6 +105,7 @@ function deviceInfo($element) {
     $allTimer = setInterval(
       function() {
         getLevels();
+        updateChart();
       },
       $updateRate
     );
@@ -90,35 +125,19 @@ function getLevel() {
   });
 }
 
-// function updateDevices($level) {
-//   switch($level.level) {
-//     case 0:
-//       $('#device-'+$level.device_id).removeClass( "low medium full" ).addClass('empty');
-//       break;
-//     case 1:
-//       $('#device-'+$level.device_id).removeClass( "empty medium full" ).addClass('low');
-//       break;
-//     case 2:
-//       $('#device-'+$level.device_id).removeClass( "empty low full" ).addClass('medium');
-//       break;
-//     case 3:
-//       $('#device-'+$level.device_id).removeClass( "empty low medium" ).addClass('full');
-//       break;  
-//   }
-// }
 
 function updateDevices($level) {
-  $percentage = $level.y / $dimensions[$level.device_id - 1].y;
-  if ($percentage >= 0 && $percentage < 0.1) {
+  $percentage = $level.percentage;
+  if ($percentage >= 0 && $percentage < 10) {
     $('#device-'+$level.device_id).removeClass( "low medium full" ).addClass('empty');
   }
-  else if ($percentage >= 0.1 && $percentage < 0.4) {
+  else if ($percentage >= 10 && $percentage < 40) {
     $('#device-'+$level.device_id).removeClass( "empty medium full" ).addClass('low');
   }
-  else if ($percentage >= 0.4 && $percentage < 0.8) {
+  else if ($percentage >= 40 && $percentage < 80) {
     $('#device-'+$level.device_id).removeClass( "empty low full" ).addClass('medium');
   }
-  else if ($percentage >= 0.8) {
+  else if ($percentage >= 80) {
     $('#device-'+$level.device_id).removeClass( "empty low medium" ).addClass('full');
   }
 }
@@ -145,27 +164,30 @@ function getDevices() {
   });
 }
 
-// Creating Chart Mannualy
-function chart() {
+
+function plotChart() {
   $.ajax({
     type: "GET",
-    url: "/get_all_devices_graph",
+    url: "/get_devices_levels",
     dataType: "json",
     success: function(response){
-      $chart = new Chartkick.LineChart("graph-display", response);
+      $options.series = response;
+      $chart = new Highcharts.Chart($options);
     }
   });
 }
 
 // Updating Chart
-function updatechart() {
+function updateChart() {
   $.ajax({
     type: "GET",
-    url: "/get_all_devices_graph",
+    url: "/get_devices_levels",
     dataType: "json",
     success: function(response){
-      $chart = Chartkick.charts["chart-1"];
-      $chart.updateData(response);
+      $($chart.series).each(function(i) {
+        $chart.series[i].setData(response[i].data);
+      });
+      $chart.redraw();
     }
   });
 }
