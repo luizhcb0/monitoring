@@ -1,7 +1,7 @@
 class Level < ApplicationRecord
   belongs_to :device
   
-  after_create :set_y
+  after_create :set_high_and_percentage
   
   def self.get_current_level(device_id)
     where(device_id: device_id).maximum(:id)
@@ -29,8 +29,9 @@ class Level < ApplicationRecord
   end
   
   private
-    def set_y
+    def set_high_and_percentage
       device = Device.find(self.device_id)
-      self.update_attributes(y: device.dimension.y - self.level)
+      self.update_attributes(y: device.dimension.y - self.level, percentage: (100*(device.dimension.y - self.level)/device.dimension.y).round(2))
     end
+    
 end

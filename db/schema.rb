@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20171010053719) do
     t.integer  "device_id",  null: false
     t.float    "level",      null: false
     t.float    "y"
+    t.float    "percentage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["device_id"], name: "index_levels_on_device_id", using: :btree
