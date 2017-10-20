@@ -37,7 +37,6 @@ gem 'bootstrap-sass'
 gem "font-awesome-rails"
 gem 'font-awesome-sass'
 
-gem "chartkick"
 gem "rack-cors"
 gem 'rack-attack'
 gem 'simple_token_authentication'

@@ -16,5 +16,4 @@
 //= require bootstrap-sprockets
 //= require jquery-readyselector
 //= require highcharts
-//= require chartkick
 //= require_tree .
