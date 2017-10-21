@@ -19,6 +19,7 @@ $options = {
         title: {
             text: 'Horário'
         },
+        range:  1 * 3600 * 1000 * 6,
         type: 'datetime',
         labels: {
           formatter: function () {
@@ -187,6 +188,9 @@ function updateChart() {
       $($chart.series).each(function(i) {
         $chart.series[i].setData(response[i].data);
       });
+      $ex = $chart.xAxis[0].getExtremes();
+      // $("body").append("Min = "+ex.min+"<br>"+"MAX = "+ex.max+"<br><br>");
+      $chart.xAxis[0].setExtremes($ex.min + (1000) , $ex.max + (1000));
       $chart.redraw();
     }
   });
