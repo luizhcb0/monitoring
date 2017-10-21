@@ -25,4 +25,10 @@ Rails.application.routes.draw do
   get "/render_all_current_levels", to: "monitoring#render_all_current_levels", as: "render_all_current_levels"
   get "/get_all_dimensions", to: "monitoring#get_all_dimensions", as: "get_all_dimensions"
   
+  get "/get_graph/:id", to: "graphs#get_graph", as: "get_graph"
+  get "/get_all_graphs", to: "graphs#get_all_graphs", as: "get_all_graphs"
+  
+  get "/get_device_levels/:id", to: "graphs#get_device_levels", as: "get_device_levels"
+  get "/get_devices_levels", to: "graphs#get_devices_levels", as: "get_devices_levels"
+  
 end

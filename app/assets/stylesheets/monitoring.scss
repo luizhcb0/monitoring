@@ -115,7 +115,7 @@
   padding: 10%;
 }
 
-.devices-canvas {
+.devices-canvas, .graph-canvas {
 	display: block;
   padding: 10%;
 }
@@ -219,4 +219,9 @@
 	text-align: left;
 	margin-left: 10px;
 	margin-top: 4px;
+}
+
+#graph-canvas {
+	margin-top: 26px;
+	width: 100%;
 }

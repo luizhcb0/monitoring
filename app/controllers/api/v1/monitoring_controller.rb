@@ -17,6 +17,7 @@ class Api::V1::MonitoringController < Api::V1::BaseController
   # POST /api/v1/monitoring
   def create
     @level = Level.new(monitoring_params)
+    # Arrumar pra salvar só se for diferente do último nível ou tiver passado mais de 1h
     if @level.save
       render json: @level, status: :created
     else
