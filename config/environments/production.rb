@@ -54,6 +54,7 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
+  config.active_job.queue_adapter = :delayed_job
   # config.active_job.queue_name_prefix = "monitoring_#{Rails.env}"
   config.action_mailer.perform_caching = false
 
@@ -74,6 +75,17 @@ Rails.application.configure do
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
+  
+  config.action_mailer.delivery_method = :smtp
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => "luizhcb0@gmail.com",
+    :password             => "08071991lhcb",
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
