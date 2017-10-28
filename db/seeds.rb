@@ -8,15 +8,16 @@
 
 User.create(name: "admin", email: "admin@gmail.com", password: "111111")
 User.create(name: "Luiz", email: "luizhcb0@gmail.com", password: "111111")
+User.create(name: "Lucas", email: "luccoelhoo@gmail.com", password: "111111")
 
 device1 = Device.create(user_id: 2, address: "http://192.168.0.22", position: "top", order: 1)
 device2 = Device.create(user_id: 2, address: "http://192.168.0.22", position: "top", order: 2)
 device3 = Device.create(user_id: 2, address: "http://192.168.0.22", position: "top", order: 3)
 device4 = Device.create(user_id: 2, address: "http://192.168.0.22", position: "top", order: 4)
-device5 = Device.create(user_id: 2, address: "http://192.168.0.22", position: "bottom", order: 1)
-device6 = Device.create(user_id: 2, address: "http://192.168.0.22", position: "bottom", order: 2)
-device7 = Device.create(user_id: 2, address: "http://192.168.0.22", position: "bottom", order: 3)
-device8 = Device.create(user_id: 2, address: "http://192.168.0.22", position: "bottom", order: 4)
+device5 = Device.create(user_id: 3, address: "http://192.168.0.22", position: "bottom", order: 1)
+device6 = Device.create(user_id: 3, address: "http://192.168.0.22", position: "bottom", order: 2)
+device7 = Device.create(user_id: 3, address: "http://192.168.0.22", position: "bottom", order: 3)
+device8 = Device.create(user_id: 3, address: "http://192.168.0.22", position: "bottom", order: 4)
 
 Dimension.create(x: 2, y: 6, z: 2, device_id: 1)
 Dimension.create(x: 2, y: 6, z: 2, device_id: 2)
