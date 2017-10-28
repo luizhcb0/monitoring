@@ -19,6 +19,9 @@ class Api::V1::MonitoringController < Api::V1::BaseController
     @level = Level.new(monitoring_params)
     # Arrumar pra salvar só se for diferente do último nível ou tiver passado mais de 1h
     if @level.save
+      if @level.percentage < 50
+        SendEmailJob.set(wait: 8.seconds).perform_later(@level)
+      end
       render json: @level, status: :created
     else
       render json: @level.errors, status: :unprocessable_entity
