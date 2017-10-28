@@ -3,8 +3,12 @@ class Level < ApplicationRecord
   
   after_create :set_high_and_percentage
   
-  def self.get_current_level(device_id)
+  def self.get_current_level_id(device_id)
     where(device_id: device_id).maximum(:id)
+  end
+  
+  def self.get_current_level(device_id)
+    where(id: Level.get_current_level_id(device_id)).first
   end
   
   def self.get_all_current_levels

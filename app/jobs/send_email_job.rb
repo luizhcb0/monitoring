@@ -5,6 +5,10 @@ class SendEmailJob < ApplicationJob
     @user = level.device.user
     @device = level.device
     @percentage = level.percentage
-    DefaultMailer.sample_email(@user, @device, @percentage).deliver_later
+    if level.percentage < 50
+      DefaultMailer.alert_email(@user, @device, @percentage).deliver_later
+    else
+      DefaultMailer.normal_email(@user, @device, @percentage).deliver_later
+    end
   end
 end
