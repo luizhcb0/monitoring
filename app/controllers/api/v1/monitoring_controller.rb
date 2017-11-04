@@ -17,8 +17,19 @@ class Api::V1::MonitoringController < Api::V1::BaseController
   # POST /api/v1/monitoring
   def create
     @level = Level.new(monitoring_params)
+    last = Level.get_current_level(@level.device_id)
     # Arrumar pra salvar só se for diferente do último nível ou tiver passado mais de 1h
     if @level.save
+      if @level.percentage <= 50
+        if last.percentage > 50
+          SendEmailJob.set(wait: 8.seconds).perform_later(@level)
+        end
+      end
+      if @level.percentage > 50
+        if last.percentage <= 50
+          SendEmailJob.set(wait: 8.seconds).perform_later(@level)
+        end
+      end
       render json: @level, status: :created
     else
       render json: @level.errors, status: :unprocessable_entity
