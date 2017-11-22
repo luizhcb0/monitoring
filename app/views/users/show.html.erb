@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-sm-10 col-sm-offset-1">
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="list-container">
+          <div class="list-model-type">
+            <div class="col-sm-12 model-type"><%= @user.name %></div>
+          </div>
+          <div class="list-items">
+            <div class="item">
+              <div class="col-sm-12">
+                <div class="item-name"><%= @user.email %></div>
+              </div>
+              <div class="col-xs-6 item-action">
+                <% if current_user.role == "admin" %>
+                  <%= link_to edit_user_path(@user), class:"btn edit-item" do %>
+                    <i class="fa fa-pencil"></i>
+                  <% end %>
+                  <%= link_to user_path(@user), class:"btn delete-item", method: "delete", data: {confirm: "Tem certeza que deseja deletar?"} do %>
+                    <i class="fa fa-trash-o"></i>
+                  <% end %>
+                <% else %>
+                  <%= link_to edit_profile_path, class:"btn edit-item" do %>
+                    <i class="fa fa-pencil"></i>
+                  <% end %>
+                  <%= link_to user_path(@user), class:"btn delete-item", method: "delete", data: {confirm: "Tem certeza que deseja deletar?"} do %>
+                    <i class="fa fa-trash-o"></i>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

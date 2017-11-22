@@ -1,6 +1,9 @@
 <% if current_user %>
-  <%= render "dashboard" %>
+  <% if current_user.role == "admin" %>
+    <%= render "admin_dashboard" %>
+  <% else %>
+    <%= render "user_dashboard" %>
+  <% end %>
 <% else %>
   <%= render "not_registered" %>
 <% end %>
-

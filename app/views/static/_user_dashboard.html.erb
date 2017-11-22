@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-sm-10 col-sm-offset-1">
+
+    <div class="row">
+      <div class="col-sm-6">
+        <%= link_to monitoring_index_path do %>
+          <div class="menu-container">
+            <div class="menu-label">Monitoramento</div>
+            <i class="fa fa-bar-chart"></i>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-sm-6">
+        <%= link_to devices_path do %>
+          <div class="menu-container">
+            <div class="menu-label">Dispositivos</div>
+            <i class="fa fa-cube"></i>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <%= link_to profile_path do %>
+          <div class="menu-container">
+            <div class="menu-label">Perfil</div>
+            <i class="fa fa-user-circle"></i>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-sm-6">
+        <%= link_to root_path do %>
+          <div class="menu-container">
+            <div class="menu-label">Configurações</div>
+            <i class="fa fa-cog"></i>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>

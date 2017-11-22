@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-sm-10 col-sm-offset-1">
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="list-container">
+          <div class="list-model-type">
+            <div class="col-xs-6 model-type">Usuários</div>
+            <div class="col-xs-6 model-add">
+              <% if current_user.role == "admin" %>
+                <%= link_to new_user_path, class: "add-item" do %>
+                  <i class="fa fa-plus"></i>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <div class="list-items">
+            <% @users.each do |user| %>
+            <div class="item">
+              <div class="col-xs-6">
+                <div class="item-name"><%= user.name %></div>
+                <div class="item-description"><%= user.email %></div>
+              </div>
+              <div class="col-xs-6 item-action">
+                <%= link_to user_path(user), class:"btn show-item" do %>
+                  <i class="fa fa-eye"></i>
+                <% end %>
+                <%= link_to edit_user_path(user), class:"btn edit-item" do %>
+                  <i class="fa fa-pencil"></i>
+                <% end %>
+                <% if current_user.role == "admin" %>
+                  <%= link_to user_path(user), class:"btn delete-item", method: "delete", data: {confirm: "Tem certeza que deseja deletar?"} do %>
+                    <i class="fa fa-trash-o"></i>
+                  <% end %>
+                <% else %>
+                  <%#= link_to unregister_path(device), class:"btn delete-item", data: {confirm: "Tem certeza que deseja deletar?"} do %>
+                    <i class="fa fa-trash-o"></i>
+                  <%# end %>
+                <% end %>
+
+              </div>
+              <div class="bar"></div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
