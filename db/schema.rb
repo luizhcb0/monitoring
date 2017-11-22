@@ -32,11 +32,13 @@ ActiveRecord::Schema.define(version: 20171028183755) do
 
   create_table "devices", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "address",    null: false
-    t.integer  "position",   null: false
-    t.integer  "order",      null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "serial",      null: false
+    t.integer  "model",       null: false
+    t.string   "address"
+    t.integer  "position"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.index ["user_id"], name: "index_devices_on_user_id", using: :btree
   end
 
@@ -62,9 +64,10 @@ ActiveRecord::Schema.define(version: 20171028183755) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",                                           null: false
+    t.string   "name",                              default: "", null: false
     t.string   "email",                             default: "", null: false
     t.string   "encrypted_password",                default: "", null: false
+    t.integer  "role",                              default: 1,  null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -81,7 +84,7 @@ ActiveRecord::Schema.define(version: 20171028183755) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "devices", "users", on_delete: :cascade
+  add_foreign_key "devices", "users", on_delete: :nullify
   add_foreign_key "dimensions", "devices", on_delete: :cascade
   add_foreign_key "levels", "devices", on_delete: :cascade
 end

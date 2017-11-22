@@ -36,6 +36,7 @@ gem 'devise'
 gem 'bootstrap-sass'
 gem "font-awesome-rails"
 gem 'font-awesome-sass'
+gem 'jquery_mask_rails'
 
 gem "rack-cors"
 gem 'rack-attack'

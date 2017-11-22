@@ -5,8 +5,8 @@
 .menu-container {
   font-size: 120px;
   line-height: 90px;
+  min-height: 260px;
   color: #bbb;
-  height: 260px;
   border:1px solid #ddd !important;
   border-radius: 2px;
   box-shadow: 0px 0px 2px #ccc;
@@ -14,10 +14,11 @@
   background-color: #f8f8f8;
 }
 
-#register {
-  height: 540px;
+@media (min-width: 768px) {
+  #register {
+    min-height: 600px;
+  }
 }
-
 
 .menu-container:hover {
   color: #1555a0;
@@ -31,4 +32,15 @@
 
 a:hover {
     text-decoration: none !important;
+}
+
+.default-container {
+  padding: 30px;
+  min-height: 260px;
+  color: #404565;
+  border:1px solid #ddd !important;
+  border-radius: 2px;
+  box-shadow: 0px 0px 2px #ccc;
+  margin-bottom: 20px;
+  background-color: #f8f8f8;
 }

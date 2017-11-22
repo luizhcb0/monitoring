@@ -15,5 +15,6 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require jquery-readyselector
+//= require jquery.mask
 //= require highstock
 //= require_tree .

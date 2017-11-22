@@ -4,18 +4,14 @@
 
 
 
-.top-devices {
+.box-devices {
 	display: flex;
-	border-bottom: 2px solid #ddd;
+	justify-content: center;
+	// border-bottom: 2px solid #ddd;
 }
 
 .water-device-info {
 	height: 35vh;
-}
-
-.bottom-devices {
-	display: flex;
-	border-top: 2px solid #ddd;
 }
 
 .canvas {
@@ -35,10 +31,10 @@
 
 @media (max-width: 767px) {
 	.water-device {
-		width: 12%;
+		width: 14%;
 		box-shadow: 0px 0px 2px #888;
-		margin-left: 10%;
-		min-height: 7vw;
+		margin: auto;
+		min-height: 9vw;
 		border-radius: 5%;
 	}
 }
@@ -47,7 +43,7 @@
 	.water-device {
 		box-shadow: 0px 0px 2px #888;
 		width: 12%;
-		margin-left: 10%;
+		margin: auto;
 		min-height: 3vw;
 		border-radius: 4%;
 		display: -webkit-box;

@@ -1,0 +1,28 @@
+<%= form_for @device, url: {action: :registration_process}, html: {class: 'form-horizontal'} do |f| %>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+
+    <div class="">
+      <h2>Cadastro de Módulo</h2>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :serial, "Número de Série", class: "col-sm-4 control-label"%>
+      <div class="col-sm-8">
+        <%= f.text_field :serial, required: "required", placeholder: "XXXX-XXXX-XX", class: "form-control", id: "serial-register"  %>
+        <div class="serial-error"><%= @device.errors[:serial].first %></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description, "Descrição", class: "col-sm-4 control-label"%>
+      <div class="col-sm-8">
+        <%= f.text_field :description, class: "form-control", id: "desc-field"  %>
+      </div>
+    </div>
+
+    <%= f.submit "Cadastrar", class: "btn btn-default", id: "btn-submit" %>
+
+  </div>
+</div>
+<% end %>
