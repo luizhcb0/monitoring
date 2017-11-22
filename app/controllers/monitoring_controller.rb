@@ -1,13 +1,12 @@
 class MonitoringController < ApplicationController
   include StrongParamsHolder
-  
+
   before_action :authenticate_user!
-  
+
   def index
-    @top_devices = Device.get_top_devices
-    @bottom_devices = Device.get_bottom_devices
+    @devices = Device.get_user_devices(current_user)
   end
-  
+
   def create
     @level = Level.new(monitoring_params)
     if @level.save
@@ -16,7 +15,7 @@ class MonitoringController < ApplicationController
       render json: "error"
     end
   end
-  
+
   def get_all_dimensions
     @dimensions = Array.new
     Device.all.each do |device|
@@ -24,13 +23,13 @@ class MonitoringController < ApplicationController
     end
     render json: @dimensions
   end
-  
+
   def render_current_level
     id = Level.get_current_level(params[:device_id])
     @level = Level.find(id)
     render json: @level
   end
-  
+
   def render_all_current_levels
     @levels = Array.new
     array = Level.get_all_current_levels
@@ -40,5 +39,5 @@ class MonitoringController < ApplicationController
     end
     render json: @levels
   end
-  
+
 end
