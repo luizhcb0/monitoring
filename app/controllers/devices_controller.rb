@@ -64,6 +64,14 @@ class DevicesController < ApplicationController
     end
   end
 
+  def unregister
+    @device = Device.find(params[:id])
+    @device.user = nil
+    if @device.save
+      redirect_to devices_path
+    end
+  end
+
   def serial_check
     @device = Device.where(serial: params[:serial])
     render json: @device

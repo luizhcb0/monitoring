@@ -1,0 +1,35 @@
+<%= form_for @user, html: {class: 'form-horizontal'} do |f| %>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+
+    <div class="">
+      <h2>Cadastro de Usuário</h2>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :name, "Nome", class: "col-sm-4 control-label"%>
+      <div class="col-sm-8">
+        <%= f.text_field :name, required: "required", class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email, class: "col-sm-4 control-label"%>
+      <div class="col-sm-8">
+        <%= f.email_field :email, required: "required", class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group">
+        <%= link_to edit_password_path(@user) do %>
+          <button type="button" class="btn btn-default" name="button">Mudar Senha</button>
+        <% end %>
+      </div>
+    </div>
+
+    <%= f.submit "Salvar", class: "btn btn-default" %>
+
+  </div>
+</div>
+<% end %>

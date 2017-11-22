@@ -21,11 +21,21 @@ Rails.application.routes.draw do
 
   resources :monitoring, only: [:index, :create]
   resources :devices
+  resources :users
+
+  get "/profile", to: "users#profile", as: "profile"
+  get "/edit_profile", to: "users#edit_profile", as: "edit_profile"
+  get "/edit_password/:id", to: "users#edit_password", as: "edit_password"
+  get "/edit_profile_password", to: "users#edit_profile_password", as: "edit_profile_password"
+  patch "/profile_update", to: "users#profile_update", as: "profile_update"
+  patch "/password_update/:id", to: "users#password_update", as: "password_update"
+  patch "/profile_password_update", to: "users#profile_password_update", as: "profile_password_update"
 
   get "/serial_check/:serial", to: "devices#serial_check", as: "serial_check"
   get "/available_check/:serial", to: "devices#available_check", as: "available_check"
   get "/new_registration", to: "devices#new_registration", as: "new_registration"
   post "/registration_process", to: "devices#registration_process", as: "registration_process"
+  get "/unregister/:id", to: "devices#unregister", as: "unregister"
 
   get "/render_current_level/:device_id", to: "monitoring#render_current_level", as: "render_current_level"
   get "/render_all_current_levels", to: "monitoring#render_all_current_levels", as: "render_all_current_levels"

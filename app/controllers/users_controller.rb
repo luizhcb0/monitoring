@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
   include StrongParamsHolder
-  
+
   before_action :authenticate_user!
 
   def index
-    @users = User.all
+    @users = User.all.order(:name)
   end
 
   def show
@@ -16,12 +16,35 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def edit_password
+    @user = User.find(params[:id])
+    render :edit_password
+  end
+
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      redirect_to users_path
+      redirect_to user_path(@user.id)
     else
       render :edit
+    end
+  end
+
+  def password_update
+    @user = User.find(params[:id])
+    if @user == current_user
+      if @user.update_attributes(user_params)
+        bypass_sign_in(@user)
+        redirect_to root_path
+      else
+        redirect_to edit_password_path
+      end
+    else
+      if @user.update_attributes(user_params)
+        redirect_to root_path
+      else
+        redirect_to edit_password_path
+      end
     end
   end
 
@@ -30,63 +53,39 @@ class UsersController < ApplicationController
     @user.destroy
     redirect_to users_path
   end
-  
-  def password_edit
-    @user = User.find(params[:id])
-    render :password_edit
-  end
-  
-  def password_update
-    @user = User.find(params[:id])
-    if @user == current_user
-      if @user.update_attributes(user_params)
-        bypass_sign_in(@user)
-        redirect_to users_path
-      else
-        redirect_to password_edit_path
-      end
-    else
-      if @user.update_attributes(user_params)
-        redirect_to users_path
-      else
-        redirect_to password_edit_path
-      end
-    end
-  end
-  
-  def user_profile
-    @devices = Device.get_user_devices(current_user.id)
+
+  def profile
     @user = User.find(current_user.id)
     render :show
   end
-  
-  def user_profile_edit
+
+  def edit_profile
     @user = User.find(current_user.id)
     render :edit
   end
-  
-  def user_profile_update
+
+  def profile_update
+    @user = User.find(current_user.id)
+    if @user.update_attributes(user_params)
+      redirect_to user_path(@user.id)
+    else
+      render :edit
+    end
+  end
+
+  def edit_profile_password
+    @user = User.find(current_user.id)
+    render :edit_password
+  end
+
+  def profile_password_update
     @user = User.find(current_user.id)
     if @user.update_attributes(user_params)
       bypass_sign_in(@user)
-      redirect_to user_profile_path
+      redirect_to root_path
     else
-      redirect_to user_profile_edit_path
+      redirect_to edit_profile_password_path
     end
   end
-  
-  def user_password_edit
-    @user = User.find(current_user.id)
-    render :user_password_edit
-  end
-  
-  def user_password_update
-    @user = User.find(current_user.id)
-    if @user.update_attributes(user_params)
-      bypass_sign_in(@user)
-      redirect_to user_profile_path
-    else
-      redirect_to user_password_edit_path
-    end
-  end
+
 end
