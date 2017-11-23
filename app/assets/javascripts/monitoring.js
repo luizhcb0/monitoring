@@ -169,7 +169,9 @@ function getDevices() {
 function plotChart() {
   $.ajax({
     type: "GET",
-    url: "/get_devices_levels",
+    // #hidden_id is at _infos.html.erb. It shows the user who owns the devices.
+    // Must be changed if more than a user has a device
+    url: "/get_user_devices_levels/"+$("#hidden_id").val(),
     dataType: "json",
     success: function(response){
       $options.series = response;
@@ -182,14 +184,15 @@ function plotChart() {
 function updateChart() {
   $.ajax({
     type: "GET",
-    url: "/get_devices_levels",
+    url: "/get_user_devices_levels/"+$("#hidden_id").val(),
     dataType: "json",
     success: function(response){
       $($chart.series).each(function(i) {
-        $chart.series[i].setData(response[i].data);
+        $chart.series[i].update(response[i]);
+        // Problema da Função receber um NaN
+        // $chart.series[i].setData(response[i].data);
       });
       $ex = $chart.xAxis[0].getExtremes();
-      // $("body").append("Min = "+ex.min+"<br>"+"MAX = "+ex.max+"<br><br>");
       $chart.xAxis[0].setExtremes($ex.min + (1000) , $ex.max + (1000));
       $chart.redraw();
     }

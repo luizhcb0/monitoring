@@ -46,5 +46,6 @@ Rails.application.routes.draw do
 
   get "/get_device_levels/:id", to: "graphs#get_device_levels", as: "get_device_levels"
   get "/get_devices_levels", to: "graphs#get_devices_levels", as: "get_devices_levels"
+  get "/get_user_devices_levels/:id", to: "graphs#get_user_devices_levels", as: "get_user_devices_levels"
 
 end
