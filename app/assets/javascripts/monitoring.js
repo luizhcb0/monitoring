@@ -193,7 +193,10 @@ function updateChart() {
         // $chart.series[i].setData(response[i].data);
       });
       $ex = $chart.xAxis[0].getExtremes();
-      $chart.xAxis[0].setExtremes($ex.min + (1000) , $ex.max + (1000));
+      $("body").append($ex.min +" " + $ex.max+"<br>");
+      if ($ex.max - $ex.min > 1000) {
+        $chart.xAxis[0].setExtremes($ex.min + (1000) , $ex.max + (1000));
+      }
       $chart.redraw();
     }
   });
