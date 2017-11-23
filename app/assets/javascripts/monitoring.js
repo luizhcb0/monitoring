@@ -193,7 +193,9 @@ function updateChart() {
         // $chart.series[i].setData(response[i].data);
       });
       $ex = $chart.xAxis[0].getExtremes();
-      if ($ex.max - $ex.min > 1000) {
+      // $("body").append(($ex.max - $ex.min)+"<br>");
+      // $ex.max - $ex.min = difference milli seconds between first plot and last
+      if ($ex.max - $ex.min > 360000) {
         $chart.xAxis[0].setExtremes($ex.min + (1000) , $ex.max + (1000));
       }
       $chart.redraw();
