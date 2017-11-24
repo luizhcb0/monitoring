@@ -40,6 +40,9 @@ $options = {
         title: {
             text: 'Nível'
         },
+        tickInterval: 10,
+        min: 0,
+        max: 100,
         labels: {
           formatter: function () {
               // return Highcharts.dateFormat('%a %d %b %H:%M', this.value);
