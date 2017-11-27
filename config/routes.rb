@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :monitoring, only: [:index, :create]
   resources :devices
   resources :users
+  resources :settings
 
   get "/profile", to: "users#profile", as: "profile"
   get "/edit_profile", to: "users#edit_profile", as: "edit_profile"
