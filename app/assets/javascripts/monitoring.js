@@ -84,7 +84,7 @@ $(".monitoring.index").ready(function() {
 function updateDevice($level) {
   $percentage = $level.percentage;
   $litters = 1000 * $level.y * $dimensions[$level.device_id - 1].z * $dimensions[$level.device_id - 1].x
-  $(".tank_info").html("Nível de água: "+$percentage+"%<br>Volume: "+$litters+" litros");
+  $(".tank_info").html("Reservatório "+$level.device_id+"<br>Nível de água: "+$percentage+"%<br>Volume: "+$litters+" litros");
   $('.water').animate({
     height: $percentage+'%'
   }, 1000);
