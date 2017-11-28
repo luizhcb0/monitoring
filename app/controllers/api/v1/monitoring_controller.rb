@@ -1,6 +1,6 @@
 class Api::V1::MonitoringController < Api::V1::BaseController
   include StrongParamsHolder
-  
+
   before_action :set_contact, only: [:show, :update, :destroy]
   before_action :require_authorization!, only: [:show, :update, :destroy]
 
@@ -11,23 +11,26 @@ class Api::V1::MonitoringController < Api::V1::BaseController
 
   # GET /api/v1/monitoring/1
   def show
-    
+
   end
 
   # POST /api/v1/monitoring
   def create
     @level = Level.new(monitoring_params)
+    @setting = @level.device.user.setting
     last = Level.get_current_level(@level.device_id)
     # Arrumar pra salvar só se for diferente do último nível ou tiver passado mais de 1h
     if @level.save
-      if @level.percentage <= 50
-        if last.percentage > 50
-          SendEmailJob.set(wait: 8.seconds).perform_later(@level)
+      if @setting.active?
+        if @level.percentage <= @setting.alert_level
+          if last.percentage > @setting.alert_level
+            SendEmailJob.set(wait: 8.seconds).perform_later(@level)
+          end
         end
-      end
-      if @level.percentage > 50
-        if last.percentage <= 50
-          SendEmailJob.set(wait: 8.seconds).perform_later(@level)
+        if @level.percentage > @setting.alert_level
+          if last.percentage <= @setting.alert_level
+            SendEmailJob.set(wait: 8.seconds).perform_later(@level)
+          end
         end
       end
       render json: @level, status: :created
@@ -47,5 +50,5 @@ class Api::V1::MonitoringController < Api::V1::BaseController
         render json: {}, status: :forbidden
       end
     end
-  
+
 end

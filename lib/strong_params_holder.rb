@@ -14,4 +14,8 @@ module StrongParamsHolder
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
+
+  def setting_params
+    params.require(:setting).permit(:active, :alert_level)
+  end
 end

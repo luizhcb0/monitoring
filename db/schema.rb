@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171028183755) do
+ActiveRecord::Schema.define(version: 20171127185257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,15 @@ ActiveRecord::Schema.define(version: 20171028183755) do
     t.index ["device_id"], name: "index_levels_on_device_id", using: :btree
   end
 
+  create_table "settings", force: :cascade do |t|
+    t.integer  "user_id"
+    t.float    "alert_level"
+    t.boolean  "active",      default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["user_id"], name: "index_settings_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "name",                              default: "", null: false
     t.string   "email",                             default: "", null: false
@@ -87,4 +96,5 @@ ActiveRecord::Schema.define(version: 20171028183755) do
   add_foreign_key "devices", "users", on_delete: :nullify
   add_foreign_key "dimensions", "devices", on_delete: :cascade
   add_foreign_key "levels", "devices", on_delete: :cascade
+  add_foreign_key "settings", "users", on_delete: :cascade
 end
