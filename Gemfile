@@ -34,6 +34,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
 gem 'bootstrap-sass'
+gem 'bootstrap-toggle-rails'
 gem "font-awesome-rails"
 gem 'font-awesome-sass'
 gem 'jquery_mask_rails'
