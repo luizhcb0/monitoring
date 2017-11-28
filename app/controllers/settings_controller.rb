@@ -1,25 +1,20 @@
 class SettingsController < ApplicationController
   include StrongParamsHolder
 
+  before_action :authenticate_user!
+
   def index
     @user = current_user
-  end
-
-  def show
-  end
-
-  def new
-  end
-
-  def create
-  end
-
-  def edit
+    @setting = @user.setting
   end
 
   def update
+    @setting = Setting.find(params[:id])
+    if @setting.update_attributes(setting_params)
+      redirect_to root_path
+    else
+      render :index
+    end
   end
 
-  def destroy
-  end
 end
