@@ -90,6 +90,12 @@ function updateDevice($level) {
   }, 1000);
 }
 
+function resumeDevice($level) {
+  $percentage = $level.percentage;
+  $litters = 1000 * $level.y * $dimensions[$level.device_id - 1].z * $dimensions[$level.device_id - 1].x
+  $('.water-device-info').html('Reservatório '+$level.device_id+'<br>Nível: '+$level.percentage+'%');
+}
+
 function deviceInfo($element) {
   if ($element.className.split(' ')[0] == 'water-device') {
     $device_id = $element.id.substr($element.id.length - 1);
@@ -118,13 +124,35 @@ function deviceInfo($element) {
   }
 }
 
-function getLevel() {
+function deviceResumeShow($element) {
+  if ($element.className.split(' ')[0] == 'water-device') {
+    $device_id = $element.id.substr($element.id.length - 1);
+    getResume($device_id);
+  }
+}
+
+function deviceResumeHide($element) {
+  $('.water-device-info').html('');
+}
+
+function getLevel($device_id) {
   $.ajax({
     type: "GET",
     url: "/render_current_level/"+$device_id,
     dataType: "json",
     success: function(response){
       updateDevice(response);
+    }
+  });
+}
+
+function getResume($device_id) {
+  $.ajax({
+    type: "GET",
+    url: "/render_current_level/"+$device_id,
+    dataType: "json",
+    success: function(response){
+      resumeDevice(response);
     }
   });
 }

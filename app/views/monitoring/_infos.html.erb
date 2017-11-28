@@ -15,7 +15,7 @@
         <div class="box-devices">
           <% @devices.each_with_index do |l, i| %>
 
-            <div class="water-device" id="device-<%= l.id %>" onclick="deviceInfo(this)"></div>
+            <div class="water-device" id="device-<%= l.id %>" onclick="deviceInfo(this)" onmouseover="deviceResumeShow(this)" onmouseout="deviceResumeHide(this)"></div>
 
             <% if (i !=0 && i % 3) == 0 %>
               </div>
