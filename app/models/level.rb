@@ -29,8 +29,8 @@ class Level < ApplicationRecord
 
   def self.get_all_user_devices_levels(user_id)
     levels = Array.new
-    Device.where(user_id: user_id).order(created_at: :asc).each do |device|
-      levels <<  where(device_id: device.id)
+    Device.where(user_id: user_id).each do |device|
+      levels <<  where(device_id: device.id).order(created_at: :asc)
     end
     return levels
   end
