@@ -56,15 +56,15 @@
 // ********************************
 
 .tank_info {
-	margin-bottom: 24px;
+	// margin-bottom: 24px;
 	//color: #58d;
 	//display: block;
-	min-height: 20px;
+	min-height: 60px;
 }
 
 @media (min-width: 768px) {
 	.tank {
-		box-shadow: 2px 3px 3px #888;
+		box-shadow: 1px 2px 1px #bbb;
 	  margin: 30px auto;
 	  height: 22vw;
 		width: 100%;
@@ -87,7 +87,7 @@
 
 @media (max-width: 767px) {
   .tank {
-  	box-shadow: 2px 3px 3px #888;
+  	box-shadow: 1px 2px 1px #bbb;
       margin: 30px auto;
       height:50vw;
       position: relative;
