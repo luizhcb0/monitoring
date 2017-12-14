@@ -1,3 +1,8 @@
+Highcharts.setOptions({
+  global: {
+      useUTC: false
+  }
+});
 $updateRate = 1000;
 $dimensions = [];
 $chart = null;
