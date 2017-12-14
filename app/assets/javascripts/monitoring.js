@@ -3,7 +3,7 @@ $dimensions = [];
 $chart = null;
 $options = {
     chart: {
-        renderTo: 'graph-canvas',
+        //renderTo: 'graph-canvas',
         type: 'line',
         backgroundColor: '#f8f8f8'
     },
@@ -75,6 +75,16 @@ $(".monitoring.index").ready(function() {
     function() {
       getLevels();
       updateChart();
+    },
+    $updateRate
+  );
+});
+
+$(".monitoring.devices_history").ready(function() {
+  plotHistoryChart();
+  $allTimer = setInterval(
+    function() {
+      updateHistoryChart();
     },
     $updateRate
   );
@@ -206,6 +216,22 @@ function plotChart() {
     dataType: "json",
     success: function(response){
       $options.series = response;
+      $options.chart.renderTo = "graph-canvas";
+      $chart = new Highcharts.Chart($options);
+    }
+  });
+}
+
+function plotHistoryChart() {
+  $.ajax({
+    type: "GET",
+    // #hidden_id is at _infos.html.erb. It shows the user who owns the devices.
+    // Must be changed if more than a user has a device
+    url: "/get_user_devices_levels_history/"+$("#hidden_id").val(),
+    dataType: "json",
+    success: function(response){
+      $options.series = response;
+      $options.chart.renderTo = "history-graph-canvas";
       $chart = new Highcharts.Chart($options);
     }
   });
@@ -216,6 +242,28 @@ function updateChart() {
   $.ajax({
     type: "GET",
     url: "/get_user_devices_levels/"+$("#hidden_id").val(),
+    dataType: "json",
+    success: function(response){
+      $($chart.series).each(function(i) {
+        $chart.series[i].update(response[i]);
+        // Problema da Função receber um NaN
+        // $chart.series[i].setData(response[i].data);
+      });
+      $ex = $chart.xAxis[0].getExtremes();
+      // $("body").append(($ex.max - $ex.min)+"<br>");
+      // $ex.max - $ex.min = difference milli seconds between first plot and last
+      if ($ex.max - $ex.min > 360000) {
+        $chart.xAxis[0].setExtremes($ex.min + (1000) , $ex.max + (1000));
+      }
+      $chart.redraw();
+    }
+  });
+}
+
+function updateHistoryChart() {
+  $.ajax({
+    type: "GET",
+    url: "/get_user_devices_levels_history/"+$("#hidden_id").val(),
     dataType: "json",
     success: function(response){
       $($chart.series).each(function(i) {
