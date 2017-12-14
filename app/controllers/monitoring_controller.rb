@@ -4,6 +4,7 @@ class MonitoringController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @user = current_user
     @devices = Device.get_user_devices(current_user)
   end
 
@@ -14,6 +15,11 @@ class MonitoringController < ApplicationController
     else
       render json: "error"
     end
+  end
+
+  def devices_history
+    @user = current_user
+    render :devices_history
   end
 
   def get_all_dimensions

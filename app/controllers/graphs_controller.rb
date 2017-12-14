@@ -58,6 +58,28 @@ class GraphsController < ApplicationController
       }
   end
 
+  def get_user_devices_levels_history
+    user_id = params[:id]
+    @levels = Level.get_all_user_devices_levels_history(user_id)
+    @hash = {}
+    @array = Array.new
+
+    @levels.each do |l|
+      l.each do |i|
+        a = i.created_at.to_datetime.to_i * 1000
+        @hash[a] = i.percentage.round(2)
+      end
+      @array << @hash
+      @hash = Hash.new
+    end
+    render json:
+      @array.each_with_index.map {
+        |a, index| {
+          name: "Reservatório #{index + 1}", data: a.map {|b| b }
+        }
+      }
+  end
+
 
 
   # Deprecated
