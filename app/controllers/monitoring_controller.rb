@@ -38,7 +38,7 @@ class MonitoringController < ApplicationController
 
   def render_all_current_levels
     @levels = Array.new
-    array = Level.get_all_current_levels
+    array = Level.get_all_current_levels(current_user.id)
     # Rails.logger.debug("Array: #{array.inspect}")
     array.each do |level|
       @levels << Level.find_by(id: level) if level

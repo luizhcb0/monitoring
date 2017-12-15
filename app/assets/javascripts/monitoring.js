@@ -189,6 +189,21 @@ function updateDevices($level) {
   }
 }
 
+function verifyDataSending(data) {
+  $now = new Date();
+  $now_milis = $now.getTime();
+  $time= new Date(data.created_at);
+  $diff = ($now_milis - $time.getTime());
+  // 15 minutes
+  if ($diff > 1000 * 60 * 15) {
+    $('#device-'+data.device_id).html('<i class="fa fa-exclamation-triangle"></i>');
+  }
+  else {
+    $('#device-'+data.device_id).html('');
+  }
+
+}
+
 function getLevels() {
   $.ajax({
     type: "GET",
@@ -196,6 +211,7 @@ function getLevels() {
     dataType: "json",
     success: function(response){
       response.forEach(updateDevices);
+      response.forEach(verifyDataSending);
     }
   });
 }
@@ -210,7 +226,6 @@ function getDevices() {
     }
   });
 }
-
 
 function plotChart() {
   $.ajax({

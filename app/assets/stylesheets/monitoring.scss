@@ -37,6 +37,7 @@
 		margin: auto;
 		min-height: 9vw;
 		border-radius: 5%;
+		line-height: 9vw;
 	}
 }
 
@@ -47,7 +48,10 @@
 		margin: auto;
 		min-height: 3vw;
 		border-radius: 4%;
-		display: -webkit-box;
+		font-size: 17px;
+		// display: -webkit-box;
+		display: block;
+		line-height: 3vw;
 	}
 }
 
@@ -125,6 +129,7 @@
 	background-color: #2585f0;
 	border: 1px solid #1575e0;
 	opacity: 0.7;
+	color: #fff;
 }
 
 .full:hover {
@@ -147,6 +152,7 @@
 	background-color: #f0ca30;
 	border: 1px solid #e0ba20;
 	opacity: 0.7;
+	color: #fff;
 }
 
 .medium:hover {
@@ -169,6 +175,7 @@
 	background-color: #ea2020;
 	border: 1px solid #da1010;
 	opacity: 0.7;
+	color: #fff;
 }
 
 .low:hover {
@@ -191,6 +198,7 @@
 	background-color: #fafafa;
 	border: 1px solid #889;
 	opacity: 0.7;
+	color: #f35;
 }
 
 .empty:hover {
