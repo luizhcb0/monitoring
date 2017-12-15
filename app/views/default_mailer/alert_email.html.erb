@@ -8,5 +8,11 @@
     <p>
       Informamos que a capacidade do dispositivo <%= @device.id %> chegou a <%= @percentage %>%.
     </p>
+    <p>
+      <%= @text %>
+    </p>
+    <p>
+      O dia do ultimo nivel critico foi <%= @last_cl.strftime("%d/%m/%Y - %H:%M") %>.
+    </p>
   </body>
 </html>
