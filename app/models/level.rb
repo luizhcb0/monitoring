@@ -11,9 +11,9 @@ class Level < ApplicationRecord
     where(id: Level.get_current_level_id(device_id)).first
   end
 
-  def self.get_all_current_levels
+  def self.get_all_current_levels(user_id)
     levels = Array.new
-    Device.all.each do |device|
+    Device.where(user_id: user_id).each do |device|
       levels <<  where(device_id: device.id).maximum(:id)
     end
     return levels
