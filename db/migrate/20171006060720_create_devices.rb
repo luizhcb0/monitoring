@@ -5,7 +5,8 @@ class CreateDevices < ActiveRecord::Migration[5.0]
       t.string :serial, null: false, unique: true
       t.integer :model, null: false
       t.string :address
-      t.integer :position
+      t.datetime :time_between_cl
+      t.datetime :last_cl
       t.string :description
       t.timestamps
     end

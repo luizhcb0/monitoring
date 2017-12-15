@@ -32,13 +32,14 @@ ActiveRecord::Schema.define(version: 20171127185257) do
 
   create_table "devices", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "serial",      null: false
-    t.integer  "model",       null: false
+    t.string   "serial",          null: false
+    t.integer  "model",           null: false
     t.string   "address"
-    t.integer  "position"
+    t.datetime "time_between_cl"
+    t.datetime "last_cl"
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.index ["user_id"], name: "index_devices_on_user_id", using: :btree
   end
 
