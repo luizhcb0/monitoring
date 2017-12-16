@@ -5,6 +5,7 @@ Highcharts.setOptions({
 });
 $updateRate = 1000;
 $dimensions = [];
+$devices = {};
 $chart = null;
 $options = {
     chart: {
@@ -24,6 +25,7 @@ $options = {
         title: {
             text: 'Horário'
         },
+        // 2 hours
         range:  1 * 3600 * 1000 * 6,
         type: 'datetime',
         labels: {
@@ -56,7 +58,18 @@ $options = {
         }
     },
     scrollbar: {
-        enabled: true
+        enabled: true,
+        barBackgroundColor: "#1555a0",
+        barBorderColor: "#036ab7",
+        barBorderRadius: 8,
+        buttonArrowColor: "#fff",
+        buttonBackgroundColor: "#1555a0",
+        buttonBorderColor: "#036ab7",
+        buttonBorderRadius: 2,
+        height: 20,
+        margin:10,
+        rifleColor: "#fff",
+        trackBackgroundColor: "#e5e5f0"
     },
     credits: {
         enabled: true,
@@ -73,8 +86,15 @@ $options = {
 };
 
 $(".monitoring.index").ready(function() {
-  getLevels();
+  //caching
+  $tankInfo = $(".tank_info");
+  $water = $(".water");
+  $waterDeviceInfo = $('.water-device-info');
+  $deviceCanvas = $('.device-canvas');
+  $devicesCanvas = $('.devices-canvas');
   getDevices();
+
+  getLevels();
   plotChart();
   $allTimer = setInterval(
     function() {
@@ -83,6 +103,7 @@ $(".monitoring.index").ready(function() {
     },
     $updateRate
   );
+  return false;
 });
 
 $(".monitoring.devices_history").ready(function() {
@@ -93,22 +114,25 @@ $(".monitoring.devices_history").ready(function() {
     },
     $updateRate
   );
+  return false;
 });
 
 
 function updateDevice($level) {
   $percentage = $level.percentage;
   $litters = 1000 * $level.y * $dimensions[$level.device_id - 1].z * $dimensions[$level.device_id - 1].x
-  $(".tank_info").html("Reservatório "+$level.device_id+"<br>Nível de água: "+$percentage+"%<br>Volume: "+$litters+" litros");
-  $('.water').animate({
+  $tankInfo.html("Reservatório "+$level.device_id+"<br>Nível de água: "+$percentage+"%<br>Volume: "+$litters+" litros");
+  $water.animate({
     height: $percentage+'%'
   }, 1000);
+  return false;
 }
 
 function resumeDevice($level) {
   $percentage = $level.percentage;
   $litters = 1000 * $level.y * $dimensions[$level.device_id - 1].z * $dimensions[$level.device_id - 1].x
-  $('.water-device-info').html('Reservatório '+$level.device_id+'<br>Nível: '+$level.percentage+'%');
+  $waterDeviceInfo.html('Reservatório '+$level.device_id+'<br>Nível: '+$level.percentage+'%');
+  return false;
 }
 
 function deviceInfo($element) {
@@ -122,8 +146,8 @@ function deviceInfo($element) {
       },
       $updateRate
     );
-    $('.devices-canvas').css('display','none');
-    $('.device-canvas').css('display','block');
+    $devicesCanvas.css('display','none');
+    $deviceCanvas.css('display','block');
   }
   else {
     clearInterval($oneTimer);
@@ -134,9 +158,10 @@ function deviceInfo($element) {
       },
       $updateRate
     );
-    $('.device-canvas').css('display','none');
-    $('.devices-canvas').css('display','block');
+    $deviceCanvas.css('display','none');
+    $devicesCanvas.css('display','block');
   }
+  return false;
 }
 
 function deviceResumeShow($element) {
@@ -144,10 +169,12 @@ function deviceResumeShow($element) {
     $device_id = $element.id.substr($element.id.length - 1);
     getResume($device_id);
   }
+  return false;
 }
 
 function deviceResumeHide($element) {
-  $('.water-device-info').html('');
+  $waterDeviceInfo.html('');
+  return false;
 }
 
 function getLevel($device_id) {
@@ -159,6 +186,7 @@ function getLevel($device_id) {
       updateDevice(response);
     }
   });
+  return false;
 }
 
 function getResume($device_id) {
@@ -170,23 +198,25 @@ function getResume($device_id) {
       resumeDevice(response);
     }
   });
+  return false;
 }
 
 
 function updateDevices($level) {
   $percentage = $level.percentage;
   if ($percentage >= 0 && $percentage < 10) {
-    $('#device-'+$level.device_id).removeClass( "low medium full" ).addClass('empty');
+    $devices[$level.device_id].removeClass( "low medium full" ).addClass('empty');
   }
   else if ($percentage >= 10 && $percentage < 40) {
-    $('#device-'+$level.device_id).removeClass( "empty medium full" ).addClass('low');
+    $devices[$level.device_id].removeClass( "empty medium full" ).addClass('low');
   }
   else if ($percentage >= 40 && $percentage < 80) {
-    $('#device-'+$level.device_id).removeClass( "empty low full" ).addClass('medium');
+    $devices[$level.device_id].removeClass( "empty low full" ).addClass('medium');
   }
   else if ($percentage >= 80) {
-    $('#device-'+$level.device_id).removeClass( "empty low medium" ).addClass('full');
+    $devices[$level.device_id].removeClass( "empty low medium" ).addClass('full');
   }
+  return false;
 }
 
 function verifyDataSending(data) {
@@ -196,11 +226,12 @@ function verifyDataSending(data) {
   $diff = ($now_milis - $time.getTime());
   // 15 minutes
   if ($diff > 1000 * 60 * 15) {
-    $('#device-'+data.device_id).html('<i class="fa fa-exclamation-triangle"></i>');
+    $devices[data.device_id].html('<i class="fa fa-exclamation-triangle"></i>');
   }
   else {
-    $('#device-'+data.device_id).html('');
+    $devices[data.device_id].html('');
   }
+  return false;
 
 }
 
@@ -214,6 +245,7 @@ function getLevels() {
       response.forEach(verifyDataSending);
     }
   });
+  return false;
 }
 
 function getDevices() {
@@ -223,8 +255,12 @@ function getDevices() {
     dataType: "json",
     success: function(response){
       $dimensions = response;
+      for (i = 0; i < $dimensions.length; i++) {
+        $devices[$dimensions[i].device_id] = ($('#device-'+$dimensions[i].device_id));
+      }
     }
   });
+  return false;
 }
 
 function plotChart() {
@@ -240,6 +276,7 @@ function plotChart() {
       $chart = new Highcharts.Chart($options);
     }
   });
+  return false;
 }
 
 function plotHistoryChart() {
@@ -255,6 +292,7 @@ function plotHistoryChart() {
       $chart = new Highcharts.Chart($options);
     }
   });
+  return false;
 }
 
 // Updating Chart
@@ -270,14 +308,24 @@ function updateChart() {
         // $chart.series[i].setData(response[i].data);
       });
       $ex = $chart.xAxis[0].getExtremes();
-      // $("body").append(($ex.max - $ex.min)+"<br>");
       // $ex.max - $ex.min = difference milli seconds between first plot and last
-      if ($ex.max - $ex.min > 360000) {
-        $chart.xAxis[0].setExtremes($ex.min + (1000) , $ex.max + (1000));
+      if ($ex.dataMax - $ex.dataMin > 3600000) {
+        if ($ex.dataMax - $ex.max  < 60000 ) {
+          $chart.xAxis[0].setExtremes($ex.min, $ex.dataMax + 120000);
+        }
+        else {
+
+        }
       }
-      $chart.redraw();
+      else {
+        $chart.xAxis[0].setExtremes($ex.dataMin - 2000, $ex.dataMax + 2000);
+      }
+      // $("body").append($ex.min+" "+($ex.max - $ex.min)+" "+$ex.max+"<br>");
+      // $("body").append($ex.dataMin+" "+($ex.dataMax - $ex.dataMin)+" "+$ex.dataMax+"<br><br>");
+
     }
   });
+  return false;
 }
 
 function updateHistoryChart() {
@@ -300,4 +348,5 @@ function updateHistoryChart() {
       $chart.redraw();
     }
   });
+  return false;
 }

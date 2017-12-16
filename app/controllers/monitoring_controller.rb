@@ -24,7 +24,7 @@ class MonitoringController < ApplicationController
 
   def get_all_dimensions
     @dimensions = Array.new
-    Device.all.each do |device|
+    Device.where(user_id: current_user.id).each do |device|
       @dimensions << device.dimension
     end
     render json: @dimensions
