@@ -87,14 +87,13 @@ $options = {
 
 $(".monitoring.index").ready(function() {
   //caching
+  getDevices();
+  getLevels();
   $tankInfo = $(".tank_info");
   $water = $(".water");
   $waterDeviceInfo = $('.water-device-info');
   $deviceCanvas = $('.device-canvas');
   $devicesCanvas = $('.devices-canvas');
-  getDevices();
-
-  getLevels();
   plotChart();
   $allTimer = setInterval(
     function() {
