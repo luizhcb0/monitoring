@@ -25,7 +25,6 @@ class MonitoringController < ApplicationController
   def get_all_dimensions
     @dimensions = Array.new
     @dimensions = Device.get_all_user_dimensions(current_user.id)
-    puts @dimensions
     render json: @dimensions
   end
 
