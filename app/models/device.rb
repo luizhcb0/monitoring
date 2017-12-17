@@ -18,6 +18,14 @@ class Device < ApplicationRecord
     where(position: "bottom")
   end
 
+  def self.get_all_user_dimensions(user_id)
+    dimensions = Array.new
+    Device.where(user_id: user_id).each do |device|
+      dimensions <<  device.dimension
+    end
+    return dimensions
+  end
+
   def self.get_user_devices(user_id)
     where(user_id: user_id)
   end

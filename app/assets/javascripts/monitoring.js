@@ -4,7 +4,7 @@ Highcharts.setOptions({
   }
 });
 $updateRate = 1000;
-$dimensions = [];
+$dimensions = {};
 $devices = {};
 $chart = null;
 $options = {
@@ -87,14 +87,8 @@ $options = {
 
 $(".monitoring.index").ready(function() {
   //caching
-  $tankInfo = $(".tank_info");
-  $water = $(".water");
-  $waterDeviceInfo = $('.water-device-info');
-  $deviceCanvas = $('.device-canvas');
-  $devicesCanvas = $('.devices-canvas');
   getDevices();
 
-  getLevels();
   plotChart();
   $allTimer = setInterval(
     function() {
@@ -120,17 +114,17 @@ $(".monitoring.devices_history").ready(function() {
 
 function updateDevice($level) {
   $percentage = $level.percentage;
-  $litters = 1000 * $level.y * $dimensions[$level.device_id - 1].z * $dimensions[$level.device_id - 1].x
-  $tankInfo.html("Reservatório "+$level.device_id+"<br>Nível de água: "+$percentage+"%<br>Volume: "+$litters+" litros");
+  $litters = 1000 * $level.y * $dimensions[$level.device_id].z * $dimensions[$level.device_id].x
   $water.animate({
     height: $percentage+'%'
   }, 1000);
+  $tankInfo.html("Reservatório "+$level.device_id+"<br>Nível de água: "+$percentage+"%<br>Volume: "+$litters+" litros");
   return false;
 }
 
 function resumeDevice($level) {
   $percentage = $level.percentage;
-  $litters = 1000 * $level.y * $dimensions[$level.device_id - 1].z * $dimensions[$level.device_id - 1].x
+  $litters = 1000 * $level.y * $dimensions[$level.device_id].z * $dimensions[$level.device_id].x
   $waterDeviceInfo.html('Reservatório '+$level.device_id+'<br>Nível: '+$level.percentage+'%');
   return false;
 }
@@ -254,10 +248,17 @@ function getDevices() {
     url: "/get_all_dimensions",
     dataType: "json",
     success: function(response){
-      $dimensions = response;
-      for (i = 0; i < $dimensions.length; i++) {
-        $devices[$dimensions[i].device_id] = ($('#device-'+$dimensions[i].device_id));
+      $temp = response;
+      for (i = 0; i < $temp.length; i++) {
+        $devices[$temp[i].device_id] = ($('#device-'+$temp[i].device_id));
+        $dimensions[$temp[i].device_id] = $temp[i];
       }
+      $tankInfo = $(".tank_info");
+      $water = $(".water");
+      $waterDeviceInfo = $('.water-device-info');
+      $deviceCanvas = $('.device-canvas');
+      $devicesCanvas = $('.devices-canvas');
+      getLevels();
     }
   });
   return false;
