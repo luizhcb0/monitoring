@@ -28,7 +28,7 @@ Dimension.create(x: 2, y: 6, z: 2, device_id: 3)
 Dimension.create(x: 2, y: 6, z: 2, device_id: 4)
 Dimension.create(x: 2, y: 6, z: 2, device_id: 5)
 Dimension.create(x: 2, y: 6, z: 2, device_id: 6)
-Dimension.create(x: 2, y: 6, z: 2, device_id: 7)
+Dimension.create(x: 2, y: 0.6, z: 0.6, volume: 1000, device_id: 7)
 Dimension.create(x: 2, y: 6, z: 2, device_id: 8)
 
 Level.create(device_id: 1, level: 0)

@@ -45,9 +45,9 @@ ActiveRecord::Schema.define(version: 20171127185257) do
 
   create_table "dimensions", force: :cascade do |t|
     t.integer  "device_id"
-    t.float    "x",          null: false
-    t.float    "y",          null: false
-    t.float    "z",          null: false
+    t.float    "x"
+    t.float    "y"
+    t.float    "z"
     t.float    "volume"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

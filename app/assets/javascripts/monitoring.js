@@ -114,7 +114,8 @@ $(".monitoring.devices_history").ready(function() {
 
 function updateDevice($level) {
   $percentage = $level.percentage;
-  $litters = 1000 * $level.y * $dimensions[$level.device_id].z * $dimensions[$level.device_id].x
+  //$litters = 1000 * $level.y * $dimensions[$level.device_id].z * $dimensions[$level.device_id].x
+  $litters = $percentage/100 * $dimensions[$level.device_id].volume
   $water.animate({
     height: $percentage+'%'
   }, 1000);
@@ -124,7 +125,8 @@ function updateDevice($level) {
 
 function resumeDevice($level) {
   $percentage = $level.percentage;
-  $litters = 1000 * $level.y * $dimensions[$level.device_id].z * $dimensions[$level.device_id].x
+  // $litters = 1000 * $level.y * $dimensions[$level.device_id].z * $dimensions[$level.device_id].x
+  $litters = $percentage/100 * $dimensions[$level.device_id].volume
   $waterDeviceInfo.html('Reservatório '+$level.device_id+'<br>Nível: '+$level.percentage+'%');
   return false;
 }
