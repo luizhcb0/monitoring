@@ -84,4 +84,3 @@ test:
 production:
   <<: *default
   database: monitoring_production
-  password: <%= ENV['MONITORING_DATABASE_PASSWORD'] %>
