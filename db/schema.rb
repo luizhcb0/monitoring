@@ -12,14 +12,11 @@
 
 ActiveRecord::Schema.define(version: 20171127185257) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "delayed_jobs", force: :cascade do |t|
-    t.integer  "priority",   default: 0, null: false
-    t.integer  "attempts",   default: 0, null: false
-    t.text     "handler",                null: false
-    t.text     "last_error"
+  create_table "delayed_jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "priority",                 default: 0, null: false
+    t.integer  "attempts",                 default: 0, null: false
+    t.text     "handler",    limit: 65535,             null: false
+    t.text     "last_error", limit: 65535
     t.datetime "run_at"
     t.datetime "locked_at"
     t.datetime "failed_at"
@@ -30,7 +27,7 @@ ActiveRecord::Schema.define(version: 20171127185257) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   end
 
-  create_table "devices", force: :cascade do |t|
+  create_table "devices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
     t.string   "serial",          null: false
     t.integer  "model",           null: false
@@ -43,37 +40,37 @@ ActiveRecord::Schema.define(version: 20171127185257) do
     t.index ["user_id"], name: "index_devices_on_user_id", using: :btree
   end
 
-  create_table "dimensions", force: :cascade do |t|
+  create_table "dimensions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "device_id"
-    t.float    "x"
-    t.float    "y"
-    t.float    "z"
-    t.float    "volume"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.float    "x",          limit: 24
+    t.float    "y",          limit: 24
+    t.float    "z",          limit: 24
+    t.float    "volume",     limit: 24
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.index ["device_id"], name: "index_dimensions_on_device_id", using: :btree
   end
 
-  create_table "levels", force: :cascade do |t|
-    t.integer  "device_id",  null: false
-    t.float    "level",      null: false
-    t.float    "y"
-    t.float    "percentage"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "levels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "device_id",             null: false
+    t.float    "level",      limit: 24, null: false
+    t.float    "y",          limit: 24
+    t.float    "percentage", limit: 24
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.index ["device_id"], name: "index_levels_on_device_id", using: :btree
   end
 
-  create_table "settings", force: :cascade do |t|
+  create_table "settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
-    t.float    "alert_level"
-    t.boolean  "active",      default: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.float    "alert_level", limit: 24
+    t.boolean  "active",                 default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.index ["user_id"], name: "index_settings_on_user_id", using: :btree
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",                              default: "", null: false
     t.string   "email",                             default: "", null: false
     t.string   "encrypted_password",                default: "", null: false
@@ -84,8 +81,8 @@ ActiveRecord::Schema.define(version: 20171127185257) do
     t.integer  "sign_in_count",                     default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
     t.string   "authentication_token",   limit: 30
