@@ -14,19 +14,17 @@
   background-color: #f8f8f8;
 }
 
-@media (min-width: 768px) {
-  #register {
-    min-height: 600px;
-  }
+#index {
+  min-height: 89vh;
 }
 
 .menu-container:hover {
-  color: #1555a0;
+  color: #031a47;
   text-decoration: none;
 }
 
 .menu-label {
-  color: #1555a0;
+  color: #031a47;
   font-size: 18px;
 }
 
