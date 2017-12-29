@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :devices
   resources :users
   resources :settings, only: [:index, :update]
+  resources :contacts, only: [:index, :create]
 
   get "/profile", to: "users#profile", as: "profile"
   get "/edit_profile", to: "users#edit_profile", as: "edit_profile"
@@ -51,5 +52,9 @@ Rails.application.routes.draw do
   get "/get_user_devices_levels_history/:id", to: "graphs#get_user_devices_levels_history", as: "get_user_devices_levels_history"
 
   get "/devices_history", to: "monitoring#devices_history", as: "devices_history"
+
+  get "/services", to: "static#services", as: "services"
+  get "/solutions", to: "static#solutions", as: "solutions"
+  get "/institutional", to: "static#institutional", as: "institutional"
 
 end
