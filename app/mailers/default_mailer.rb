@@ -30,6 +30,6 @@ class DefaultMailer < ApplicationMailer
 
   def contact_email(contact)
     @contact = contact
-    mail(to: "luizhcb0@gmail.com", from: "#{contact.name} <#{contact.email}>", subject: contact.subject)
+    mail(to: "atendimento@lcasystems.com.br", from: "#{contact.name} <#{contact.email}>", subject: contact.subject)
   end
 end
