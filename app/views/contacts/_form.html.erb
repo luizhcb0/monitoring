@@ -1,0 +1,41 @@
+<%= form_for @contact, html: {class: 'form-horizontal'} do |f| %>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+
+    <div class="">
+      <h2>Mande uma mensagem</h2>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :name, "Nome", class: "col-sm-3 control-label"%>
+      <div class="col-sm-8">
+        <%= f.text_field :name, required: "required", class: "form-control"  %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email, class: "col-sm-3 control-label"%>
+      <div class="col-sm-8">
+        <%= f.email_field :email, class: "form-control", required: "required" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :subject, "Assunto", class: "col-sm-3 control-label"%>
+      <div class="col-sm-8">
+        <%= f.text_field :subject, class: "form-control", required: "required" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :Body, "Mensagem", class: "col-sm-3 control-label"%>
+      <div class="col-sm-8">
+        <%= f.text_area :body, {class: "form-control", rows: 6, required: "required"}  %>
+      </div>
+    </div>
+
+    <%= f.submit "Enviar", class: "btn btn-default" %>
+
+  </div>
+</div>
+<% end %>

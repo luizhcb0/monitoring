@@ -18,4 +18,8 @@ module StrongParamsHolder
   def setting_params
     params.require(:setting).permit(:active, :alert_level)
   end
+
+  def contact_params
+    params.require(:contact).permit(:name, :email, :subject, :body)
+  end
 end
