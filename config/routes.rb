@@ -53,7 +53,6 @@ Rails.application.routes.draw do
 
   get "/devices_history", to: "monitoring#devices_history", as: "devices_history"
 
-  get "/services", to: "static#services", as: "services"
   get "/solutions", to: "static#solutions", as: "solutions"
   get "/institutional", to: "static#institutional", as: "institutional"
 
