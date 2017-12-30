@@ -1,10 +1,11 @@
+<div class="contact-form">
 <%= form_for @contact, html: {class: 'form-horizontal'} do |f| %>
 <div class="row">
-  <div class="col-sm-8 col-sm-offset-2">
+  <div class="col-sm-12">
 
-    <div class="">
-      <h2>Mande uma mensagem</h2>
-    </div>
+    <p><h2>Contato</h2></p>
+
+    
 
     <div class="form-group">
       <%= f.label :name, "Nome", class: "col-sm-3 control-label"%>
@@ -39,3 +40,4 @@
   </div>
 </div>
 <% end %>
+</div>
