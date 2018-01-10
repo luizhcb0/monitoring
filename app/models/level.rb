@@ -29,8 +29,9 @@ class Level < ApplicationRecord
 
   def self.get_all_user_devices_levels(user_id)
     levels = Array.new
+    now = DateTime.now
     Device.where(user_id: user_id).each do |device|
-      levels <<  where(device_id: device.id).order(created_at: :asc).last(1440)
+      levels <<  where(device_id: device.id, created_at: (now - 1.day)..now).order(created_at: :asc)
     end
     return levels
   end
