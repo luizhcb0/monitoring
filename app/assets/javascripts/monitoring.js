@@ -128,6 +128,7 @@ function resumeDevice($level) {
   // $litters = 1000 * $level.y * $dimensions[$level.device_id].z * $dimensions[$level.device_id].x
   $litters = $percentage/100 * $dimensions[$level.device_id].volume
   $waterDeviceInfo.html('Reservatório '+$level.device_id+'<br>Nível: '+$level.percentage+'%');
+  $waterDeviceInfo.css('display', 'block')
   return false;
 }
 
@@ -169,7 +170,7 @@ function deviceResumeShow($element) {
 }
 
 function deviceResumeHide($element) {
-  $waterDeviceInfo.html('');
+  $waterDeviceInfo.css('display', 'none');
   return false;
 }
 
