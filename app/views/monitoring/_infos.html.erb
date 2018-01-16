@@ -3,10 +3,17 @@
     <div class="col-sm-10 col-sm-offset-1">
 
       <div class="device-canvas">
-        <div class="tank_info"></div>
-        <div class="tank">
-          <div class="water"></div>
+        <div class="row tank-info-canvas">
+          <div class="col-xs-8 col-sm-6 col-xs-offset-2 col-sm-offset-3">
+            <div class="tank-info"></div>
+          </div>
         </div>
+        <div class="row">
+          <div class="tank">
+            <div class="water"></div>
+          </div>
+        </div>
+
         <button class="btn btn-primary" type="button" name="button" onclick="deviceInfo(this)">Voltar</button>
       </div>
 
@@ -25,7 +32,7 @@
 
           <% end %>
         </div>
-        <div class="col-xs-6 col-xs-offset-3">
+        <div class="col-xs-8 col-sm-6 col-xs-offset-2 col-sm-offset-3">
           <div class="water-device-info"></div>
         </div>
         <%= hidden_field_tag :hidden_id, @user.id %>
