@@ -64,11 +64,27 @@
 // Device Focus
 // ********************************
 
-.tank_info {
-	// margin-bottom: 24px;
-	//color: #58d;
-	//display: block;
-	min-height: 60px;
+.tank-info {
+	display: none;
+	background-color: #f8f8fa;
+	padding: 10px;
+	border:1px solid #c0c0cf;
+	border-radius: 2px;
+	box-shadow: 0px 0px 6px #ccc;
+}
+
+.tank-info-canvas {
+	min-height: 82px;
+}
+
+.water-device-info {
+	margin-top: 20px;
+	background-color: #f8f8fa;
+	padding: 10px;
+	border:1px solid #c0c0cf;
+	border-radius: 2px;
+	box-shadow: 0px 0px 6px #ccc;
+	display: none;
 }
 
 @media (min-width: 768px) {

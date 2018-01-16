@@ -102,7 +102,14 @@ $historyOptions = {
     chart: {
         //renderTo: 'graph-canvas',
         type: 'line',
+        height: 490,
         backgroundColor: '#f8f8f8'
+    },
+    tooltip: {
+      borderRadius: 2,
+      borderWidth: 1,
+      valueDecimals: 2,
+      animation: false
     },
     title: {
         text: 'Nível nos reservatórios'
@@ -141,19 +148,21 @@ $historyOptions = {
             text: 'Nível'
         },
         tickInterval: 10,
+        tickAmount: 11,
+        minRange: 100,
         min: 0,
         max: 100,
         labels: {
           formatter: function () {
               // return Highcharts.dateFormat('%a %d %b %H:%M', this.value);
-              return (this.value + '%');
+              return Highcharts.format(this.value + '%');
           },
           align: 'left'
         }
     },
     rangeSelector: {
       enabled: true,
-      verticalAlign: 'top',
+      verticalAlign: 'bottom',
 	    x: 0,
 	    y: 0
     },
@@ -211,6 +220,7 @@ function updateDevice($level) {
     height: $percentage+'%'
   }, 1000);
   $tankInfo.html("Reservatório "+$level.device_id+"<br>Nível de água: "+$percentage+"%<br>Volume: "+$litters+" litros");
+  $tankInfo.css('display','block')
   return false;
 }
 
@@ -234,6 +244,7 @@ function deviceInfo($element) {
       },
       $updateRate
     );
+    $tankInfo.css('display','none')
     $devicesCanvas.css('display','none');
     $deviceCanvas.css('display','block');
   }
@@ -347,7 +358,7 @@ function getDevices() {
         $devices[$temp[i].device_id] = ($('#device-'+$temp[i].device_id));
         $dimensions[$temp[i].device_id] = $temp[i];
       }
-      $tankInfo = $(".tank_info");
+      $tankInfo = $(".tank-info");
       $water = $(".water");
       $waterDeviceInfo = $('.water-device-info');
       $deviceCanvas = $('.device-canvas');
