@@ -59,17 +59,17 @@ $options = {
     },
     scrollbar: {
         enabled: true,
-        barBackgroundColor: "#1555a0",
-        barBorderColor: "#036ab7",
-        barBorderRadius: 8,
+        barBackgroundColor: "#033a67",
+        barBorderColor: "#031a47",
+        barBorderRadius: 6,
         buttonArrowColor: "#fff",
-        buttonBackgroundColor: "#1555a0",
-        buttonBorderColor: "#036ab7",
+        buttonBackgroundColor: "#033a67",
+        buttonBorderColor: "#031a47",
         buttonBorderRadius: 2,
-        height: 20,
+        height: 25,
         margin:10,
         rifleColor: "#fff",
-        trackBackgroundColor: "#e5e5f0"
+        trackBackgroundColor: "#e3eaf7"
     },
     credits: {
         enabled: true,
@@ -79,7 +79,7 @@ $options = {
           verticalAlign: 'bottom',
           y: -5
         },
-        href: 'javascript:window.open("http://lcasystems.com.br/", "_blank")',
+        // href: 'javascript:window.open("http://lcasystems.com.br/", "_blank")',
         text: 'LCA®'
     },
     // series: $dados
@@ -102,12 +102,12 @@ $(".monitoring.index").ready(function() {
 
 $(".monitoring.devices_history").ready(function() {
   plotHistoryChart();
-  $allTimer = setInterval(
-    function() {
-      updateHistoryChart();
-    },
-    $updateRate
-  );
+  // $allTimer = setInterval(
+  //   function() {
+  //     updateHistoryChart();
+  //   },
+  //   $updateRate
+  // );
   return false;
 });
 
