@@ -1,7 +1,19 @@
 Highcharts.setOptions({
   global: {
       useUTC: false
-  }
+  },
+  lang: {
+      months: [
+          'Janeiro', 'Fevereiro', 'Março', 'Abril',
+          'Maio', 'Junho', 'Julho', 'Agosto',
+          'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+      ],
+      weekdays: [
+          'Domingo', 'Segunda', 'Terça', 'Quarta',
+          'Quinta', 'Sexta', 'Sábado'
+      ],
+      shortMonths: [ "Jan" , "Fev" , "Mar" , "Abr" , "Mai" , "Jun" , "Jul" , "Ago" , "Set" , "Out" , "Nov" , "Dez"]
+  },
 });
 $updateRate = 1000;
 $dimensions = {};
@@ -18,6 +30,7 @@ $options = {
     },
     plotOptions: {
       series: {
+          shadow: true,
           animation: false
       }
     },
@@ -69,7 +82,7 @@ $options = {
         height: 25,
         margin:10,
         rifleColor: "#fff",
-        trackBackgroundColor: "#e3eaf7"
+        trackBackgroundColor: "#f3f4f5"
     },
     credits: {
         enabled: true,
@@ -83,6 +96,84 @@ $options = {
         text: 'LCA®'
     },
     // series: $dados
+};
+
+$historyOptions = {
+    chart: {
+        //renderTo: 'graph-canvas',
+        type: 'line',
+        backgroundColor: '#f8f8f8'
+    },
+    title: {
+        text: 'Nível nos reservatórios'
+    },
+    plotOptions: {
+      series: {
+          shadow: true,
+          showInNavigator: true,
+          animation: false
+      }
+    },
+    xAxis: {
+        title: {
+            text: 'Horário'
+        },
+        // 2 hours
+        range:  1 * 3600 * 1000 * 6,
+        type: 'datetime',
+        labels: {
+          formatter: function () {
+              // return Highcharts.dateFormat('%a %d %b %H:%M', this.value);
+              return Highcharts.dateFormat('%H:%M', this.value);
+          },
+          dateTimeLabelFormats: {
+              minute: '%H:%M',
+              hour: '%H:%M',
+              day: '%e. %b',
+              week: '%e. %b',
+              month: '%b \'%y',
+              year: '%Y'
+          }
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'Nível'
+        },
+        tickInterval: 10,
+        min: 0,
+        max: 100,
+        labels: {
+          formatter: function () {
+              // return Highcharts.dateFormat('%a %d %b %H:%M', this.value);
+              return (this.value + '%');
+          },
+          align: 'left'
+        }
+    },
+    rangeSelector: {
+      enabled: true,
+      verticalAlign: 'top',
+	    x: 0,
+	    y: 0
+    },
+    scrollbar: {
+        enabled: true,
+        barBackgroundColor: "#033a67",
+        barBorderColor: "#031a47",
+        barBorderRadius: 6,
+        buttonArrowColor: "#fff",
+        buttonBackgroundColor: "#033a67",
+        buttonBorderColor: "#031a47",
+        buttonBorderRadius: 2,
+        height: 18,
+        margin:10,
+        rifleColor: "#fff",
+        trackBackgroundColor: "#f3f4f5"
+    },
+    credits: {
+        enabled: false,
+    }
 };
 
 $(".monitoring.index").ready(function() {
@@ -291,9 +382,10 @@ function plotHistoryChart() {
     url: "/get_user_devices_levels_history/"+$("#hidden_id").val(),
     dataType: "json",
     success: function(response){
-      $options.series = response;
-      $options.chart.renderTo = "history-graph-canvas";
-      $chart = new Highcharts.Chart($options);
+      // $historyOptions.plotOptions.series.shadow = true;
+      $historyOptions.series = response;
+      $historyOptions.chart.renderTo = "history-graph-canvas";
+      $chart = new Highcharts.StockChart($historyOptions);
     }
   });
   return false;
