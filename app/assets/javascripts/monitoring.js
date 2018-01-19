@@ -235,7 +235,7 @@ function resumeDevice($level) {
 
 function deviceInfo($element) {
   if ($element.className.split(' ')[0] == 'water-device') {
-    $device_id = $element.id.substr($element.id.length - 1);
+    $device_id = $element.id.split('-')[1]
     clearInterval($allTimer);
     $oneTimer = setInterval(
       function() {
@@ -265,7 +265,7 @@ function deviceInfo($element) {
 
 function deviceResumeShow($element) {
   if ($element.className.split(' ')[0] == 'water-device') {
-    $device_id = $element.id.substr($element.id.length - 1);
+    $device_id = $element.id.split('-')[1]
     getResume($device_id);
   }
   return false;
