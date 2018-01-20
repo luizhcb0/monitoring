@@ -13,7 +13,8 @@ class Level < ApplicationRecord
 
   def self.get_all_current_levels(user_id)
     levels = Array.new
-    Device.where(user_id: user_id).each do |device|
+    Device.left_outer_joins(:users).where(users: {id: user_id}).each do |device|
+    # Device.where(user_id: user_id).each do |device|
       levels <<  where(device_id: device.id).maximum(:id)
     end
     return levels
@@ -30,7 +31,7 @@ class Level < ApplicationRecord
   def self.get_all_user_devices_levels(user_id)
     levels = Array.new
     now = DateTime.now
-    Device.where(user_id: user_id).each do |device|
+    Device.left_outer_joins(:users).where(users: {id: user_id}).each do |device|
       levels <<  where(device_id: device.id, created_at: (now - 1.day)..now).order(created_at: :asc)
     end
     return levels

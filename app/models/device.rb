@@ -1,7 +1,7 @@
 class Device < ApplicationRecord
   has_many :levels
   has_one :dimension
-  belongs_to :user
+  has_and_belongs_to_many :users
   accepts_nested_attributes_for :dimension, allow_destroy: true
 
   after_create :set_first_level
@@ -31,7 +31,12 @@ class Device < ApplicationRecord
 
   private
     def set_first_level
-      d = Dimension.create(x: 2, y: 0.5, z: 0.5, volume: 1000, device_id: self.id) if self.dimension.nil?
-      Level.create(device_id: self.id, level: d.y)
+      if self.dimension.nil?
+        d = Dimension.create(x: 2, y: 0.5, z: 0.5, volume: 1000, device: self)
+        Level.create(device: self, level: d.y)
+      else
+        Level.create(device: self, level: self.dimension.y)
+      end
+
     end
 end
