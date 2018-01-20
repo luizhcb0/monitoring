@@ -9,7 +9,7 @@ module StrongParamsHolder
 
   def device_params
     params.require(:device).permit(:serial, :model, :description,
-      dimension_attributes: [:x, :y, :z, :volume, :device_id, :destroy], user_ids: [])
+      dimension_attributes: [:id, :x, :y, :z, :volume, :device_id, :_destroy], user_ids: [])
   end
 
   def user_params

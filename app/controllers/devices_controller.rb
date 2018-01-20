@@ -34,6 +34,7 @@ class DevicesController < ApplicationController
 
   def edit
     @device = Device.find(params[:id])
+    @dimension = @device.dimension
   end
 
   def update
@@ -42,7 +43,7 @@ class DevicesController < ApplicationController
       @device.users = []
     end
     if @device.update_attributes(device_params)
-      redirect_to devices_path(@device.id)
+      redirect_to device_path(@device)
     else
       render :edit
     end
