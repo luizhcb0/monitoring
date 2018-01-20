@@ -2,6 +2,9 @@ class Device < ApplicationRecord
   has_many :levels
   has_one :dimension
   belongs_to :user
+  accepts_nested_attributes_for :dimension, allow_destroy: true
+
+  after_create :set_first_level
 
   validates_uniqueness_of :serial, {message: "O Número de Série já existe"}
   validates_format_of :serial, with: /\d{4}-\d{4}-\d{2}/,
@@ -18,15 +21,17 @@ class Device < ApplicationRecord
     where(position: "bottom")
   end
 
-  def self.get_all_user_dimensions(user_id)
+  def self.get_all_user_dimensions(user)
     dimensions = Array.new
-    Device.where(user_id: user_id).each do |device|
+    user.devices.each do |device|
       dimensions <<  device.dimension
     end
     return dimensions
   end
 
-  def self.get_user_devices(user_id)
-    where(user_id: user_id)
-  end
+  private
+    def set_first_level
+      d = Dimension.create(x: 2, y: 0.5, z: 0.5, volume: 1000, device_id: self.id) if self.dimension.nil?
+      Level.create(device_id: self.id, level: d.y)
+    end
 end
