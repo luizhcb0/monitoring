@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @devices = Device.get_user_devices(params[:id])
+    @devices = @user.devices
   end
 
   def edit
