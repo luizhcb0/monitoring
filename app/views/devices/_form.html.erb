@@ -21,6 +21,10 @@
       </div>
     </div>
 
+    <%= f.fields_for :dimension, @dimension do |d| %>
+      <%= render 'dimension_fields', f: d %>
+    <% end %>
+
     <div class="form-group">
       <%= f.label :description, "Descrição", class: "col-sm-4 control-label"%>
       <div class="col-sm-8">
