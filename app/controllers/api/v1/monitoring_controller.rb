@@ -16,38 +16,39 @@ class Api::V1::MonitoringController < Api::V1::BaseController
 
   # POST /api/v1/monitoring
   def create
-    @level = Level.new(monitoring_params)
-    @device = @level.device
-    @setting = @level.device.user.setting
-    last = Level.get_current_level(@level.device_id)
-    # Arrumar pra salvar só se for diferente do último nível ou tiver passado mais de 1h
-    if @level.save
-      if @setting.active?
-        if @level.percentage <= @setting.alert_level
-          if last.percentage > @setting.alert_level
-            if @device.last_cl.nil?
-              @device.update_attributes(last_cl: @level.created_at, time_between_cl: Time.at(@level.created_at - @device.created_at))
-            else
-              @device.update_attributes(last_cl: @level.created_at, time_between_cl: Time.at(@level.created_at - @device.last_cl))
+    setting = Array.new
+    level = Level.new(monitoring_params)
+    device = level.device
+    last = Level.get_current_level(level.device_id)
+    if level.save
+      device.users.each do |user|
+        if user.setting.active?
+          if level.percentage <= user.setting.alert_level
+            if last.percentage > user.setting.alert_level
+              if device.last_cl.nil?
+                device.update_attributes(last_cl: level.created_at, time_between_cl: Time.at(level.created_at - device.created_at))
+              else
+                device.update_attributes(last_cl: level.created_at, time_between_cl: Time.at(level.created_at - device.last_cl))
+              end
+              SendEmailJob.set(wait: 8.seconds).perform_later(level, user)
             end
-            SendEmailJob.set(wait: 8.seconds).perform_later(@level)
           end
-        end
-        if @level.percentage > @setting.alert_level
-          if last.percentage <= @setting.alert_level
-            SendEmailJob.set(wait: 8.seconds).perform_later(@level)
+          if level.percentage > user.setting.alert_level
+            if last.percentage <= user.setting.alert_level
+              SendEmailJob.set(wait: 8.seconds).perform_later(level, user)
+            end
           end
         end
       end
-      render json: @level, status: :created
+      render json: level, status: :created
     else
-      render json: @level.errors, status: :unprocessable_entity
+      render json: level.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /api/v1/monitoring/1
   def destroy
-    @level.destroy
+    level.destroy
   end
 
   private
