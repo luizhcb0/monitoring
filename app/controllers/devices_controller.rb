@@ -16,6 +16,7 @@ class DevicesController < ApplicationController
   end
 
   def new
+    @dimension = Dimension.new
     @device = Device.new
   end
 
