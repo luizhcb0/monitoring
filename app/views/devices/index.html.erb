@@ -19,35 +19,39 @@
             </div>
           </div>
           <div class="list-items">
-            <% @devices.each do |device| %>
-            <div class="item">
-              <div class="col-xs-6">
-                <div class="item-name"><%= device.serial %></div>
-                <div class="item-description"><%= device_model(device.model) %></div>
-                <div class="item-description">
-                  <%= device.user.name if device.user.present? && current_user.role == "admin" %>
+            <% if @devices.present? %>
+              <% @devices.each do |device| %>
+              <div class="item">
+                <div class="col-xs-6">
+                  <div class="item-name"><%= device.serial %></div>
+                  <div class="item-description"><%= device_model(device.model) %></div>
+                  <div class="item-description">
+                    <% device.users.each do |user| %>
+                      <%= "|#{user.name}|" if current_user.role == "admin" %>
+                    <% end %>
+                  </div>
                 </div>
-              </div>
-              <div class="col-xs-6 item-action">
-                <%= link_to device_path(device), class:"btn show-item" do %>
-                  <i class="fa fa-eye"></i>
-                <% end %>
-                <%= link_to edit_device_path(device), class:"btn edit-item" do %>
-                  <i class="fa fa-pencil"></i>
-                <% end %>
-                <% if current_user.role == "admin" %>
-                  <%= link_to device_path(device), class:"btn delete-item", method: "delete", data: {confirm: "Tem certeza que deseja deletar?"} do %>
-                    <i class="fa fa-trash-o"></i>
+                <div class="col-xs-6 item-action">
+                  <%= link_to device_path(device), class:"btn show-item" do %>
+                    <i class="fa fa-eye"></i>
                   <% end %>
-                <% else %>
-                  <%= link_to unregister_path(device), class:"btn delete-item", data: {confirm: "Tem certeza que deseja deletar?"} do %>
-                    <i class="fa fa-trash-o"></i>
+                  <%= link_to edit_device_path(device), class:"btn edit-item" do %>
+                    <i class="fa fa-pencil"></i>
                   <% end %>
-                <% end %>
+                  <% if current_user.role == "admin" %>
+                    <%= link_to device_path(device), class:"btn delete-item", method: "delete", data: {confirm: "Tem certeza que deseja deletar?"} do %>
+                      <i class="fa fa-trash-o"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to unregister_path(device), class:"btn delete-item", data: {confirm: "Tem certeza que deseja deletar?"} do %>
+                      <i class="fa fa-trash-o"></i>
+                    <% end %>
+                  <% end %>
 
+                </div>
+                <div class="bar"></div>
               </div>
-              <div class="bar"></div>
-            </div>
+              <% end %>
             <% end %>
           </div>
         </div>

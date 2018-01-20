@@ -33,9 +33,14 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :user_id, "Usuário", class: "col-sm-4 control-label"%>
+      <%= f.label :user_ids, "Usuário", class: "col-sm-4 control-label"%>
       <div class="col-sm-8">
-        <%= f.select :user_id, user_array, {include_blank: "Selecione o Usuário"}, {class: "form-control"} %>
+        <% User.all.each do |user| %>
+          <label class="checkbox-inline">
+            <%= f.check_box :user_ids, {:multiple => true}, user.id, nil  %> <%= user.name %>
+          </label>
+        <% end %>
+        <%#= f.select :user_ids, user_array, {include_blank: "Selecione o Usuário"}, {class: "form-control"} %>
       </div>
     </div>
 

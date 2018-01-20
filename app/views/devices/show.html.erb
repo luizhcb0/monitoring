@@ -10,7 +10,11 @@
           <div class="list-items">
             <div class="item">
               <div class="col-sm-12">
-                <div class="item-name"><%= @device.user.name if @device.user.present? %></div>
+                <div class="item-name">
+                  <% @device.users.each do |user| %>
+                    <%= "|#{user.name}|" if current_user.role == "admin" %>
+                  <% end %>
+                </div>
                 <div class="item-description"><%= @device.serial %></div>
               </div>
               <div class="col-xs-6 item-action">
