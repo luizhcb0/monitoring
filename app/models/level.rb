@@ -39,7 +39,7 @@ class Level < ApplicationRecord
 
   def self.get_all_user_devices_levels_history(user_id)
     levels = Array.new
-    Device.where(user_id: user_id).each do |device|
+    Device.left_outer_joins(:users).where(users: {id: user_id}).each do |device|
       levels <<  where(device_id: device.id).order(created_at: :asc)
     end
     return levels
