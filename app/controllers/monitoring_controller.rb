@@ -5,7 +5,7 @@ class MonitoringController < ApplicationController
 
   def index
     @user = current_user
-    @devices = Device.get_user_devices(current_user)
+    @devices = current_user.devices
   end
 
   def create
@@ -24,7 +24,7 @@ class MonitoringController < ApplicationController
 
   def get_all_dimensions
     @dimensions = Array.new
-    @dimensions = Device.get_all_user_dimensions(current_user.id)
+    @dimensions = Device.get_all_user_dimensions(current_user)
     render json: @dimensions
   end
 

@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @devices = Device.get_user_devices(params[:id])
+    @devices = @user.devices
   end
 
   def edit
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      redirect_to user_path(@user.id)
+      redirect_to user_path(@user)
     else
       render :edit
     end

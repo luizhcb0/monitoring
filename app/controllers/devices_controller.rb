@@ -7,7 +7,7 @@ class DevicesController < ApplicationController
     if current_user.role == "admin"
       @devices = Device.all
     else
-      @devices = Device.get_user_devices(current_user.id)
+      @devices = current_user.devices
     end
   end
 
@@ -16,6 +16,7 @@ class DevicesController < ApplicationController
   end
 
   def new
+    @dimension = Dimension.new
     @device = Device.new
   end
 
@@ -33,12 +34,16 @@ class DevicesController < ApplicationController
 
   def edit
     @device = Device.find(params[:id])
+    @dimension = @device.dimension
   end
 
   def update
     @device = Device.find(params[:id])
+    if params[:device][:user_ids].nil?
+      @device.users = []
+    end
     if @device.update_attributes(device_params)
-      redirect_to devices_path(@device.id)
+      redirect_to device_path(@device)
     else
       render :edit
     end
@@ -56,7 +61,7 @@ class DevicesController < ApplicationController
 
   def registration_process
     @device = Device.where(serial: device_params[:serial]).first
-    @device.user_id = current_user.id
+    @device.users << current_user
     if @device.update_attributes(device_params)
       render json: @device
     else
@@ -66,7 +71,7 @@ class DevicesController < ApplicationController
 
   def unregister
     @device = Device.find(params[:id])
-    @device.user = nil
+    @device.users.delete(current_user)
     if @device.save
       redirect_to devices_path
     end
@@ -78,7 +83,8 @@ class DevicesController < ApplicationController
   end
 
   def available_check
-    @device = Device.where(serial: params[:serial], user_id: (nil || current_user.id))
+    # Must change to allow a user to link to another device
+    @device = Device.left_outer_joins(:users).where(serial: params[:serial], users: {id: [nil]})
     render json: @device
   end
 

@@ -1,8 +1,7 @@
 class SendEmailJob < ApplicationJob
   queue_as :default
 
-  def perform(level)
-    user = level.device.user
+  def perform(level, user)
     device = level.device
     percentage = level.percentage
     if level.percentage <= user.setting.alert_level
