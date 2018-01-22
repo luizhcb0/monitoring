@@ -40,7 +40,7 @@ $options = {
             text: 'Horário'
         },
         // 2 hours
-        range:  1 * 3600 * 1000 * 6,
+        range:  1 * 3600 * 1000 * 8,
         type: 'datetime',
         labels: {
           formatter: function () {
@@ -414,10 +414,10 @@ function updateChart() {
       // $ex.max - $ex.min = difference milli seconds between first plot and last
       if ($ex.dataMax - $ex.dataMin > 3600000) {
         if ($ex.dataMax - $ex.max  < 60000 ) {
-          $chart.xAxis[0].setExtremes($ex.min, $ex.dataMax + 120000);
+          $chart.xAxis[0].setExtremes($ex.min, $ex.dataMax + 60000);
         }
         else {
-
+          $chart.xAxis[0].setExtremes($ex.min, $ex.dataMax + 10000);
         }
       }
       else {
