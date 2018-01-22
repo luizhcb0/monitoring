@@ -15,7 +15,8 @@ Highcharts.setOptions({
       shortMonths: [ "Jan" , "Fev" , "Mar" , "Abr" , "Mai" , "Jun" , "Jul" , "Ago" , "Set" , "Out" , "Nov" , "Dez"]
   },
 });
-$updateRate = 1000;
+$graphUpdateRate = 60000;
+$deviceUpdateRate = 1000;
 $dimensions = {};
 $devices = {};
 $chart = null;
@@ -195,26 +196,19 @@ $(".monitoring.index").ready(function() {
       getLevels();
       updateChart();
     },
-    $updateRate
+    $graphUpdateRate
   );
   return false;
 });
 
 $(".monitoring.devices_history").ready(function() {
   plotHistoryChart();
-  // $allTimer = setInterval(
-  //   function() {
-  //     updateHistoryChart();
-  //   },
-  //   $updateRate
-  // );
   return false;
 });
 
 
 function updateDevice($level) {
   $percentage = $level.percentage;
-  //$litters = 1000 * $level.y * $dimensions[$level.device_id].z * $dimensions[$level.device_id].x
   $litters = $percentage/100 * $dimensions[$level.device_id].volume
   $water.animate({
     height: $percentage+'%'
@@ -226,7 +220,6 @@ function updateDevice($level) {
 
 function resumeDevice($level) {
   $percentage = $level.percentage;
-  // $litters = 1000 * $level.y * $dimensions[$level.device_id].z * $dimensions[$level.device_id].x
   $litters = $percentage/100 * $dimensions[$level.device_id].volume
   $waterDeviceInfo.html('Reservatório '+$level.device_id+'<br>Nível: '+$level.percentage+'%');
   $waterDeviceInfo.css('display', 'block')
@@ -242,7 +235,7 @@ function deviceInfo($element) {
         getLevel($device_id);
         updateChart();
       },
-      $updateRate
+      $deviceUpdateRate
     );
     $tankInfo.css('display','none')
     $devicesCanvas.css('display','none');
@@ -255,7 +248,7 @@ function deviceInfo($element) {
         getLevels();
         updateChart();
       },
-      $updateRate
+      $graphUpdateRate
     );
     $deviceCanvas.css('display','none');
     $devicesCanvas.css('display','block');
@@ -283,6 +276,7 @@ function getLevel($device_id) {
     dataType: "json",
     success: function(response){
       updateDevice(response);
+      verifyDataSending(response)
     }
   });
   return false;
