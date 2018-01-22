@@ -386,6 +386,7 @@ function plotChart() {
 }
 
 function plotHistoryChart() {
+  $('#loading').show();
   $.ajax({
     type: "GET",
     // #hidden_id is at _infos.html.erb. It shows the user who owns the devices.
@@ -393,6 +394,7 @@ function plotHistoryChart() {
     url: "/get_user_devices_levels_history/"+$("#hidden_id").val(),
     dataType: "json",
     success: function(response){
+      $('#loading').hide();
       // $historyOptions.plotOptions.series.shadow = true;
       $historyOptions.series = response;
       $historyOptions.chart.renderTo = "history-graph-canvas";
