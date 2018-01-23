@@ -69,6 +69,13 @@ class DevicesController < ApplicationController
     end
   end
 
+  def edit_registration
+    @device = Device.where(serial: device_params[:serial]).first
+    if @device.update_attributes(device_params)
+      redirect_to devices_path(@device)
+    end
+  end
+
   def unregister
     @device = Device.find(params[:id])
     @device.users.delete(current_user)

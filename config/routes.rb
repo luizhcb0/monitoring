@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   get "/available_check/:serial", to: "devices#available_check", as: "available_check"
   get "/new_registration", to: "devices#new_registration", as: "new_registration"
   post "/registration_process", to: "devices#registration_process", as: "registration_process"
+  patch "/edit_registration", to: "devices#edit_registration", as: "edit_registration"
   get "/unregister/:id", to: "devices#unregister", as: "unregister"
 
   get "/render_current_level/:device_id", to: "monitoring#render_current_level", as: "render_current_level"
