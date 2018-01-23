@@ -1,0 +1,26 @@
+<%= form_for @device, url: {action: :edit_registration}, html: {class: 'form-horizontal'} do |f| %>
+<div class="row">
+
+  <h2>Editar</h2>
+  <div class="bar"></div>
+
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="form-group">
+      <%= f.label :serial, "Número de Série", class: "col-sm-4 control-label"%>
+      <div class="col-sm-4">
+        <%= @device.serial %>
+        <%= f.hidden_field :serial, value: @device.serial %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description, "Descrição", class: "col-sm-4 control-label"%>
+      <div class="col-sm-6">
+        <%= f.text_field :description, class: "form-control", id: "desc-field"  %>
+      </div>
+    </div>
+
+    <%= f.submit "Atualizar", class: "btn btn-default" %>
+  </div>
+</div>
+<% end %>
