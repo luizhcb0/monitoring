@@ -29,6 +29,13 @@ $options = {
     title: {
         text: 'Nível nos reservatórios'
     },
+    tooltip: {
+      borderRadius: 2,
+      valueDecimals: 2,
+      animation: false,
+      valueSuffix: '%',
+      xDateFormat: '%A, %e de %B, %H:%M:%S'
+    },
     plotOptions: {
       series: {
           shadow: true,
@@ -44,8 +51,17 @@ $options = {
         type: 'datetime',
         labels: {
           formatter: function () {
-              // return Highcharts.dateFormat('%a %d %b %H:%M', this.value);
+            if (Highcharts.dateFormat('%H:%M', this.value) == "00:00") {
+              if (Highcharts.dateFormat('%d/%m', this.value) == "01/01") {
+                return Highcharts.dateFormat('%H:%M<br>%e %b/%Y', this.value);
+              }
+              else {
+                return Highcharts.dateFormat('%H:%M<br>%e %b', this.value);
+              }
+            }
+            else {
               return Highcharts.dateFormat('%H:%M', this.value);
+            }
           },
           dateTimeLabelFormats: {
               minute: '%H:%M',
@@ -66,7 +82,6 @@ $options = {
         max: 100,
         labels: {
           formatter: function () {
-              // return Highcharts.dateFormat('%a %d %b %H:%M', this.value);
               return Highcharts.format(this.value + '%');
           },
         }
@@ -110,7 +125,9 @@ $historyOptions = {
       borderRadius: 2,
       borderWidth: 1,
       valueDecimals: 2,
-      animation: false
+      animation: false,
+      valueSuffix: '%',
+      xDateFormat: '%A, %e de %B, %H:%M:%S'
     },
     title: {
         text: 'Nível nos reservatórios'
@@ -131,8 +148,17 @@ $historyOptions = {
         type: 'datetime',
         labels: {
           formatter: function () {
-              // return Highcharts.dateFormat('%a %d %b %H:%M', this.value);
-              return Highcharts.dateFormat('%H:%M', this.value);
+              if (Highcharts.dateFormat('%H:%M', this.value) == "00:00") {
+                if (Highcharts.dateFormat('%d/%m', this.value) == "01/01") {
+                  return Highcharts.dateFormat('%H:%M<br>%e %b/%Y', this.value);
+                }
+                else {
+                  return Highcharts.dateFormat('%H:%M<br>%e %b', this.value);
+                }
+              }
+              else {
+                return Highcharts.dateFormat('%H:%M', this.value);
+              }
           },
           dateTimeLabelFormats: {
               minute: '%H:%M',
@@ -155,7 +181,6 @@ $historyOptions = {
         max: 100,
         labels: {
           formatter: function () {
-              // return Highcharts.dateFormat('%a %d %b %H:%M', this.value);
               return Highcharts.format(this.value + '%');
           },
           align: 'left'
@@ -303,10 +328,10 @@ function updateDevices($level) {
   else if ($percentage >= 10 && $percentage < 40) {
     $devices[$level.device_id].removeClass( "empty medium full" ).addClass('low');
   }
-  else if ($percentage >= 40 && $percentage < 80) {
+  else if ($percentage >= 40 && $percentage < 60) {
     $devices[$level.device_id].removeClass( "empty low full" ).addClass('medium');
   }
-  else if ($percentage >= 80) {
+  else if ($percentage >= 60) {
     $devices[$level.device_id].removeClass( "empty low medium" ).addClass('full');
   }
   return false;
