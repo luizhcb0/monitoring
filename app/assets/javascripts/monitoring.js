@@ -144,7 +144,7 @@ $historyOptions = {
             text: 'Horário'
         },
         // 2 hours
-        range:  1 * 3600 * 1000 * 6,
+        range:  1 * 3600 * 1000 * 72,
         type: 'datetime',
         labels: {
           formatter: function () {
