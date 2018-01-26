@@ -442,7 +442,6 @@ function updateChart() {
           $chart.xAxis[0].setExtremes($ex.min, $ex.dataMax + 60000);
         }
         else {
-          $chart.xAxis[0].setExtremes($ex.min, $ex.dataMax + 10000);
         }
       }
       else {
