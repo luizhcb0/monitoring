@@ -43,7 +43,7 @@ class DevicesController < ApplicationController
       @device.users = []
     end
     if @device.update_attributes(device_params)
-      redirect_to device_path(@device)
+      redirect_to devices_path
     else
       render :edit
     end
