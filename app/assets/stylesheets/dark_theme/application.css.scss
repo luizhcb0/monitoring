@@ -25,7 +25,7 @@ body {
   // background-color: #E6E6E6;
   background-color: #1a1d30;
   text-align: center;
-  font-family: 'Unica One', sans-serif;
+  font-family: 'Verdana', sans-serif;
 }
 
  .affix {
@@ -155,16 +155,16 @@ body {
  }
 
  .add-item, .add-item:active, .add-item:focus, {
-   color: #fff;
-   background-color: #031a47;
-   border:1px solid #fff !important;
+   color: #14172f;
+   background-color: #C9B978;
+   border:2px solid #14172f !important;
    border-radius: 5px;
    padding: 0 12px 0 12px;
    font-size: 30px;
  }
  .add-item:hover {
-   color: #fff;
-   background-color: #033a67;
+   color: #14172f;
+   background-color: #A99958;
  }
  .list-items {
    padding: 10px;
@@ -174,60 +174,59 @@ body {
 
 }
  .item-name {
+   color: #efeff5;
    text-align: left;
    font-size: 18px;
  }
  .item-description {
-   color: #aaa;
+   color: #8085a5;
    text-align: left;
  }
  .item-action {
    text-align: right;
  }
  .delete-item, .delete-item:focus, .delete-item:active {
-   color: #d57 !important;
+   color: #ea2020 !important;
    font-size: 18px !important;
-   border-color: #ccc !important;
-   background-color: #fff !important;
+   border-color: #05031a !important;
+   background-color: #404565 !important;
  }
  .delete-item:hover {
-   color: #d57 !important;
-   border-color: #d57 !important;
-   background-color: #fffafa !important;
+   background-color: #303555 !important;
  }
  .show-item, .show-item:focus, .show-item:active {
-   color: #5b7 !important;
+   color: #25f580 !important;
    font-size: 18px !important;
-   border-color: #ccc !important;
-   background-color: #fff !important;
+   border-color: #05031a !important;
+   background-color: #404565 !important;
  }
  .show-item:hover {
-   color: #5b7 !important;
-   border-color: #5b7 !important;
-   background-color: #fafffa !important;
+   background-color: #303555 !important;
  }
  .edit-item, .edit-item:focus, .edit-item:active {
-   color: #57d !important;
+   color: #05aaf5 !important;
    font-size: 18px !important;
-   border-color: #ccc !important;
-   background-color: #fff !important;
+   border-color: #05031a !important;
+   background-color: #404565 !important;
  }
  .edit-item:hover {
-   color: #57d !important;
-   border-color: #57d !important;
-   background-color: #f7f7ff !important;
+   background-color: #303555 !important;
  }
  .bar {
    display: inline-block;
    height: 2px;
-   background-color: #eee;
+   background-color: #2b3050;
    width: 100%;
  }
 
- input[type=email], input[type=text], textarea, input[type=password], input[type=checkbox] {
+ input[type=email], input[type=text], textarea, input[type=password], input[type=checkbox], select {
    background-color: #1a1d30 !important;
    border-color: #05031a !important;
    color: #fff !important;
+ }
+
+ .control-label {
+   color: #C9B978;
  }
 
  .btn-default {
