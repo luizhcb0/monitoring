@@ -4,7 +4,6 @@ module ApplicationHelper
   end
 
   def current_theme
-    # current_theme = current_user.theme || 'default'
-    current_theme = 'white_theme/application'
+    current_theme = current_user.setting.theme
   end
 end

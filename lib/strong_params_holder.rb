@@ -17,7 +17,7 @@ module StrongParamsHolder
   end
 
   def setting_params
-    params.require(:setting).permit(:active, :alert_level)
+    params.require(:setting).permit(:active, :alert_level, :theme)
   end
 
   def contact_params
