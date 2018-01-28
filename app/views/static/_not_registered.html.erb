@@ -7,7 +7,11 @@
             <!-- Logo -->
             <div class="row">
               <div class="col-sm-4 col-sm-offset-4">
-                <%= image_tag 'logo_white.png', class: 'logo' %>
+                <% if current_theme == 'dark_theme/application'  %>
+                  <%= image_tag 'logo_dark.png', class: 'logo' %>
+                <% else %>
+                  <%= image_tag 'logo_white.png', class: 'logo' %>
+                <% end %>
               </div>
             </div>
             <!--  ------>
