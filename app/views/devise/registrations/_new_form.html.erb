@@ -1,0 +1,58 @@
+<div class="row">
+  <h1>Registrar</h1>
+  <br>
+</div>
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), novalidate: 'novalidate') do |f| %>
+      <%= devise_error_messages! %>
+
+      <div class="row">
+        <div class="form-group group">
+          <%= f.label :nome, class: "col-sm-3 control-label"%>
+          <div class="col-sm-8">
+            <%= f.text_field :name, class: "form-control", required: "required", autofocus: true  %>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="form-group group">
+          <%= f.label :email, class: "col-sm-3 control-label"%>
+          <div class="col-sm-8">
+            <%= f.email_field :email, class: "form-control", required: "required", autofocus: true  %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group group">
+          <%= f.label :senha, class: "col-sm-3 control-label"%>
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %>
+          <div class="col-sm-8">
+            <%= f.password_field :password, class: "form-control", required: "required", autocomplete: "off" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group group">
+          <%= f.label :password_confirmation, "Confirme a Senha", class: "col-sm-3 control-label"%>
+          <div class="col-sm-8">
+            <%= f.password_field :password_confirmation, class: "form-control", required: "required", autocomplete: "off" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="actions">
+          <%= f.submit "Registrar", class: "btn btn-default" %>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>
