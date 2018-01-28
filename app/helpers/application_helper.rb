@@ -4,6 +4,9 @@ module ApplicationHelper
   end
 
   def current_theme
-    current_theme = current_user.setting.theme
+    if current_user.nil?
+      current_theme = 'dark_theme/application'
+    else
+      current_theme = current_user.setting.theme 
   end
 end
