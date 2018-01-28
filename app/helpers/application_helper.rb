@@ -7,6 +7,7 @@ module ApplicationHelper
     if current_user.nil?
       current_theme = 'dark_theme/application'
     else
-      current_theme = current_user.setting.theme 
+      current_theme = current_user.setting.theme
+    end
   end
 end
