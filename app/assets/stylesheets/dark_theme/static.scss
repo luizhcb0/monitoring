@@ -62,5 +62,8 @@ a:hover {
 }
 
 .full-screen-container {
-  min-height: 89vh;
+  //min-height: 89vh;
+  min-height: -webkit-calc(97vh - 130px);
+  min-height: -moz-calc(97vh - 130px);
+  min-height: calc(97vh - 130px);
 }
