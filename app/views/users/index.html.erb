@@ -5,14 +5,7 @@
       <div class="col-sm-12">
         <div class="list-container">
           <div class="list-model-type">
-            <div class="col-xs-6 model-type">Usuários</div>
-            <div class="col-xs-6 model-add">
-              <% if current_user.role == "admin" %>
-                <%= link_to new_user_path, class: "add-item" do %>
-                  <i class="fa fa-plus"></i>
-                <% end %>
-              <% end %>
-            </div>
+            <div class="col-xs-6 model-type"><b>Usuários</b></div>
           </div>
           <div class="list-items">
             <% @users.each do |user| %>
