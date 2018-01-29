@@ -532,7 +532,7 @@ function plotHistoryChart() {
       $chart = new Highcharts.StockChart($historyOptions);
       $ex = $chart.xAxis[0].getExtremes();
       $chart.xAxis[0].update({
-        range: ($ex.dataMax - $ex.dataMin)/3
+        range: ($ex.dataMax - $ex.dataMin)/4
       });
       // $chart.xAxis[0].setExtremes($ex.dataMin + ($ex.dataMax - $ex.dataMin)/2, $ex.dataMax)
     }
