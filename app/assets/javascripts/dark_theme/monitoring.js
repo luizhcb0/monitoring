@@ -268,7 +268,7 @@ $historyOptions = {
             text: 'Horário'
         },
         // 72 hours
-        range:  1 * 3600 * 1000 * 72,
+        // range: 1 * 3600 * 1000 * 72,
         type: 'datetime',
         labels: {
           formatter: function () {
@@ -530,6 +530,11 @@ function plotHistoryChart() {
       $historyOptions.series = response;
       $historyOptions.chart.renderTo = "history-graph-canvas";
       $chart = new Highcharts.StockChart($historyOptions);
+      $ex = $chart.xAxis[0].getExtremes();
+      $chart.xAxis[0].update({
+        range: ($ex.dataMax - $ex.dataMin)/3
+      });
+      // $chart.xAxis[0].setExtremes($ex.dataMin + ($ex.dataMax - $ex.dataMin)/2, $ex.dataMax)
     }
   });
   return false;
