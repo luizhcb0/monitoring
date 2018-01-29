@@ -11,7 +11,11 @@
   <div class="form-group">
     <%= f.label :active, "Alertas", class: "col-sm-offset-1 col-sm-4 control-label" %>
     <div class="col-sm-2">
-      <%= f.check_box :active, data: {toggle: "toggle", on: "Ativados", off: "Desativados", onstyle: "toggle-active", offstyle: "toggle-deactive"} %>
+      <% if current_theme == "dark_theme/application" %>
+        <%= f.check_box :active, data: {toggle: "toggle", on: "Ativados", off: "Desativados", onstyle: "toggle-active", offstyle: "toggle-deactive"} %>
+      <% else %>
+        <%= f.check_box :active, data: {toggle: "toggle", on: "Ativados", off: "Desativados", onstyle: "success"} %>
+      <% end %>
     </div>
   </div>
 
