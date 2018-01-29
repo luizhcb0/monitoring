@@ -223,3 +223,13 @@ body {
    background-color: #eee;
    width: 100%;
  }
+
+ .btn-theme {
+   background-color: #fff !important;
+   color: #333 !important;
+   border-color: #ccc !important;
+ }
+
+ .btn-theme:hover, .btn-theme:active, .btn-theme:focus {
+   background-color: #e0e0e0 !important;
+ }
