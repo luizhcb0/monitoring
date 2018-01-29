@@ -220,23 +220,24 @@ body {
  input[type=email], input[type=text], textarea, input[type=password], input[type=checkbox], select {
    background-color: #1a1d30 !important;
    border-color: #05031a !important;
-   color: #fff !important;
+   color: #efeff5 !important;
  }
 
  .control-label {
    color: #C9B978;
  }
 
- .btn-default {
+ .btn-theme {
    background-color: #C9B978;
    color: #14172f;
-   border-color: #C0B070;
+   border-color: #A99958;
  }
 
- .btn-default:hover, .btn-default:active, .btn-default:focus {
-   background-color: #C0B070 !important;
+ 
+ .btn-theme:hover, .btn-theme:active, .btn-theme:focus {
+   background-color: #A99958 !important;
    color: #14172f !important;
-   border-color: #C0B070 !important;
+   border-color: #A99958 !important;
  }
 
  a[href^="tel:"] {
