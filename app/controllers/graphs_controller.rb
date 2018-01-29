@@ -9,10 +9,15 @@ class GraphsController < ApplicationController
       @hash[a] = l.percentage.round(2)
     end
 
-    render json: [
-      name: "Reservatório #{device_id}",
-      data: @hash.map {|a| a }
-    ]
+    respond_to do |format|
+      format.html { redirect_to(root_path)}
+      format.js {
+        render json: [
+          name: "Reservatório #{device_id}",
+          data: @hash.map {|a| a }
+        ]
+      }
+    end
   end
 
   def get_devices_levels
@@ -28,12 +33,17 @@ class GraphsController < ApplicationController
       @array << @hash
       @hash = Hash.new
     end
-    render json:
-      @array.each_with_index.map {
-        |a, index| {
-          name: "Reservatório #{index + 1}", data: a.map {|b| b }
+
+    respond_to do |format|
+      format.html { redirect_to(root_path)}
+      format.js {
+        render json: @array.each_with_index.map {
+          |a, index| {
+            name: "Reservatório #{index + 1}", data: a.map {|b| b }
+          }
         }
       }
+    end
   end
 
   def get_user_devices_levels
@@ -50,12 +60,17 @@ class GraphsController < ApplicationController
       @array << @hash
       @hash = Hash.new
     end
-    render json:
-      @array.each_with_index.map {
-        |a, index| {
-          name: "Reservatório #{index + 1}", data: a.map {|b| b }
+
+    respond_to do |format|
+      format.html { redirect_to(root_path)}
+      format.js {
+        render json: @array.each_with_index.map {
+          |a, index| {
+            name: "Reservatório #{index + 1}", data: a.map {|b| b }
+          }
         }
       }
+    end
   end
 
   def get_user_devices_levels_history
@@ -72,12 +87,17 @@ class GraphsController < ApplicationController
       @array << @hash
       @hash = Hash.new
     end
-    render json:
-      @array.each_with_index.map {
-        |a, index| {
-          name: "Reservatório #{index + 1}", data: a.map {|b| b }
+
+    respond_to do |format|
+      format.html { redirect_to(root_path)}
+      format.js {
+        render json: @array.each_with_index.map {
+          |a, index| {
+            name: "Reservatório #{index + 1}", data: a.map {|b| b }
+          }
         }
       }
+    end
   end
 
 end
