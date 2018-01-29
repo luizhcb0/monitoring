@@ -233,7 +233,26 @@ body {
    border-color: #A99958;
  }
 
- 
+ .toggle-on {
+   background-color: #C9B978 !important;
+   border-color: #05031a !important;
+   color: #14172f !important;
+ }
+
+ .toggle-on:hover {
+   background-color: #A99958 !important;
+ }
+
+ .toggle-off {
+   background-color: #1a1d30 !important;
+   border-color: #05031a !important;
+   color: #efeff5 !important;
+ }
+
+ .toggle-off:hover {
+   background-color: #131628 !important;
+ }
+
  .btn-theme:hover, .btn-theme:active, .btn-theme:focus {
    background-color: #A99958 !important;
    color: #14172f !important;
