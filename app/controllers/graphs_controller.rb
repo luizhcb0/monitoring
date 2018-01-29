@@ -11,7 +11,7 @@ class GraphsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(root_path)}
-      format.js {
+      format.json {
         render json: [
           name: "Reservatório #{device_id}",
           data: @hash.map {|a| a }
@@ -36,7 +36,7 @@ class GraphsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(root_path)}
-      format.js {
+      format.json {
         render json: @array.each_with_index.map {
           |a, index| {
             name: "Reservatório #{index + 1}", data: a.map {|b| b }
@@ -63,7 +63,7 @@ class GraphsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(root_path)}
-      format.js {
+      format.json {
         render json: @array.each_with_index.map {
           |a, index| {
             name: "Reservatório #{index + 1}", data: a.map {|b| b }
@@ -90,7 +90,7 @@ class GraphsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(root_path)}
-      format.js {
+      format.json {
         render json: @array.each_with_index.map {
           |a, index| {
             name: "Reservatório #{index + 1}", data: a.map {|b| b }
