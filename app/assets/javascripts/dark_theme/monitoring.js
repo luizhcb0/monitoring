@@ -187,7 +187,7 @@ $chart = null;
 $options = {
   chart: {
     //renderTo: 'graph-canvas',
-    type: 'line'
+    type: 'spline'
   },
   title: {
     text: 'Nível nos reservatórios'
@@ -245,7 +245,7 @@ $options = {
 $historyOptions = {
     chart: {
         //renderTo: 'graph-canvas',
-        type: 'line',
+        type: 'spline',
         height: 490,
         backgroundColor: '#0a0d20'
     },
