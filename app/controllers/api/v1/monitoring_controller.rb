@@ -21,7 +21,10 @@ class Api::V1::MonitoringController < Api::V1::BaseController
     device = level.device
     last = Level.get_current_level(level.device_id)
     if level.save
-      if ((level.created_at.to_datetime.to_i)-(last.created_at.to_datetime.to_i) > 900)
+      if ((level.created_at.to_datetime.to_i)-(last.created_at.to_datetime.to_i) > 900) #15 minutes
+        if ((level.created_at.to_datetime.to_i)-(last.created_at.to_datetime.to_i) > (60*60*5)) #5 hours
+          Level.create(device_id: level.device_id, created_at: (last.created_at + 50.minute).to_datetime)
+        end
         Level.create(device_id: level.device_id, created_at: (DateTime.now - 5.minute).to_datetime)
       end
       device.users.each do |user|
