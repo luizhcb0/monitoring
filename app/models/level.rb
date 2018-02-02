@@ -3,19 +3,16 @@ class Level < ApplicationRecord
 
   after_create :set_high_and_percentage
 
-  def self.get_current_level_id(device_id)
-    where(device_id: device_id).maximum(:id)
-  end
-
   def self.get_current_level(device_id)
-    where(id: Level.get_current_level_id(device_id)).first
+    created_at = where(device_id: device_id).maximum(:created_at)
+    level = find_by(created_at: created_at)
   end
 
   def self.get_all_current_levels(user_id)
     levels = Array.new
     Device.left_outer_joins(:users).where(users: {id: user_id}).each do |device|
     # Device.where(user_id: user_id).each do |device|
-      levels <<  where(device_id: device.id).maximum(:id)
+      levels <<  where(device_id: device.id).maximum(:created_at)
     end
     return levels
   end
@@ -53,7 +50,11 @@ class Level < ApplicationRecord
   private
     def set_high_and_percentage
       device = Device.find(self.device_id)
-      self.update_attributes(y: device.dimension.y - self.level, percentage: (100*(device.dimension.y - self.level)/device.dimension.y).round(2))
+      if self.level.present?
+        self.update_attributes(y: device.dimension.y - self.level, percentage: (100*(device.dimension.y - self.level)/device.dimension.y).round(2))
+      else
+        self.update_attributes(y: nil, percentage: nil)
+      end
     end
 
 end

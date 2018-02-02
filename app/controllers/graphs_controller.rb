@@ -6,7 +6,11 @@ class GraphsController < ApplicationController
     @hash = {}
     @levels.each do |l|
       a = l.created_at.to_datetime.to_i * 1000
-      @hash[a] = l.percentage.round(2)
+      if l.percentage.present?
+        @hash[a] = l.percentage.round(2)
+      else
+        @hash[a] = l.percentage
+      end
     end
 
     respond_to do |format|
@@ -28,7 +32,11 @@ class GraphsController < ApplicationController
     @levels.each do |l|
       l.each do |i|
         a = i.created_at.to_datetime.to_i * 1000
-        @hash[a] = i.percentage.round(2)
+        if i.percentage.present?
+          @hash[a] = i.percentage.round(2)
+        else
+          @hash[a] = i.percentage
+        end
       end
       @array << @hash
       @hash = Hash.new
@@ -55,7 +63,11 @@ class GraphsController < ApplicationController
     @levels.each do |l|
       l.each do |i|
         a = i.created_at.to_datetime.to_i * 1000
-        @hash[a] = i.percentage.round(2)
+        if i.percentage.present?
+          @hash[a] = i.percentage.round(2)
+        else
+          @hash[a] = i.percentage
+        end
       end
       @array << @hash
       @hash = Hash.new
@@ -82,7 +94,11 @@ class GraphsController < ApplicationController
     @levels.each do |l|
       l.each do |i|
         a = i.created_at.to_datetime.to_i * 1000
-        @hash[a] = i.percentage.round(2)
+        if i.percentage.present?
+          @hash[a] = i.percentage.round(2)
+        else
+          @hash[a] = i.percentage
+        end
       end
       @array << @hash
       @hash = Hash.new

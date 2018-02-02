@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180128164405) do
+ActiveRecord::Schema.define(version: 20180202003847) do
 
   create_table "contacts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20180128164405) do
 
   create_table "levels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "device_id",             null: false
-    t.float    "level",      limit: 24, null: false
+    t.float    "level",      limit: 24
     t.float    "y",          limit: 24
     t.float    "percentage", limit: 24
     t.datetime "created_at",            null: false
