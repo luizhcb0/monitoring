@@ -21,6 +21,9 @@ class Api::V1::MonitoringController < Api::V1::BaseController
     device = level.device
     last = Level.get_current_level(level.device_id)
     if level.save
+      if ((level.created_at.to_datetime.to_i)-(last.created_at.to_datetime.to_i) > 900)
+        Level.create(device_id: level.device_id, created_at: (DateTime.now - 5.minute).to_datetime)
+      end
       device.users.each do |user|
         if user.setting.active?
           if level.percentage <= user.setting.alert_level
