@@ -32,8 +32,7 @@ class MonitoringController < ApplicationController
   end
 
   def render_current_level
-    id = Level.get_current_level(params[:device_id])
-    @level = Level.find(id)
+    @level = Level.get_current_level(params[:device_id])
     respond_to do |format|
       format.html { redirect_to(root_path)}
       format.json { render json: @level }
@@ -45,7 +44,7 @@ class MonitoringController < ApplicationController
     array = Level.get_all_current_levels(current_user.id)
     # Rails.logger.debug("Array: #{array.inspect}")
     array.each do |level|
-      @levels << Level.find_by(id: level) if level
+      @levels << Level.find_by(created_at: level) if level
     end
     respond_to do |format|
       format.html { redirect_to(root_path)}
