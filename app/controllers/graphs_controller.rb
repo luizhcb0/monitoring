@@ -14,7 +14,13 @@ class GraphsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to(root_path)}
+      format.html {
+        render json: @array.each_with_index.map {
+          |a, index| {
+            name: "Reservatório #{index + 1}", data: a.map {|b| b }
+          }
+        }
+      }
       format.json {
         render json: [
           name: "Reservatório #{device_id}",
@@ -43,7 +49,13 @@ class GraphsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to(root_path)}
+      format.html {
+        render json: @array.each_with_index.map {
+          |a, index| {
+            name: "Reservatório #{index + 1}", data: a.map {|b| b }
+          }
+        }
+      }
       format.json {
         render json: @array.each_with_index.map {
           |a, index| {
@@ -74,7 +86,13 @@ class GraphsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to(root_path)}
+      format.html {
+        render json: @array.each_with_index.map {
+          |a, index| {
+            name: "Reservatório #{index + 1}", data: a.map {|b| b }
+          }
+        }
+      }
       format.json {
         render json: @array.each_with_index.map {
           |a, index| {
@@ -105,7 +123,13 @@ class GraphsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to(root_path)}
+      format.html {
+        render json: @array.each_with_index.map {
+          |a, index| {
+            name: "Reservatório #{index + 1}", data: a.map {|b| b }
+          }
+        }
+      }
       format.json {
         render json: @array.each_with_index.map {
           |a, index| {

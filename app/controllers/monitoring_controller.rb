@@ -26,7 +26,8 @@ class MonitoringController < ApplicationController
     @dimensions = Array.new
     @dimensions = Device.get_all_user_dimensions(current_user)
     respond_to do |format|
-      format.html { redirect_to(root_path)}
+      format.html { render json: @dimensions }
+      # format.html { redirect_to(root_path)}
       format.json { render json: @dimensions }
     end
   end
@@ -34,7 +35,7 @@ class MonitoringController < ApplicationController
   def render_current_level
     @level = Level.get_current_level(params[:device_id])
     respond_to do |format|
-      format.html { redirect_to(root_path)}
+      format.html { render json: @level }
       format.json { render json: @level }
     end
   end
@@ -47,7 +48,7 @@ class MonitoringController < ApplicationController
       @levels << Level.find_by(created_at: level) if level
     end
     respond_to do |format|
-      format.html { redirect_to(root_path)}
+      format.html { render json: @levels }
       format.json { render json: @levels }
     end
   end
