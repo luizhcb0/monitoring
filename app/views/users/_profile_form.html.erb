@@ -3,7 +3,7 @@
   <div class="col-sm-8 col-sm-offset-2">
 
     <div class="">
-      <h2>Cadastro de Usuário</h2>
+      <h2>Dados do Usuário</h2>
     </div>
 
     <div class="form-group">
@@ -14,9 +14,24 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :email, "Modelo", class: "col-sm-4 control-label"%>
+      <%= f.label :email, class: "col-sm-4 control-label"%>
       <div class="col-sm-8">
         <%= f.email_field :email, required: "required", class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :phone, "Telefone", class: "col-sm-4 control-label"%>
+      <div class="col-sm-8">
+        <%= f.telephone_field :phone, class: "form-control", required: "required", autofocus: true  %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label "Fuso Horário", class: "col-sm-4 control-label"%>
+      <div class="col-sm-8">
+        <%= f.select :time_zone, options_for_select(time_zone_array.map { |k,v| [k, k] }, @user.time_zone),
+        {include_blank: "Selecione o Fuso Horário"}, {class: "form-control", required: "required", autofocus: true}  %>
       </div>
     </div>
 
