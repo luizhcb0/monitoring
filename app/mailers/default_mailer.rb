@@ -1,10 +1,11 @@
 class DefaultMailer < ApplicationMailer
-  default from: "atendimento@lcasystems.com.br"
+  default from: '"LCA Systems" <atendimento@lcasystems.com.br>'
 
-  def alert_email(user, device, percentage)
+  def alert_email(user, device, level)
     @user = user
     @device = device
-    @percentage = percentage
+    @percentage = level.percentage
+    @created_at = level.created_at
     @tbcl = @device.time_between_cl.to_i
     @last_cl = Time.at(@device.last_cl.to_i - @device.time_between_cl.to_i)
 
@@ -21,10 +22,11 @@ class DefaultMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Alerta')
   end
 
-  def normal_email(user, device, percentage)
+  def normal_email(user, device, level)
     @user = user
     @device = device
-    @percentage = percentage
+    @percentage = level.percentage
+    @created_at = level.created_at
     mail(to: @user.email, subject: 'Condições normalizadas')
   end
 

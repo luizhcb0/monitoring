@@ -1,2 +1,3 @@
 Olá, <%= @user.name %>
-Informamos que a capacidade do dispositivo <%= @device.id %> chegou a <%= @percentage %>%.
+Informamos que às <%= @created_at.in_time_zone(@user.time_zone).strftime("%d/%m/%Y - %H:%M") %> a capacidade do dispositivo <%= @device.serial %> chegou a <%= @percentage %>%.
+A data do último nível crítico foi <%= @last_cl.strftime("%d/%m/%Y - %H:%M") %>.
