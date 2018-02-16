@@ -1,2 +1,6 @@
-Olá, <%= @user.name %>
-Informamos que às <%= @created_at.in_time_zone(@user.time_zone).strftime("%H:%M - %d/%m/%Y") %> as condições foram normalizadas e a capacidade do dispositivo <%= @device.serial %> chegou a <%= @percentage %>%.
+Olá, <%= @user.name %>!
+As condições normais foram reestabelecidas em <%= @created_at.in_time_zone(@user.time_zone).strftime("%d/%m/%Y - %H:%M") %>
+Reservatório: <%= @device.serial %>
+Nível: <%= @percentage %>%
+Data do último evento crítico: <%= @last_cl.in_time_zone(@user.time_zone).strftime("%d/%m/%Y - %H:%M") %>
+<%= @text %>

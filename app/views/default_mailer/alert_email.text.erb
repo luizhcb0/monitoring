@@ -1,3 +1,5 @@
 Olá, <%= @user.name %>
-Informamos que às <%= @created_at.in_time_zone(@user.time_zone).strftime("%d/%m/%Y - %H:%M") %> a capacidade do dispositivo <%= @device.serial %> chegou a <%= @percentage %>%.
-A data do último nível crítico foi <%= @last_cl.in_time_zone(@user.time_zone).strftime("%d/%m/%Y - %H:%M") %>.
+Alerta de nível crítico em <%= @created_at.in_time_zone(@user.time_zone).strftime("%d/%m/%Y - %H:%M") %>
+Reservatório: <%= @device.serial %>
+Nível: <%= @percentage %>%
+Data do último evento crítico: <%= @last_cl.in_time_zone(@user.time_zone).strftime("%d/%m/%Y - %H:%M") %>

@@ -4,15 +4,12 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h3>Olá, <%= @user.name %></h3>
+    <h3>Olá, <%= @user.name %>!</h3>
     <p>
-      Informamos que às <%= @created_at.in_time_zone(@user.time_zone).strftime("%H:%M - %d/%m/%Y") %> a capacidade do dispositivo <%= @device.serial %> chegou a <%= @percentage %>%.
+      Alerta de nível crítico em <%= @created_at.in_time_zone(@user.time_zone).strftime("%d/%m/%Y - %H:%M") %>
     </p>
-    <p>
-      <%= @text %>
-    </p>
-    <p>
-      A data do último nível crítico foi <%= @last_cl.in_time_zone(@user.time_zone).strftime("%d/%m/%Y - %H:%M") %>.
-    </p>
+    <p><b>Reservatório: </b><%= @device.serial %></p>
+    <p><b>Nível: </b><%= @percentage %>%</p>
+    <p><b>Data do último evento crítico: </b><%= @last_cl.in_time_zone(@user.time_zone).strftime("%d/%m/%Y - %H:%M") %></p>
   </body>
 </html>
