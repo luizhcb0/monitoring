@@ -2,7 +2,8 @@ class User < ApplicationRecord
   after_create :set_settings
 
   has_one :setting
-  has_and_belongs_to_many :devices
+  has_many :user_devices
+  has_many :devices, through: :user_devices
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

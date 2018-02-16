@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180216175449) do
+ActiveRecord::Schema.define(version: 20180216194324) do
 
   create_table "contacts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -40,17 +40,9 @@ ActiveRecord::Schema.define(version: 20180216175449) do
     t.string   "serial",      null: false
     t.integer  "model",       null: false
     t.string   "address"
-    t.datetime "last_cl"
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-  end
-
-  create_table "devices_users", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "device_id"
-    t.integer "user_id"
-    t.index ["device_id"], name: "index_devices_users_on_device_id", using: :btree
-    t.index ["user_id"], name: "index_devices_users_on_user_id", using: :btree
   end
 
   create_table "dimensions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -84,6 +76,15 @@ ActiveRecord::Schema.define(version: 20180216175449) do
     t.index ["user_id"], name: "index_settings_on_user_id", using: :btree
   end
 
+  create_table "user_devices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id",             null: false
+    t.integer  "device_id",           null: false
+    t.datetime "last_critical_level"
+    t.index ["device_id"], name: "index_user_devices_on_device_id", using: :btree
+    t.index ["user_id", "device_id"], name: "index_user_devices_on_user_id_and_device_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_user_devices_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",                              default: "", null: false
     t.string   "email",                             default: "", null: false
@@ -107,9 +108,9 @@ ActiveRecord::Schema.define(version: 20180216175449) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "devices_users", "devices", on_delete: :cascade
-  add_foreign_key "devices_users", "users", on_delete: :cascade
   add_foreign_key "dimensions", "devices", on_delete: :cascade
   add_foreign_key "levels", "devices", on_delete: :cascade
   add_foreign_key "settings", "users", on_delete: :cascade
+  add_foreign_key "user_devices", "devices", on_delete: :cascade
+  add_foreign_key "user_devices", "users", on_delete: :cascade
 end
