@@ -1,2 +1,2 @@
 Olá, <%= @user.name %>
-Informamos que a capacidade do dispositivo <%= @device.id %> chegou a <%= @percentage %>%.
+Informamos que às <%= @created_at.in_time_zone(@user.time_zone).strftime("%H:%M - %d/%m/%Y") %> as condições foram normalizadas e a capacidade do dispositivo <%= @device.serial %> chegou a <%= @percentage %>%.

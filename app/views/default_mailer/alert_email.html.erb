@@ -4,15 +4,15 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Olá, <%= @user.name %></h1>
+    <h3>Olá, <%= @user.name %></h3>
     <p>
-      Informamos que a capacidade do dispositivo <%= @device.id %> chegou a <%= @percentage %>%.
+      Informamos que às <%= @created_at.in_time_zone(@user.time_zone).strftime("%H:%M - %d/%m/%Y") %> a capacidade do dispositivo <%= @device.serial %> chegou a <%= @percentage %>%.
     </p>
     <p>
       <%= @text %>
     </p>
     <p>
-      O dia do ultimo nivel critico foi <%= @last_cl.strftime("%d/%m/%Y - %H:%M") %>.
+      A data do último nível crítico foi <%= @last_cl.strftime("%d/%m/%Y - %H:%M") %>.
     </p>
   </body>
 </html>

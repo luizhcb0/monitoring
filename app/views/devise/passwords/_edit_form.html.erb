@@ -1,0 +1,41 @@
+<div class="row">
+  <h1>Alterar Senha</h1>
+  <br>
+</div>
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <%= form_for(resource, as: resource_name, url: user_password_path(@user), html: { method: :put }) do |f| %>
+      <%= devise_error_messages! %>
+      <%= f.hidden_field :reset_password_token %>
+
+      <div class="row">
+        <div class="form-group group">
+          <%= f.label :senha, class: "col-sm-3 control-label"%>
+          <% if @minimum_password_length %>
+            <em>(mínimo <%= @minimum_password_length %> caracteres)</em>
+          <% end %>
+          <div class="col-sm-8">
+            <%= f.password_field :password, class: "form-control", required: "required", autocomplete: "off" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group group">
+          <%= f.label :password_confirmation, "Confirme a Senha", class: "col-sm-3 control-label"%>
+          <div class="col-sm-8">
+            <%= f.password_field :password_confirmation, class: "form-control", required: "required", autocomplete: "off" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="actions">
+          <%= f.submit "Alterar Senha", class: "btn btn-theme" %>
+        </div>
+      </div>
+
+    <% end %>
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

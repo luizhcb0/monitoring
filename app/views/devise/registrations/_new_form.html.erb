@@ -28,9 +28,27 @@
 
       <div class="row">
         <div class="form-group group">
+          <%= f.label :phone, "Telefone", class: "col-sm-3 control-label"%>
+          <div class="col-sm-8">
+            <%= f.telephone_field :phone, class: "form-control", required: "required", autofocus: true  %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group group">
+          <%= f.label "Fuso Horário", class: "col-sm-3 control-label"%>
+          <div class="col-sm-8">
+            <%= f.select :time_zone, options_for_select(time_zone_array.map { |k,v| [k, k] }), {include_blank: "Selecione o Fuso Horário"}, {class: "form-control", required: "required", autofocus: true}  %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group group">
           <%= f.label :senha, class: "col-sm-3 control-label"%>
           <% if @minimum_password_length %>
-            <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <em>(mínimo <%= @minimum_password_length %> caracteres)</em>
           <% end %>
           <div class="col-sm-8">
             <%= f.password_field :password, class: "form-control", required: "required", autocomplete: "off" %>
