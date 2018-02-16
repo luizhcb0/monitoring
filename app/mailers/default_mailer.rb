@@ -3,24 +3,26 @@ class DefaultMailer < ApplicationMailer
 
   after_action :set_last_critical_level, only: :alert_email
 
-  def alert_email(user, device, level)
-    @user = user
-    @device = device
+  def alert_email(user_device, level)
+    @user_device = user_device
+    @user = user_device.user
+    @device = user_device.device
     @level = level
     @percentage = level.percentage
     @created_at = level.created_at
-    @last_cl = device.last_cl
+    @last_cl = user_device.last_critical_level
     mail(to: @user.email, subject: 'Alerta')
   end
 
-  def normal_email(user, device, level)
-    @user = user
-    @device = device
+  def normal_email(user_device, level)
+    @user_device = user_device
+    @user = user_device.user
+    @device = user_device.device
     @level = level
     @percentage = level.percentage
     @created_at = level.created_at
-    @last_cl = device.last_cl
-    @tbcn = level.created_at.to_i - device.last_cl.to_i
+    @last_cl = user_device.last_critical_level
+    @tbcn = level.created_at.to_i - @last_cl.to_i
 
     if @tbcn < 60
       @text = "O reservatório levou #{@tbcn} segundo(s) para reestabelecer as condições normais."
@@ -42,6 +44,6 @@ class DefaultMailer < ApplicationMailer
 
   private
     def set_last_critical_level
-      @device.update_attributes(last_cl: @level.created_at)
+      @user_device.update_attributes(last_critical_level: @level.created_at)
     end
 end

@@ -28,18 +28,19 @@ class Api::V1::MonitoringController < Api::V1::BaseController
         Level.create(device_id: level.device_id, created_at: (DateTime.now - 5.minute).to_datetime)
       end
       device.users.each do |user|
+        user_device = UserDevice.where(device: device, user: user).first
         if user.setting.active?
           if level.percentage <= user.setting.alert_level
+            if user_device.last_critical_level.nil?
+              user_device.update_attributes(last_critical_level: level.created_at)
+            end
             if last.percentage > user.setting.alert_level
-              if device.last_cl.nil?
-                device.update_attributes(last_cl: level.created_at)
-              end
-              SendEmailJob.set(wait: 8.seconds).perform_later(level, user)
+              SendEmailJob.set(wait: 8.seconds).perform_later(level, user_device)
             end
           end
           if level.percentage > user.setting.alert_level
             if last.percentage <= user.setting.alert_level
-              SendEmailJob.set(wait: 8.seconds).perform_later(level, user)
+              SendEmailJob.set(wait: 8.seconds).perform_later(level, user_device)
             end
           end
         end
