@@ -32,9 +32,7 @@ class Api::V1::MonitoringController < Api::V1::BaseController
           if level.percentage <= user.setting.alert_level
             if last.percentage > user.setting.alert_level
               if device.last_cl.nil?
-                device.update_attributes(last_cl: level.created_at, time_between_cl: Time.at(level.created_at - device.created_at))
-              else
-                device.update_attributes(last_cl: level.created_at, time_between_cl: Time.at(level.created_at - device.last_cl))
+                device.update_attributes(last_cl: level.created_at)
               end
               SendEmailJob.set(wait: 8.seconds).perform_later(level, user)
             end
