@@ -342,32 +342,36 @@ $(".monitoring.devices_history").ready(function() {
 });
 
 
-function updateDevice($level) {
+function updateDevice($response, $index) {
+  $level = $response[0]
+  $device = $response[1]
   $percentage = $level.percentage;
   $litters = ($percentage/100 * $dimensions[$level.device_id].volume).toFixed(2)
   $water.animate({
     height: $percentage+'%'
   }, 1000);
-  $tankInfo.html("Reservatório "+$level.device_id+"<br>Nível de água: "+$percentage+"%<br>Volume: "+$litters+" litros");
+  $tankInfo.html("Reservatório "+$index+"<br>Serial: "+$device.serial+"<br>Nível de água: "+$percentage+"%<br>Volume: "+$litters+" litros");
   $tankInfo.css('display','block')
   return false;
 }
 
-function resumeDevice($level) {
+function resumeDevice($response, $index) {
+  $level = $response[0]
+  $device = $response[1]
   $percentage = $level.percentage;
   $litters = ($percentage/100 * $dimensions[$level.device_id].volume).toFixed(2)
-  $waterDeviceInfo.html('Reservatório '+$level.device_id+'<br>Nível: '+$level.percentage+'%');
+  $waterDeviceInfo.html('Reservatório '+$index+'<br>Serial: '+$device.serial+'<br>Nível: '+$level.percentage+'%');
   $waterDeviceInfo.css('display', 'block')
   return false;
 }
 
-function deviceInfo($element) {
+function deviceInfo($element, $index) {
   if ($element.className.split(' ')[0] == 'water-device') {
     $device_id = $element.id.split('-')[1]
     clearInterval($allTimer);
     $oneTimer = setInterval(
       function() {
-        getLevel($device_id);
+        getLevel($device_id, $index);
         updateChart();
       },
       $deviceUpdateRate
@@ -391,10 +395,10 @@ function deviceInfo($element) {
   return false;
 }
 
-function deviceResumeShow($element) {
+function deviceResumeShow($element, $index) {
   if ($element.className.split(' ')[0] == 'water-device') {
     $device_id = $element.id.split('-')[1]
-    getResume($device_id);
+    getResume($device_id, $index);
   }
   return false;
 }
@@ -404,26 +408,26 @@ function deviceResumeHide($element) {
   return false;
 }
 
-function getLevel($device_id) {
+function getLevel($device_id, $index) {
   $.ajax({
     type: "GET",
     url: "/render_current_level/"+$device_id,
     dataType: "json",
     success: function(response){
-      updateDevice(response);
-      verifyDataSending(response)
+      updateDevice(response, $index);
+      verifyDataSending(response[0])
     }
   });
   return false;
 }
 
-function getResume($device_id) {
+function getResume($device_id, $index) {
   $.ajax({
     type: "GET",
     url: "/render_current_level/"+$device_id,
     dataType: "json",
     success: function(response){
-      resumeDevice(response);
+      resumeDevice(response, $index);
     }
   });
   return false;

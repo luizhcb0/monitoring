@@ -34,9 +34,10 @@ class MonitoringController < ApplicationController
 
   def render_current_level
     @level = Level.get_current_level(params[:device_id])
+    @device = Device.find(params[:device_id])
     respond_to do |format|
-      format.html { render json: @level }
-      format.json { render json: @level }
+      format.html { render json: [@level, @device] }
+      format.json { render json: [@level, @device] }
     end
   end
 

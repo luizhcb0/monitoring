@@ -27,19 +27,33 @@
 
 @media (max-width: 767px) {
 	.water-device {
-		width: 14%;
+		width: 100%;
 		box-shadow: 0px 0px 2px #888;
 		margin: auto;
 		min-height: 9vw;
 		border-radius: 5%;
 		line-height: 9vw;
 	}
+	.device {
+		margin: auto;
+		width: 14%;
+		line-height: 5vw;
+	}
+	.device-name {
+		margin-top: 10px;
+		width: 50%;
+		background-color: rgba(0, 0, 0, 0.85);
+		border:1px solid #404565;
+		border-radius: 2px;
+		font-size: 15px;
+		display: inline-block;
+	}
 }
 
 @media (min-width: 768px) {
 	.water-device {
 		box-shadow: 0px 0px 2px #888;
-		width: 12%;
+		width: 100%;
 		margin: auto;
 		min-height: 3vw;
 		border-radius: 4%;
@@ -47,6 +61,20 @@
 		// display: -webkit-box;
 		display: block;
 		line-height: 3vw;
+	}
+	.device {
+		margin: auto;
+		width: 12%;
+		line-height: 2vw;
+	}
+	.device-name {
+		margin-top: 10px;
+		width: 50%;
+		background-color: rgba(0, 0, 0, 0.85);
+		border:1px solid #404565;
+		border-radius: 2px;
+		font-size: 19px;
+		display: inline-block;
 	}
 }
 
