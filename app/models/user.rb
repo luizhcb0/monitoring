@@ -14,7 +14,7 @@ class User < ApplicationRecord
   private
     def set_settings
       setting = Setting.create(alert_level: 0)
-      self.update_attributes(setting: setting)
+      self.setting = setting
     end
 
 end
