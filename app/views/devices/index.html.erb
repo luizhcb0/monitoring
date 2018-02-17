@@ -25,6 +25,7 @@
                 <div class="col-xs-6">
                   <div class="item-name"><%= device.serial %></div>
                   <div class="item-description"><%= device_model(device.model) %></div>
+                  <div class="item-description"><%= device.description if device.description.present? %></div>
                   <div class="item-description">
                     <% device.users.each do |user| %>
                       <%= "|#{user.name}|" if current_user.role == "admin" %>
