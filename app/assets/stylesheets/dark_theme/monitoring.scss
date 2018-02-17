@@ -91,7 +91,7 @@
 }
 
 .tank-info-canvas {
-	min-height: 82px;
+	min-height: 110px;
 }
 
 .water-device-info {
@@ -103,12 +103,16 @@
 	display: none;
 }
 
+.water-device-info-canvas {
+	min-height: 102px !important;
+}
+
 @media (min-width: 768px) {
 	.tank {
 		box-shadow: 1px 2px 1px #202545;
 	  margin: 30px auto;
 	  height: 22vw;
-		width: 100%;
+		width: 85%;
 	  position: relative;
 	  border-style: none solid solid solid;
 	  border-width: 10px;
@@ -123,6 +127,10 @@
 	  position: absolute;
 	  bottom: 0;
 		opacity: 0.8;
+	}
+	.device-canvas {
+		display: none;
+	  padding: 6%;
 	}
 }
 
@@ -146,11 +154,10 @@
       bottom: 0;
   		opacity: 0.8;
   }
-}
-
-.device-canvas {
-	display: none;
-  padding: 10%;
+	.device-canvas {
+		display: none;
+	  padding: 10%;
+	}
 }
 
 .devices-canvas, .graph-canvas {
