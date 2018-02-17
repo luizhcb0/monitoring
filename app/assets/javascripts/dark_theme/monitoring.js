@@ -350,7 +350,7 @@ function updateDevice($response, $index) {
   $water.animate({
     height: $percentage+'%'
   }, 1000);
-  $tankInfo.html("Reservatório "+$index+"<br>Serial: "+$device.serial+"<br>Nível de água: "+$percentage+"%<br>Volume: "+$litters+" litros");
+  $tankInfo.html("Reservatório "+$index+"<br>"+$device.description+"<br>Nível de água: "+$percentage+"%<br>Volume: "+$litters+" litros");
   $tankInfo.css('display','block')
   return false;
 }
@@ -360,7 +360,7 @@ function resumeDevice($response, $index) {
   $device = $response[1]
   $percentage = $level.percentage;
   $litters = ($percentage/100 * $dimensions[$level.device_id].volume).toFixed(2)
-  $waterDeviceInfo.html('Reservatório '+$index+'<br>Serial: '+$device.serial+'<br>Nível: '+$level.percentage+'%');
+  $waterDeviceInfo.html('Reservatório '+$index+'<br>'+$device.description+'<br>Nível: '+$level.percentage+'%');
   $waterDeviceInfo.css('display', 'block')
   return false;
 }
