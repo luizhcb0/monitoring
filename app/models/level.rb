@@ -1,6 +1,7 @@
 class Level < ApplicationRecord
   belongs_to :device
-
+  has_many :last_levels, :class_name => 'EmailLog', :foreign_key => 'last_level_id'
+  has_many :new_levels, :class_name => 'EmailLog', :foreign_key => 'new_level_id'
   after_create :set_high_and_percentage
 
   def self.get_current_level(device_id)

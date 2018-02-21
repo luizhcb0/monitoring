@@ -3,6 +3,7 @@ class Device < ApplicationRecord
   has_one :dimension
   has_many :user_devices
   has_many :users, through: :user_devices
+  has_many :email_logs
   accepts_nested_attributes_for :dimension, allow_destroy: true
 
   after_create :set_first_level

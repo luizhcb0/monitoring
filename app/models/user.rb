@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_one :setting
   has_many :user_devices
   has_many :devices, through: :user_devices
+  has_many :email_logs
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

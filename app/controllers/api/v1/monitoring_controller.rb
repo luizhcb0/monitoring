@@ -16,7 +16,6 @@ class Api::V1::MonitoringController < Api::V1::BaseController
 
   # POST /api/v1/monitoring
   def create
-    setting = Array.new
     level = Level.new(monitoring_params)
     device = level.device
     last = Level.get_current_level(level.device_id)
@@ -35,12 +34,11 @@ class Api::V1::MonitoringController < Api::V1::BaseController
               user_device.update_attributes(last_critical_level: level.created_at)
             end
             if last.percentage > user.setting.alert_level
-              SendEmailJob.set(wait: 8.seconds).perform_later(level, user_device)
+              SendEmailJob.set(wait: 8.seconds).perform_later(level, user_device, last)
             end
-          end
-          if level.percentage > user.setting.alert_level
+          else
             if last.percentage <= user.setting.alert_level
-              SendEmailJob.set(wait: 8.seconds).perform_later(level, user_device)
+              SendEmailJob.set(wait: 8.seconds).perform_later(level, user_device, last)
             end
           end
         end
