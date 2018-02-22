@@ -26,6 +26,11 @@ class Api::V1::MonitoringController < Api::V1::BaseController
         end
         Level.create(device: device, created_at: (DateTime.now - 5.minute).to_datetime)
       end
+      if level.percentage < 0
+        level.set_percentage(0)
+      elsif level.percentage > 100
+        level.set_percentage(100)
+      end
       device.users.each do |user|
         user_device = UserDevice.where(device: device, user: user).first
         if user.setting.active?

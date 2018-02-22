@@ -48,6 +48,14 @@ class Level < ApplicationRecord
     return levels
   end
 
+  def set_percentage(percentage)
+    self.update_attributes(
+      percentage: percentage,
+      level: self.device.dimension.y - (self.device.dimension.y * percentage)/100,
+      y: (self.device.dimension.y * (percentage))/100
+    )
+  end
+
   private
     def set_high_and_percentage
       device = Device.find(self.device_id)
