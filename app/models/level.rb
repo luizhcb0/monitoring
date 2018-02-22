@@ -6,7 +6,7 @@ class Level < ApplicationRecord
 
   def self.get_current_level(device_id)
     created_at = where(device_id: device_id).maximum(:created_at)
-    level = find_by(created_at: created_at)
+    level = find_by(created_at: created_at, device_id: device_id)
   end
 
   def self.get_all_current_levels(user_id)
