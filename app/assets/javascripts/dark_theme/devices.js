@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(".devices.edit, .devices.new, .devices.new_registration, .devices.edit_registration ").ready(function(){
   $("#serial-field").mask('9999-9999-99');
   $("#serial-register").mask('9999-9999-99');
 
@@ -10,7 +10,7 @@ $(document).ready(function(){
       dataType: "html",
       success: function(response){
         if (response != "[]") {
-          $(".serial-error").html("O Número de Série já existe");
+          $(".serial-error").html("Número de Série inválido");
         }
         else {
           $(".serial-error").html("");
