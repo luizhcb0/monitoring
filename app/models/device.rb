@@ -1,5 +1,10 @@
 class Device < ApplicationRecord
   has_many :levels
+  has_many :humidities
+  has_many :atm_pressures
+  has_many :luminosities
+  has_many :temperatures
+
   has_one :dimension
   has_many :user_devices
   has_many :users, through: :user_devices
@@ -13,15 +18,7 @@ class Device < ApplicationRecord
     message: "O Número de Série não está no formato correto"
 
   enum position: %w(top bottom)
-  enum model: %w(water_level)
-
-  def self.get_top_devices
-    where(position: "top")
-  end
-
-  def self.get_bottom_devices
-    where(position: "bottom")
-  end
+  enum model: %w(water_level sigfox)
 
   def self.get_all_user_dimensions(user)
     dimensions = Array.new
@@ -33,12 +30,13 @@ class Device < ApplicationRecord
 
   private
     def set_first_level
-      if self.dimension.nil?
-        d = Dimension.create(x: 2, y: 0.5, z: 0.5, volume: 1000, device: self)
-        Level.create(device: self, level: d.y)
-      else
-        Level.create(device: self, level: self.dimension.y)
+      if self.model == "water_level"
+        if self.dimension.nil?
+          d = Dimension.create(x: 2, y: 0.5, z: 0.5, volume: 1000, device: self)
+          Level.create(device: self, level: d.y)
+        else
+          Level.create(device: self, level: self.dimension.y)
+        end
       end
-
     end
 end
