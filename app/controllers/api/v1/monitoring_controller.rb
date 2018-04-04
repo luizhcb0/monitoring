@@ -17,8 +17,11 @@ class Api::V1::MonitoringController < Api::V1::BaseController
   # POST /api/v1/monitoring
   def create
     device_id = monitoring_params[:device_id]
-    device = Device.find(device_id)
-
+    if device_id.present?
+      device = Device.find(device_id)
+    else
+      device = Device.find(2)
+    end
     if device.model == "sigfox"
 
       data_temp = monitoring_params[:temp].to_f
