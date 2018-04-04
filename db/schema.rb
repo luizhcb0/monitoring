@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180221173303) do
+ActiveRecord::Schema.define(version: 20180404151827) do
+
+  create_table "atm_pressures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "device_id",             null: false
+    t.float    "data",       limit: 24, null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["device_id"], name: "index_atm_pressures_on_device_id", using: :btree
+  end
 
   create_table "contacts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -40,9 +48,9 @@ ActiveRecord::Schema.define(version: 20180221173303) do
     t.string   "serial",      null: false
     t.integer  "model",       null: false
     t.string   "address"
-    t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "description"
   end
 
   create_table "dimensions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -70,6 +78,14 @@ ActiveRecord::Schema.define(version: 20180221173303) do
     t.index ["user_id"], name: "index_email_logs_on_user_id", using: :btree
   end
 
+  create_table "humidities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "device_id",             null: false
+    t.float    "data",       limit: 24, null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["device_id"], name: "index_humidities_on_device_id", using: :btree
+  end
+
   create_table "levels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "device_id",             null: false
     t.float    "level",      limit: 24
@@ -80,6 +96,14 @@ ActiveRecord::Schema.define(version: 20180221173303) do
     t.index ["device_id"], name: "index_levels_on_device_id", using: :btree
   end
 
+  create_table "luminosities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "device_id",             null: false
+    t.float    "data",       limit: 24, null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["device_id"], name: "index_luminosities_on_device_id", using: :btree
+  end
+
   create_table "settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
     t.float    "alert_level", limit: 24
@@ -88,6 +112,14 @@ ActiveRecord::Schema.define(version: 20180221173303) do
     t.datetime "updated_at",                             null: false
     t.integer  "theme",                  default: 1
     t.index ["user_id"], name: "index_settings_on_user_id", using: :btree
+  end
+
+  create_table "temperatures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "device_id",             null: false
+    t.float    "data",       limit: 24, null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["device_id"], name: "index_temperatures_on_device_id", using: :btree
   end
 
   create_table "user_devices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -122,9 +154,13 @@ ActiveRecord::Schema.define(version: 20180221173303) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "atm_pressures", "devices", on_delete: :cascade
   add_foreign_key "dimensions", "devices", on_delete: :cascade
+  add_foreign_key "humidities", "devices", on_delete: :cascade
   add_foreign_key "levels", "devices", on_delete: :cascade
+  add_foreign_key "luminosities", "devices", on_delete: :cascade
   add_foreign_key "settings", "users", on_delete: :cascade
+  add_foreign_key "temperatures", "devices", on_delete: :cascade
   add_foreign_key "user_devices", "devices", on_delete: :cascade
   add_foreign_key "user_devices", "users", on_delete: :cascade
 end
