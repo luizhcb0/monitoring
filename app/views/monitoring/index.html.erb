@@ -1,9 +1,24 @@
 <div class="row">
-  <div class="col-sm-6">
-    <%= render partial: "infos" %>
-  </div>
+  <div class="col-sm-10 col-sm-offset-1">
 
-  <div class="col-sm-6">
-    <%= render partial: "graph" %>
+    <div class="row">
+      <div class="col-sm-6">
+        <%= link_to level_monitoring_path do %>
+          <div class="menu-container">
+            <div class="menu-label">Monitoramento de Nível</div>
+            <i class="fas fa-tint"></i>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-sm-6">
+        <%= link_to weather_monitoring_path do %>
+          <div class="menu-container">
+            <div class="menu-label">Monitoramento Meteorológico</div>
+            <i class="fas fa-thermometer"></i>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
   </div>
 </div>

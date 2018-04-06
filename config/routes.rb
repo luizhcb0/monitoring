@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   patch "/edit_registration", to: "devices#edit_registration", as: "edit_registration"
   get "/unregister/:id", to: "devices#unregister", as: "unregister"
 
+  get "/level_monitoring", to: "monitoring#level_monitoring", as: "level_monitoring"
+  get "/weather_monitoring", to: "monitoring#weather_monitoring", as: "weather_monitoring"
   get "/render_current_level/:device_id", to: "monitoring#render_current_level", as: "render_current_level"
   get "/render_all_current_levels", to: "monitoring#render_all_current_levels", as: "render_all_current_levels"
   get "/get_all_dimensions", to: "monitoring#get_all_dimensions", as: "get_all_dimensions"

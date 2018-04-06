@@ -4,6 +4,10 @@ class MonitoringController < ApplicationController
   before_action :authenticate_user!
 
   def index
+
+  end
+
+  def level_monitoring
     @user = current_user
     @devices = Device.get_water_level_devices(current_user)
   end

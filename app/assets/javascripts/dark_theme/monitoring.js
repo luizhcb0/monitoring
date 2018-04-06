@@ -321,7 +321,7 @@ $historyOptions = {
     }
 };
 
-$(".monitoring.index").ready(function() {
+$(".monitoring.level_monitoring").ready(function() {
   //caching
   getDevices();
 

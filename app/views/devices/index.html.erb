@@ -25,7 +25,10 @@
                 <div class="col-xs-6">
                   <div class="item-name"><%= device.serial %></div>
                   <div class="item-description"><%= device_model(device.model) %></div>
-                  <div class="item-description"><%= device.description if device.description.present? %></div>
+                  <% if current_user.role != "admin" %>
+                    <div class="item-description"><%= @user_devices.where(device: device, user: current_user).first.description %></div>
+                  <% end %>
+
                   <div class="item-description">
                     <% device.users.each do |user| %>
                       <%= "|#{user.name}|" if current_user.role == "admin" %>
@@ -37,15 +40,15 @@
                     <i class="fa fa-eye"></i>
                   <% end %>
                   <%= link_to edit_device_path(device), class:"btn edit-item" do %>
-                    <i class="fa fa-pencil"></i>
+                    <i class="fa fa-pencil-alt"></i>
                   <% end %>
                   <% if current_user.role == "admin" %>
                     <%= link_to device_path(device), class:"btn delete-item", method: "delete", data: {confirm: "Tem certeza que deseja deletar?"} do %>
-                      <i class="fa fa-trash-o"></i>
+                      <i class="fa fa-trash-alt"></i>
                     <% end %>
                   <% else %>
                     <%= link_to unregister_path(device), class:"btn delete-item", data: {confirm: "Tem certeza que deseja deletar?"} do %>
-                      <i class="fa fa-trash-o"></i>
+                      <i class="fa fa-trash-alt"></i>
                     <% end %>
                   <% end %>
 
