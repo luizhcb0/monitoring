@@ -36,7 +36,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'bootstrap-sass'
 gem 'bootstrap-toggle-rails'
-gem "font-awesome-rails"
 gem 'font-awesome-sass'
 gem 'jquery_mask_rails'
 
