@@ -28,6 +28,10 @@ class Device < ApplicationRecord
     return dimensions
   end
 
+  def self.get_water_level_devices(user)
+    user.devices.where(model: "water_level")
+  end
+
   private
     def set_first_level
       if self.model == "water_level"

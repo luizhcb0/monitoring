@@ -5,7 +5,7 @@ class MonitoringController < ApplicationController
 
   def index
     @user = current_user
-    @devices = current_user.devices
+    @devices = Device.get_water_level_devices(current_user)
   end
 
   def create
