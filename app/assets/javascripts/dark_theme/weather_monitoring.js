@@ -47,7 +47,7 @@ function getInfo() {
         $devices_temperature[i].html("Temperatura: "+response[i][1].data+" ºC")  //Temperature
         $devices_humidity[i].html("Umidade: "+response[i][2].data+" %")  //Humidity
         $devices_luminosity[i].html("Luminosidade: "+response[i][3].data+"")  //Luminosity
-        $devices_atm_pressure[i].html("Pressão Atmosférica: "+response[i][4].data+"hPa")  //Atm Pressure
+        $devices_atm_pressure[i].html("Pressão Atmosférica: "+response[i][4].data+" hPa")  //Atm Pressure
       }
     }
   });
