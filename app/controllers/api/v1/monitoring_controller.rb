@@ -22,7 +22,7 @@ class Api::V1::MonitoringController < Api::V1::BaseController
     else
       device = Device.find(2)
     end
-    if device.model == "sigfox"
+    if device.model == "sigfox" && monitoring_params[:batt].nil?
 
       data_temp = monitoring_params[:temp].to_f
       data_umid = monitoring_params[:umid].to_f
