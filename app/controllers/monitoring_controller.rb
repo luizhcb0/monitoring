@@ -3,8 +3,9 @@ class MonitoringController < ApplicationController
 
   before_action :authenticate_user!
 
-  def index
-
+  def weather_monitoring
+    @user = current_user
+    @devices = Device.get_sigfox_devices(current_user)
   end
 
   def level_monitoring
@@ -56,6 +57,16 @@ class MonitoringController < ApplicationController
       format.html { render json: @levels }
       format.json { render json: @levels }
     end
+  end
+
+  def get_all_current_weather_infos
+    devices = Device.get_sigfox_devices(current_user)
+    infos = Device.get_all_current_weather_info(devices)
+    respond_to do |format|
+      format.html { render json: infos }
+      format.json { render json: infos }
+    end
+
   end
 
 end
