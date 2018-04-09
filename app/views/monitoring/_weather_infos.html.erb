@@ -1,8 +1,20 @@
 <div class="canvas">
   <div class="col-sm-4">
-    <div class="temperature" id="device-<%= device.id %>-temperature">Temperatura:</div>
-    <div class="temperature" id="device-<%= device.id %>-humidity">Umidade:</div>
-    <div class="temperature" id="device-<%= device.id %>-luminosity">Luminosidade</div>
-    <div class="temperature" id="device-<%= device.id %>-atm_pressure">Pressão Atmosférica:</div>
+    <div class="temperature">
+      <div class="label">Temperatura:</div>
+      <div class="data" id="device-<%= device.id %>-temperature"></div>
+    </div>
+    <div class="humidity">
+      <div class="label">Umidade:</div>
+      <div class="data" id="device-<%= device.id %>-humidity"></div>
+    </div>
+    <div class="luminosity">
+      <div class="label">Luminosidade:</div>
+      <div class="data" id="device-<%= device.id %>-luminosity"></div>
+    </div>
+    <div class="atm-pressure">
+      <div class="label">Pressão Atmosférica:</div>
+      <div class="data" id="device-<%= device.id %>-atm_pressure"></div>
+    </div>
   </div>
 </div>

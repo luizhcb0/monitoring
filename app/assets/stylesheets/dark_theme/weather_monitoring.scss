@@ -1,0 +1,10 @@
+.temperature, .luminosity, .atm-pressure, .humidity {
+  font-size: 20px;
+  text-align: left;
+  padding: 5px;
+  margin: 5px;
+}
+
+.label, .data {
+  display: inline-block;
+}

@@ -44,10 +44,10 @@ function getInfo() {
     dataType: "json",
     success: function(response){
       for (i = 0; i < response.length; i++) {
-        $devices_temperature[i].html("Temperatura: "+response[i][1].data+" ºC")  //Temperature
-        $devices_humidity[i].html("Umidade: "+response[i][2].data+" %")  //Humidity
-        $devices_luminosity[i].html("Luminosidade: "+response[i][3].data+"")  //Luminosity
-        $devices_atm_pressure[i].html("Pressão Atmosférica: "+response[i][4].data+" hPa")  //Atm Pressure
+        $devices_temperature[i].html(response[i][1].data+"ºC")  //Temperature
+        $devices_humidity[i].html(response[i][2].data+"%")  //Humidity
+        $devices_luminosity[i].html(response[i][3].data+"")  //Luminosity
+        $devices_atm_pressure[i].html(response[i][4].data+"hPa")  //Atm Pressure
       }
     }
   });
