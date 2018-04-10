@@ -1,17 +1,35 @@
 <div class="canvas">
-  <div class="col-sm-4">
+  <div class="col-sm-3">
     <div class="temperature">
-      <div class="label">Temperatura:</div>
+      <div class="temp-container">
+        <div class="temp-rainbow" id="device-<%= device.id %>-temp-rainbow">
+          <div class="temp-circle-wrap">
+            <div class="temp-circle">
+              <div class="temperature-data">
+                <div class="temperature-integer" id="device-<%= device.id %>-temperature-integer"></div>.
+                <div class="temperature-decimal" id="device-<%= device.id %>-temperature-decimal"></div>
+                <div class="temperature-metric">ºC</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="data" id="device-<%= device.id %>-temperature"></div>
     </div>
+  </div>
+  <div class="col-sm-3">
     <div class="humidity">
       <div class="label">Umidade:</div>
       <div class="data" id="device-<%= device.id %>-humidity"></div>
     </div>
+  </div>
+  <div class="col-sm-3">
     <div class="luminosity">
       <div class="label">Luminosidade:</div>
       <div class="data" id="device-<%= device.id %>-luminosity"></div>
     </div>
+  </div>
+  <div class="col-sm-3">
     <div class="atm-pressure">
       <div class="label">Pressão Atmosférica:</div>
       <div class="data" id="device-<%= device.id %>-atm_pressure"></div>
