@@ -19,8 +19,13 @@
   </div>
   <div class="col-sm-3">
     <div class="humidity">
-      <div class="label">Umidade:</div>
-      <div class="data" id="device-<%= device.id %>-humidity"></div>
+      <div class="humidity-container">
+        <div class="water-drop">
+          <div class="water-drop-fill" id="device-<%= device.id %>-humidity"></div>
+          <div class="humidity-data" id="device-<%= device.id %>-humidity-data"></div>
+        </div>
+        <div class="label">Umidade</div>
+      </div>
     </div>
   </div>
   <div class="col-sm-3">
