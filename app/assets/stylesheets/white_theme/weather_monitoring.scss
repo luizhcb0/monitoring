@@ -1,0 +1,107 @@
+.temperature, .luminosity, .atm-pressure, .humidity {
+  font-size: 20px;
+  padding: 10px;
+}
+
+.label, .data {
+  display: inline-block;
+}
+
+.temperature-data {
+  position: relative;
+  top: 8%;
+  color: #3a3d50;
+  text-shadow: 1px 1px 1px white;
+  width: 100%;
+  height: 100%;
+}
+.temperature-integer {
+  display: inline-block;
+  font-size: 75px;
+}
+.temperature-decimal {
+  display: inline-block;
+  font-size: 30px;
+}
+.temperature-metric {
+  font-size: 18px;
+}
+
+.temp-container {
+  position: relative;
+  margin: auto;
+  width: 200px;
+  height: 200px;
+}
+
+.temp-rainbow {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  border-radius: 100%;
+  position: relative;
+  box-shadow: inset 0 2px 2px rgba(255, 255, 255, .4), 0 3px 13px rgba(0, 0, 0, .85);
+  background: #5bd5f6;
+  -webkit-transition: background 3s linear;
+  -moz-transition: background 3s linear;
+}
+
+.temp-circle-wrap {
+  width: 94%;
+  height: 94%;
+  top: 3%;
+  left: 3%;
+  position: relative;
+  border-radius: 100%;
+  box-shadow: inset 0 2px 2px rgba(255, 255, 255, .4), 0 3px 13px rgba(0, 0, 0, .85);
+  background: -webkit-linear-gradient(top, #f2f6f5 0%, #cbd5d6 100%);
+}
+
+.temp-circle {
+  width: 88%;
+  height: 88%;
+  position: relative;
+  top: 6%;
+  left: 6%;
+  border-radius: 100%;
+  background: -webkit-linear-gradient(top, #cbd5d6 0%, #f2f6f5 100%);
+}
+
+.water-drop {
+  border: 1px solid #889;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  margin-top: 30%;
+  -webkit-border-radius: 94% 0 70% 60% / 70% 0 94% 60%;
+  border-radius: 94% 0 70% 60% / 70% 0 94% 60%;
+  -webkit-transform: rotateZ(-45deg);
+  transform: rotateZ(-45deg);
+  position: relative;
+}
+
+.water-drop-fill {
+  width: 100%;
+  height: 0%;
+  background-color: #95dcef;
+  position: absolute;
+  bottom: 0;
+  opacity: 0.8;
+}
+
+.humidity-data {
+  font-size: 26px;
+  color: #eee;
+  width: 100%;
+  top: 38%;
+  text-shadow: 1px 1px 1px #777;
+  position: relative;
+  -webkit-transform: rotateZ(45deg)   ;
+  transform: rotateZ(45deg)   ;
+}
+
+.humidity-container {
+  margin: auto;
+  width: 120px;
+  height: 120px;
+}
