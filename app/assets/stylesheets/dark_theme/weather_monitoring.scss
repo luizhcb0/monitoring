@@ -66,3 +66,42 @@
   border-radius: 100%;
   background: -webkit-linear-gradient(top, #cbd5d6 0%, #f2f6f5 100%);
 }
+
+.water-drop {
+  border: 1px solid #889;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  margin-top: 30%;
+  -webkit-border-radius: 94% 0 70% 60% / 70% 0 94% 60%;
+  border-radius: 94% 0 70% 60% / 70% 0 94% 60%;
+  -webkit-transform: rotateZ(-45deg);
+  transform: rotateZ(-45deg);
+  position: relative;
+}
+
+.water-drop-fill {
+  width: 100%;
+  height: 0%;
+  background-color: #95dcef;
+  position: absolute;
+  bottom: 0;
+  opacity: 0.8;
+}
+
+.humidity-data {
+  font-size: 26px;
+  color: #eee;
+  width: 100%;
+  top: 38%;
+  text-shadow: 1px 1px 1px #777;
+  position: relative;
+  -webkit-transform: rotateZ(45deg)   ;
+  transform: rotateZ(45deg)   ;
+}
+
+.humidity-container {
+  margin: auto;
+  width: 120px;
+  height: 120px;
+}

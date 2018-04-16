@@ -4,6 +4,7 @@ $devices_temperature_integer = {}
 $devices_temperature_decimal = {}
 $devices_temperature_rainbow = {}
 $devices_humidity = {}
+$devices_humidity_data = {}
 $devices_luminosity = {}
 $devices_atm_pressure = {}
 
@@ -33,6 +34,7 @@ function cacheInfo() {
         $devices_temperature_decimal[i] = $('#device-'+response[i][0].id+"-temperature-decimal")
         $devices_temperature_rainbow[i] = $('#device-'+response[i][0].id+"-temp-rainbow")
         $devices_humidity[i] = $('#device-'+response[i][0].id+"-humidity")
+        $devices_humidity_data[i] = $('#device-'+response[i][0].id+"-humidity-data")
         $devices_luminosity[i] = $('#device-'+response[i][0].id+"-luminosity")
         $devices_atm_pressure[i] = $('#device-'+response[i][0].id+"-atm_pressure")
       }
@@ -54,12 +56,21 @@ function getInfo() {
         $devices_temperature_integer[i].html($intPart)  //Temperature
         $devices_temperature_decimal[i].html($decPart)  //Temperature
         changeTemperatureColor($devices_temperature_rainbow[i], $intPart) //Temperature
-        $devices_humidity[i].html(response[i][2].data+"%")  //Humidity
+        changeHumidity($devices_humidity[i], $devices_humidity_data[i], response[i][2].data) //Humidity
         $devices_luminosity[i].html(response[i][3].data+"")  //Luminosity
         $devices_atm_pressure[i].html(response[i][4].data+"hPa")  //Atm Pressure
       }
     }
   });
+  return false;
+}
+
+function changeHumidity ($water, $data, $percentage) {
+  $water.animate({
+    height: $percentage+'%'
+  }, 1300);
+  $data.html($percentage+"%")
+
   return false;
 }
 
