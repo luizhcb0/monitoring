@@ -56,7 +56,7 @@ function getInfo() {
         $devices_temperature_integer[i].html($intPart)  //Temperature
         $devices_temperature_decimal[i].html($decPart)  //Temperature
         changeTemperatureColor($devices_temperature_rainbow[i], $intPart) //Temperature
-        changeHumidity($devices_humidity[i], $devices_humidity_data[i], response[i][2].data) //Humidity
+        changeHumidity($devices_humidity[i], $devices_humidity_data[i], response[i][2].data.toFixed(1)) //Humidity
         $devices_luminosity[i].html(response[i][3].data+"")  //Luminosity
         $devices_atm_pressure[i].html(response[i][4].data+"hPa")  //Atm Pressure
       }
