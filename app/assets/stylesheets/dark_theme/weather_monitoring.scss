@@ -17,11 +17,11 @@
 }
 .temperature-integer {
   display: inline-block;
-  font-size: 75px;
+  font-size: 62px;
 }
 .temperature-decimal {
   display: inline-block;
-  font-size: 30px;
+  font-size: 20px;
 }
 .temperature-metric {
   font-size: 18px;
@@ -30,8 +30,8 @@
 .temp-container {
   position: relative;
   margin: auto;
-  width: 200px;
-  height: 200px;
+  width: 160px;
+  height: 160px;
 }
 
 .temp-rainbow {
@@ -40,21 +40,23 @@
   margin: auto;
   border-radius: 100%;
   position: relative;
-  box-shadow: inset 0 2px 2px rgba(255, 255, 255, .4), 0 3px 13px rgba(0, 0, 0, .85);
+  // box-shadow: inset 0 2px 2px rgba(255, 255, 255, .4), 0 3px 13px rgba(0, 0, 0, .85);   //Skeumorphic
   background: #5bd5f6;
+  border: 1px solid #889;
   -webkit-transition: background 3s linear;
   -moz-transition: background 3s linear;
 }
 
 .temp-circle-wrap {
-  width: 94%;
-  height: 94%;
-  top: 3%;
-  left: 3%;
+  width: 92%;
+  height: 92%;
+  top: 4%;
+  left: 4%;
   position: relative;
   border-radius: 100%;
   box-shadow: inset 0 2px 2px rgba(255, 255, 255, .4), 0 3px 13px rgba(0, 0, 0, .85);
-  background: -webkit-linear-gradient(top, #f2f6f5 0%, #cbd5d6 100%);
+  // background: -webkit-linear-gradient(top, #f2f6f5 0%, #cbd5d6 100%);  //Skeumorphic
+  background: #d5d5d6;
 }
 
 .temp-circle {
@@ -64,7 +66,8 @@
   top: 6%;
   left: 6%;
   border-radius: 100%;
-  background: -webkit-linear-gradient(top, #cbd5d6 0%, #f2f6f5 100%);
+  // background: -webkit-linear-gradient(top, #cbd5d6 0%, #f2f6f5 100%);    //Skeumorphic
+  background: #e2e6e5;
 }
 
 .water-drop {
@@ -72,7 +75,7 @@
   overflow: hidden;
   width: 100%;
   height: 100%;
-  margin-top: 30%;
+  margin-top: 20%;
   -webkit-border-radius: 94% 0 70% 60% / 70% 0 94% 60%;
   border-radius: 94% 0 70% 60% / 70% 0 94% 60%;
   // -webkit-transform: rotateZ(-45deg);
@@ -90,10 +93,10 @@
 }
 
 .humidity-data {
-  font-size: 26px;
+  font-size: 20px;
   color: #eee;
   width: 100%;
-  top: 38%;
+  top: 34%;
   text-shadow: 1px 1px 1px #777;
   position: relative;
   // -webkit-transform: rotateZ(45deg)   ;
@@ -102,6 +105,6 @@
 
 .humidity-container {
   margin: auto;
-  width: 120px;
-  height: 120px;
+  width: 85px;
+  height: 85px;
 }
