@@ -1,18 +1,17 @@
 $updateRate = 300000;
-$devices = {};
-$devices_temperature_integer = {}
-$devices_temperature_decimal = {}
-$devices_temperature_rainbow = {}
-$devices_humidity = {}
-$devices_humidity_data = {}
-$devices_luminosity = {}
-$devices_sun = {}
-$devices_atm_pressure = {}
+$devices = [];
+$devices_temperature_integer = []
+$devices_temperature_decimal = []
+$devices_temperature_rainbow = []
+$devices_humidity = []
+$devices_humidity_data = []
+$devices_luminosity = []
+$devices_sun = []
+$devices_atm_pressure = []
 
 $(".monitoring.weather_monitoring").ready(function() {
   //caching
-  cacheInfo();
-  getInfo();
+  cacheInfo()
 
   $allTimer = setInterval(
     function() {
@@ -41,7 +40,7 @@ function cacheInfo() {
         $devices_atm_pressure[i] = $('#device-'+response[i][0].id+"-atm_pressure");
       }
     }
-  });
+  }).done(getInfo);
   return false;
 }
 
