@@ -17,26 +17,30 @@
       <div class="data" id="device-<%= device.id %>-temperature"></div>
     </div>
   </div>
-  <div class="col-sm-3">
+  <div class="col-xs-6 col-sm-3">
     <div class="humidity">
+      <div class="weather-label">Umidade</div>
       <div class="humidity-container">
         <div class="water-drop">
           <div class="water-drop-fill" id="device-<%= device.id %>-humidity"></div>
           <div class="humidity-data" id="device-<%= device.id %>-humidity-data"></div>
         </div>
-        <div class="label">Umidade</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-6 col-sm-3">
+    <div class="luminosity">
+      <div class="weather-label">Luminosidade</div>
+      <div class="luminosity-container">
+        <div class="sun" id="device-<%= device.id %>-sun">
+          <div class="luminosity-data" id="device-<%= device.id %>-luminosity-data"></div>
+        </div>
       </div>
     </div>
   </div>
   <div class="col-sm-3">
-    <div class="luminosity">
-      <div class="label">Luminosidade:</div>
-      <div class="data" id="device-<%= device.id %>-luminosity"></div>
-    </div>
-  </div>
-  <div class="col-sm-3">
     <div class="atm-pressure">
-      <div class="label">Pressão Atmosférica:</div>
+      <div class="weather-label">Pressão Atmosférica:</div>
       <div class="data" id="device-<%= device.id %>-atm_pressure"></div>
     </div>
   </div>

@@ -1,10 +1,12 @@
 .temperature, .luminosity, .atm-pressure, .humidity {
   font-size: 20px;
   padding: 10px;
+  min-height: 200px;
 }
 
-.label, .data {
-  display: inline-block;
+.weather-label {
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .temperature-data {
@@ -45,6 +47,7 @@
   border: 1px solid #889;
   -webkit-transition: background 3s linear;
   -moz-transition: background 3s linear;
+  transition: background-color 2s linear;
 }
 
 .temp-circle-wrap {
@@ -75,7 +78,8 @@
   overflow: hidden;
   width: 100%;
   height: 100%;
-  margin-top: 20%;
+  margin: auto;
+  top: 25px;
   -webkit-border-radius: 94% 0 70% 60% / 70% 0 94% 60%;
   border-radius: 94% 0 70% 60% / 70% 0 94% 60%;
   // -webkit-transform: rotateZ(-45deg);
@@ -97,7 +101,7 @@
   color: #eee;
   width: 100%;
   top: 34%;
-  text-shadow: 1px 1px 1px #777;
+  text-shadow: 1px 1px 1px #444;
   position: relative;
   // -webkit-transform: rotateZ(45deg)   ;
   // transform: rotateZ(45deg)   ;
@@ -107,4 +111,33 @@
   margin: auto;
   width: 85px;
   height: 85px;
+}
+
+.luminosity-container {
+  margin: auto;
+  width: 85px;
+  height: 85px;
+}
+
+.sun {
+  border: 1px solid #889;
+  width: 70%;
+  height: 70%;
+  top: 25px;
+  border-radius: 50%;
+  position: relative;
+  margin: auto;
+  background: rgba(240,255,210,1);
+  -webkit-transition: background 2s linear;
+  -moz-transition: background 2s linear;
+  transition: background-color 2s linear;
+}
+
+.luminosity-data {
+  font-size: 15px;
+  color: rgba(255,255,255,1);
+  width: 100%;
+  top: 33%;
+  text-shadow: 1px 1px 1px #444;
+  position: relative;
 }

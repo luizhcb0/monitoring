@@ -6,6 +6,7 @@ $devices_temperature_rainbow = {}
 $devices_humidity = {}
 $devices_humidity_data = {}
 $devices_luminosity = {}
+$devices_sun = {}
 $devices_atm_pressure = {}
 
 $(".monitoring.weather_monitoring").ready(function() {
@@ -29,14 +30,15 @@ function cacheInfo() {
     dataType: "json",
     success: function(response){
       for (i = 0; i < response.length; i++) {
-        $devices[i] = $('#device-'+response[i][0].id)
-        $devices_temperature_integer[i] = $('#device-'+response[i][0].id+"-temperature-integer")
-        $devices_temperature_decimal[i] = $('#device-'+response[i][0].id+"-temperature-decimal")
-        $devices_temperature_rainbow[i] = $('#device-'+response[i][0].id+"-temp-rainbow")
-        $devices_humidity[i] = $('#device-'+response[i][0].id+"-humidity")
-        $devices_humidity_data[i] = $('#device-'+response[i][0].id+"-humidity-data")
-        $devices_luminosity[i] = $('#device-'+response[i][0].id+"-luminosity")
-        $devices_atm_pressure[i] = $('#device-'+response[i][0].id+"-atm_pressure")
+        $devices[i] = $('#device-'+response[i][0].id);
+        $devices_temperature_integer[i] = $('#device-'+response[i][0].id+"-temperature-integer");
+        $devices_temperature_decimal[i] = $('#device-'+response[i][0].id+"-temperature-decimal");
+        $devices_temperature_rainbow[i] = $('#device-'+response[i][0].id+"-temp-rainbow");
+        $devices_humidity[i] = $('#device-'+response[i][0].id+"-humidity");
+        $devices_humidity_data[i] = $('#device-'+response[i][0].id+"-humidity-data");
+        $devices_luminosity[i] = $('#device-'+response[i][0].id+"-luminosity-data");
+        $devices_sun[i] = $('#device-'+response[i][0].id+"-sun");
+        $devices_atm_pressure[i] = $('#device-'+response[i][0].id+"-atm_pressure");
       }
     }
   });
@@ -57,11 +59,20 @@ function getInfo() {
         $devices_temperature_decimal[i].html($decPart)  //Temperature
         changeTemperatureColor($devices_temperature_rainbow[i], $intPart) //Temperature
         changeHumidity($devices_humidity[i], $devices_humidity_data[i], response[i][2].data.toFixed(1)) //Humidity
-        $devices_luminosity[i].html(response[i][3].data+"")  //Luminosity
+        changeLuminosity($devices_luminosity[i], $devices_sun[i], response[i][3].data)  //Luminosity
         $devices_atm_pressure[i].html(response[i][4].data+"hPa")  //Atm Pressure
       }
     }
   });
+  return false;
+}
+
+function changeLuminosity ($sun_content, $sun, $data) {
+  $opacity = $data * 0.000015259021897  // Max = 65535
+  $sun.css('background', 'rgba(240,255,210,'+$opacity+')')
+  // $rgb = ($data * 0.003891050583658).toFixed(0)
+  // $sun_content.css('color', 'rgba('+(255-$rgb)+','+(255-$rgb)+','+(255-$rgb)+',1)')
+  $sun_content.html($data)
   return false;
 }
 
@@ -70,11 +81,15 @@ function changeHumidity ($water, $data, $percentage) {
     height: $percentage+'%'
   }, 1300);
   $data.html($percentage+"%")
-
   return false;
 }
 
 function changeTemperatureColor($object, $temp) {
+  // $red = 60 + ($temp * 2);
+  // $green = 230 - ($temp * 1.8);
+  // $blue = 230 - ($temp * 2.5);
+  // $opacity = 1;
+  // $object.css('background', 'rgba('+$red+','+$green+','+$blue+','+$opacity+')');
   if ($temp <= 10) {
     $object.css('background', '#5bd5f6');
   }
