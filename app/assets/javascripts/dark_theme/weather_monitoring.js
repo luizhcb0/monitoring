@@ -67,10 +67,15 @@ function getInfo() {
 }
 
 function changeLuminosity ($sun_content, $sun, $data) {
-  $opacity = $data * 0.000015259021897  // Max = 65535
+  //$opacity = $data * 0.000015259021897  // Max = 65535
+  if ($data <= 2000) {
+    $opacity = 0
+  }
+  else {
+    $opacity = 0.3 + $data * 0.000010681315328
+  }
+  console.log($opacity)
   $sun.css('background', 'rgba(240,255,210,'+$opacity+')')
-  // $rgb = ($data * 0.003891050583658).toFixed(0)
-  // $sun_content.css('color', 'rgba('+(255-$rgb)+','+(255-$rgb)+','+(255-$rgb)+',1)')
   $sun_content.html($data)
   return false;
 }
@@ -84,11 +89,12 @@ function changeHumidity ($water, $data, $percentage) {
 }
 
 function changeTemperatureColor($object, $temp) {
-  // $red = 60 + ($temp * 2);
-  // $green = 230 - ($temp * 1.8);
-  // $blue = 230 - ($temp * 2.5);
+  // $red = 100 + ($temp * 4);
+  // $green =  1/($temp - 5)*($temp - 5);
+  // $blue = 255 - ($temp * 3);
   // $opacity = 1;
   // $object.css('background', 'rgba('+$red+','+$green+','+$blue+','+$opacity+')');
+  // console.log($red, $green, $blue)
   if ($temp <= 10) {
     $object.css('background', '#5bd5f6');
   }
