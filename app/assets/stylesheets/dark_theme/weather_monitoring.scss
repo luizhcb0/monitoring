@@ -119,6 +119,38 @@
   height: 85px;
 }
 
+.atm-pressure-container {
+  margin: auto;
+  width: 100%;
+  height: 85px;
+}
+
+.atm-data {
+  font-size: 18px;
+}
+
+.barometer {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 100%;
+  border-top: 2px solid #bbc;
+  height: 20px;
+  display: flex;
+}
+
+.marker1 {
+  width: 1px;
+  height: 10px;
+  background: #bbc;
+  margin: auto;
+}
+.marker2 {
+  width: 1px;
+  height: 15px;
+  background: #bbc;
+  margin: auto;
+}
+
 .sun {
   border: 1px solid #889;
   width: 70%;

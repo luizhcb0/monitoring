@@ -37,7 +37,7 @@ function cacheInfo() {
         $devices_humidity_data[i] = $('#device-'+response[i][0].id+"-humidity-data");
         $devices_luminosity[i] = $('#device-'+response[i][0].id+"-luminosity-data");
         $devices_sun[i] = $('#device-'+response[i][0].id+"-sun");
-        $devices_atm_pressure[i] = $('#device-'+response[i][0].id+"-atm_pressure");
+        $devices_atm_pressure[i] = $('#device-'+response[i][0].id+"-atm-pressure");
       }
     }
   }).done(getInfo);
@@ -59,7 +59,7 @@ function getInfo() {
         changeTemperatureColor($devices_temperature_rainbow[i], $intPart) //Temperature
         changeHumidity($devices_humidity[i], $devices_humidity_data[i], response[i][2].data.toFixed(1)) //Humidity
         changeLuminosity($devices_luminosity[i], $devices_sun[i], response[i][3].data)  //Luminosity
-        $devices_atm_pressure[i].html(response[i][4].data+"hPa")  //Atm Pressure
+        $devices_atm_pressure[i].html(response[i][4].data+" hPa")  //Atm Pressure
       }
     }
   });
