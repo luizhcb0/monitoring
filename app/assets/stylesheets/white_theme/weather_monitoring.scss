@@ -19,14 +19,14 @@
 }
 .temperature-integer {
   display: inline-block;
-  font-size: 62px;
+  font-size: 3.1em;
 }
 .temperature-decimal {
   display: inline-block;
-  font-size: 20px;
+  font-size: 1em;
 }
 .temperature-metric {
-  font-size: 18px;
+  font-size: 0.9em;
 }
 
 .temp-container {
@@ -97,7 +97,7 @@
 }
 
 .humidity-data {
-  font-size: 20px;
+  font-size: 100%;
   color: #eee;
   width: 100%;
   top: 34%;
@@ -126,7 +126,7 @@
 }
 
 .atm-data {
-  font-size: 18px;
+  font-size: 90%;
 }
 
 .barometer {
@@ -166,7 +166,7 @@
 }
 
 .luminosity-data {
-  font-size: 15px;
+  font-size: 75%;
   color: rgba(255,255,255,1);
   width: 100%;
   top: 33%;
