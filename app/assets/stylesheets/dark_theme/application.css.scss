@@ -21,7 +21,7 @@
 @import "font-awesome";
 
 body {
-  color: #f1f1f5;
+  color: #f1f5ff;
   background-color: #121722;
   text-align: center;
   font-family: 'Verdana', sans-serif;
@@ -169,7 +169,7 @@ body {
 
 }
  .item-name {
-   color: #f1f1f5;
+   color: #f1f5ff;
    text-align: left;
    font-size: 18px;
  }
@@ -217,7 +217,7 @@ body {
  input[type=email], input[type=text], input[type=tel], textarea, input[type=password], input[type=checkbox], select {
    background-color: #121722 !important;
    border-color: #03080e !important;
-   color: #f1f1f5 !important;
+   color: #f1f5ff !important;
  }
 
  .control-label {
@@ -243,7 +243,7 @@ body {
  .toggle-off {
    background-color: #121722 !important;
    border-color: #03080e !important;
-   color: #f1f1f5 !important;
+   color: #f1f5ff !important;
  }
 
  .toggle-off:hover {

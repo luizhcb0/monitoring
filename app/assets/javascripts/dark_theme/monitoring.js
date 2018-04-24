@@ -67,13 +67,13 @@ $dark_theme = Highcharts.theme = {
     },
     labels: {
       style: {
-        color: '#f1f1f5'
+        color: '#f1f5ff'
       }
     },
     style: {
-      color: "#f1f1f5"
+      color: "#f1f5ff"
     },
-    lineColor: '#f1f1f5'
+    lineColor: '#f1f5ff'
   },
   yAxis: {
     gridLineColor: '#1d2235',
@@ -84,13 +84,13 @@ $dark_theme = Highcharts.theme = {
     },
     labels: {
       style: {
-        color: '#f1f1f5'
+        color: '#f1f5ff'
       }
     },
     style: {
-      color: "#f1f1f5"
+      color: "#f1f5ff"
     },
-    tickColor: '#f1f1f5'
+    tickColor: '#f1f5ff'
   },
   rangeSelector: {
     buttonTheme: { // styles for the buttons
@@ -99,7 +99,7 @@ $dark_theme = Highcharts.theme = {
       'stroke-width': 0,
       r: 8,
       style: {
-        color: '#f1f1f5',
+        color: '#f1f5ff',
         fontWeight: 'bold'
       },
       states: {
@@ -122,9 +122,9 @@ $dark_theme = Highcharts.theme = {
         }
       }
     },
-    inputBoxBorderColor: '#f1f1f5',
+    inputBoxBorderColor: '#f1f5ff',
     inputStyle: {
-        color: '#f1f1f5'
+        color: '#f1f5ff'
     },
     labelStyle: {
         color: '#ead26e'
