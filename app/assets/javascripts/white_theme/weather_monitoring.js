@@ -74,7 +74,6 @@ function changeLuminosity ($sun_content, $sun, $data) {
   else {
     $opacity = 0.3 + $data * 0.000010681315328
   }
-  console.log($opacity)
   $sun.css('background', 'rgba(240,255,210,'+$opacity+')')
   $sun_content.html($data)
   return false;
