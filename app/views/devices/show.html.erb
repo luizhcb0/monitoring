@@ -21,15 +21,15 @@
               </div>
               <div class="col-xs-6 item-action">
                 <%= link_to edit_device_path(@device), class:"btn edit-item" do %>
-                  <i class="fa fa-pencil"></i>
+                  <i class="fa fa-pencil-alt"></i>
                 <% end %>
                 <% if current_user.role == "admin" %>
                   <%= link_to device_path(@device), class:"btn delete-item", method: "delete", data: {confirm: "Tem certeza que deseja deletar?"} do %>
-                    <i class="fa fa-trash-o"></i>
+                    <i class="fa fa-trash-alt"></i>
                   <% end %>
                 <% else %>
                   <%= link_to unregister_path(@device), class:"btn delete-item", data: {confirm: "Tem certeza que deseja deletar?"} do %>
-                    <i class="fa fa-trash-o"></i>
+                    <i class="fa fa-trash-alt"></i>
                   <% end %>
                 <% end %>
               </div>
