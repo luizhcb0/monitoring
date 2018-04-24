@@ -18,7 +18,7 @@ Highcharts.setOptions({
 
 $dark_theme = Highcharts.theme = {
   chart: {
-    backgroundColor: '#0a0d20',
+    backgroundColor: '#0a0f15',
     style: {
        fontFamily: '\'Unica One\', sans-serif'
     },
@@ -27,7 +27,7 @@ $dark_theme = Highcharts.theme = {
       '#eeaaee', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'],
   title: {
       style: {
-        color: "#C9B978",
+        color: "#ead26e",
         fontSize: "20px"
       }
   },
@@ -48,10 +48,10 @@ $dark_theme = Highcharts.theme = {
   },
   legend: {
     itemHoverStyle:{
-      color: '#C9B978'
+      color: '#ead26e'
     },
     itemHiddenStyle:{
-      color: '#5a5d70'
+      color: '#7a7d80'
     },
     itemStyle: {
       color: '#eee',
@@ -59,38 +59,38 @@ $dark_theme = Highcharts.theme = {
     }
   },
   xAxis: {
-    gridLineColor: '#1b2040',
+    gridLineColor: '#1d2235',
     title: {
       style: {
-        color: "#C9B978"
+        color: "#ead26e"
       }
     },
     labels: {
       style: {
-        color: '#efeff5'
+        color: '#f1f1f5'
       }
     },
     style: {
-      color: "#fff"
+      color: "#f1f1f5"
     },
-    lineColor: '#fff'
+    lineColor: '#f1f1f5'
   },
   yAxis: {
-    gridLineColor: '#191d3d',
+    gridLineColor: '#1d2235',
     title: {
       style: {
-        color: "#C9B978"
+        color: "#ead26e"
       }
     },
     labels: {
       style: {
-        color: '#efeff5'
+        color: '#f1f1f5'
       }
     },
     style: {
-      color: "#fff"
+      color: "#f1f1f5"
     },
-    tickColor: '#fff'
+    tickColor: '#f1f1f5'
   },
   rangeSelector: {
     buttonTheme: { // styles for the buttons
@@ -99,67 +99,67 @@ $dark_theme = Highcharts.theme = {
       'stroke-width': 0,
       r: 8,
       style: {
-        color: '#efeff5',
+        color: '#f1f1f5',
         fontWeight: 'bold'
       },
       states: {
         hover: {
           fill: 'none',
           style: {
-            color: '#C9B978'
+            color: '#ead26e'
           }
         },
         select: {
-          fill: '#C9B978',
+          fill: '#ead26e',
           style: {
-            color: '#14172f'
+            color: '#101520'
           }
         },
         disabled: {
           style: {
-            color: '#5a5d70'
+            color: '#7a7d80'
           }
         }
       }
     },
-    inputBoxBorderColor: '#efeff5',
+    inputBoxBorderColor: '#f1f1f5',
     inputStyle: {
-        color: '#efeff5'
+        color: '#f1f1f5'
     },
     labelStyle: {
-        color: '#C9B978'
+        color: '#ead26e'
     },
   },
   navigator: {
     handles: {
-       backgroundColor: '#C9B978',
-       borderColor: '#14172f'
+       backgroundColor: '#ead26e',
+       borderColor: '#101520'
     },
-    outlineColor: '#3b4060',
+    outlineColor: '#525762',
     maskFill: 'rgba(190,210,160,0.165)',
     // series: {
     //    color: '#7798BF',
     //    lineColor: '#A6C7ED'
     // },
     xAxis: {
-       gridLineColor: '#3b4060'
+       gridLineColor: '#323742'
     }
    },
   scrollbar: {
       enabled: true,
-      barBackgroundColor: "#404565",
-      barBorderColor: "#05031a",
+      barBackgroundColor: "#323742",
+      barBorderColor: "#03080e",
       barBorderRadius: 6,
       barBorderWidth: 0,
-      buttonArrowColor: "#C9B978",
-      buttonBackgroundColor: "#404565",
-      buttonBorderColor: "#05031a",
+      buttonArrowColor: "#ead26e",
+      buttonBackgroundColor: "#323742",
+      buttonBorderColor: "#03080e",
       buttonBorderRadius: 4,
       buttonBorderWidth: 0,
       height: 25,
       margin:10,
-      rifleColor: "#C9B978",
-      trackBackgroundColor: "#101535",
+      rifleColor: "#ead26e",
+      trackBackgroundColor: "#121722",
       trackBorderWidth: 0,
       trackBorderRadius: 8,
       trackBorderColor: 'none'
@@ -247,7 +247,7 @@ $historyOptions = {
         //renderTo: 'graph-canvas',
         type: 'spline',
         height: 490,
-        backgroundColor: '#0a0d20'
+        backgroundColor: '#0a0f15'
     },
     tooltip: {
       valueSuffix: '%',
