@@ -22,10 +22,8 @@ class Device < ApplicationRecord
 
   def self.get_all_user_dimensions(user)
     dimensions = Array.new
-    user.devices.each do |device|
-      if device.model == "water_level"
-        dimensions <<  device.dimension
-      end
+    user.devices.where(model: "water_level").each do |device|
+      dimensions <<  device.dimension
     end
     return dimensions
   end

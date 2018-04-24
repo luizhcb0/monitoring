@@ -21,7 +21,7 @@ class Level < ApplicationRecord
   def self.get_all_devices_levels
     levels = Array.new
     Device.all.each do |device|
-      levels <<  where(device_id: device.id)
+      levels <<  where(device_id: device.id, model: "water_level")
     end
     return levels
   end
@@ -29,7 +29,7 @@ class Level < ApplicationRecord
   def self.get_all_user_devices_levels(user_id)
     levels = Array.new
     now = DateTime.now
-    Device.left_outer_joins(:users).where(users: {id: user_id}).each do |device|
+    Device.left_outer_joins(:users).where(users: {id: user_id}, devices: {model: "water_level"}).each do |device|
       levels <<  where(device_id: device.id, created_at: (now - 1.day)..now).order(created_at: :asc)
     end
     return levels
@@ -37,7 +37,7 @@ class Level < ApplicationRecord
 
   def self.get_all_user_devices_levels_history(user_id)
     levels = Array.new
-    Device.left_outer_joins(:users).where(users: {id: user_id}).each do |device|
+    Device.left_outer_joins(:users).where(users: {id: user_id}, devices: {model: "water_level"}).each do |device|
       levels <<  where(device_id: device.id).order(created_at: :asc)
     end
     return levels
