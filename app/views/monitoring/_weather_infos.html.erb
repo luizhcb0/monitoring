@@ -1,61 +1,59 @@
-<div class="canvas">
-  <div class="col-sm-3">
-    <div class="temperature">
-      <div class="temp-container">
-        <div class="temp-rainbow" id="device-<%= device.id %>-temp-rainbow">
-          <div class="temp-circle-wrap">
-            <div class="temp-circle">
-              <div class="temperature-data">
-                <div class="temperature-integer" id="device-<%= device.id %>-temperature-integer"></div>.
-                <div class="temperature-decimal" id="device-<%= device.id %>-temperature-decimal"></div>
-                <div class="temperature-metric">ºC</div>
-              </div>
+<div class="col-sm-3">
+  <div class="temperature">
+    <div class="temp-container">
+      <div class="temp-rainbow" id="device-<%= device.id %>-temp-rainbow">
+        <div class="temp-circle-wrap">
+          <div class="temp-circle">
+            <div class="temperature-data">
+              <div class="temperature-integer" id="device-<%= device.id %>-temperature-integer"></div>.
+              <div class="temperature-decimal" id="device-<%= device.id %>-temperature-decimal"></div>
+              <div class="temperature-metric">ºC</div>
             </div>
           </div>
         </div>
       </div>
-      <div class="data" id="device-<%= device.id %>-temperature"></div>
     </div>
+    <div class="data" id="device-<%= device.id %>-temperature"></div>
   </div>
-  <div class="col-xs-6 col-sm-3">
-    <div class="humidity">
-      <div class="weather-label">Umidade</div>
-      <div class="humidity-container">
-        <div class="water-drop">
-          <div class="water-drop-fill" id="device-<%= device.id %>-humidity"></div>
-          <div class="humidity-data" id="device-<%= device.id %>-humidity-data"></div>
-        </div>
+</div>
+<div class="col-xs-6 col-sm-3">
+  <div class="humidity">
+    <div class="weather-label">Umidade</div>
+    <div class="humidity-container">
+      <div class="water-drop">
+        <div class="water-drop-fill" id="device-<%= device.id %>-humidity"></div>
+        <div class="humidity-data" id="device-<%= device.id %>-humidity-data"></div>
       </div>
     </div>
   </div>
-  <div class="col-xs-6 col-sm-3">
-    <div class="luminosity">
-      <div class="weather-label">Luminosidade</div>
-      <div class="luminosity-container">
-        <div class="sun" id="device-<%= device.id %>-sun">
-          <div class="luminosity-data" id="device-<%= device.id %>-luminosity-data"></div>
-        </div>
+</div>
+<div class="col-xs-6 col-sm-3">
+  <div class="luminosity">
+    <div class="weather-label">Luminosidade</div>
+    <div class="luminosity-container">
+      <div class="sun" id="device-<%= device.id %>-sun">
+        <div class="luminosity-data" id="device-<%= device.id %>-luminosity-data"></div>
       </div>
     </div>
   </div>
-  <div class="col-sm-3">
-    <div class="atm-pressure">
-      <div class="weather-label">Pressão Atmosférica</div>
-      <div class="atm-pressure-container">
-        <div class="barometer" id="device-<%= device.id %>-barometer">
-          <div class="marker2"></div>
-          <div class="marker1"></div>
-          <div class="marker1"></div>
-          <div class="marker2"></div>
-          <div class="marker1"></div>
-          <div class="marker1"></div>
-          <div class="marker2"></div>
-          <div class="marker1"></div>
-          <div class="marker1"></div>
-          <div class="marker2"></div>
-        </div>
-        <div class="atm-data" id="device-<%= device.id %>-atm-pressure"></div>
+</div>
+<div class="col-sm-3">
+  <div class="atm-pressure">
+    <div class="weather-label">Pressão Atmosférica</div>
+    <div class="atm-pressure-container">
+      <div class="barometer" id="device-<%= device.id %>-barometer">
+        <div class="marker2"></div>
+        <div class="marker1"></div>
+        <div class="marker1"></div>
+        <div class="marker2"></div>
+        <div class="marker1"></div>
+        <div class="marker1"></div>
+        <div class="marker2"></div>
+        <div class="marker1"></div>
+        <div class="marker1"></div>
+        <div class="marker2"></div>
       </div>
+      <div class="atm-data" id="device-<%= device.id %>-atm-pressure"></div>
     </div>
   </div>
 </div>

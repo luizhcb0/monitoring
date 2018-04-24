@@ -1,7 +1,9 @@
 <% @devices.each do |device| %>
   <div class="row">
-    <div class="col-sm-12">
-      <%= render partial: "weather_infos", locals: {device: device} %>
+    <div class="box">
+      <div class="col-sm-12">
+        <%= render partial: "weather_infos", locals: {device: device} %>
+      </div>
     </div>
   </div>
 <% end %>
