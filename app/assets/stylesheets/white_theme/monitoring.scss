@@ -12,30 +12,27 @@
 
 .water-device-info {
 	margin-top: 20px;
-	background-color: #f8f8fa;
+	background-color: rgba(245, 245, 245, 0.5);
 	padding: 10px;
-	border:1px solid #c0c0cf;
+	border:1px solid #dadde5;
 	border-radius: 2px;
-	box-shadow: 0px 0px 6px #ccc;
 	display: none;
 }
 
 .box {
 	overflow: auto;
 	background-color: #f8f8f8;
-	box-shadow: 0px 0px 2px #ccc;
 	padding: 10px;
 	margin-bottom: 10px;
-  border:1px solid #ddd !important;
+  border:1px solid #dadde5 !important;
   border-radius: 2px;
 }
 
 .canvas {
 	background-color: #f8f8f8;
-	box-shadow: 0px 0px 2px #ccc;
 	padding: 10px;
 	margin-bottom: 10px;
-  border:1px solid #ddd !important;
+  border:1px solid #dadde5 !important;
   border-radius: 2px;
 }
 
@@ -47,19 +44,33 @@
 
 @media (max-width: 767px) {
 	.water-device {
-		width: 14%;
-		box-shadow: 0px 0px 2px #888;
+		width: 100%;
+		box-shadow: 0px 0px 2px #c5c8d5;
 		margin: auto;
 		min-height: 9vw;
 		border-radius: 5%;
 		line-height: 9vw;
 	}
+	.device {
+		margin: auto;
+		width: 14%;
+		line-height: 5vw;
+	}
+	.device-name {
+		margin-top: 10px;
+		width: 50%;
+		background-color: rgba(245, 245, 245, 0.5);
+		border:1px solid #dadde5;
+		border-radius: 2px;
+		font-size: 15px;
+		display: inline-block;
+	}
 }
 
 @media (min-width: 768px) {
 	.water-device {
-		box-shadow: 0px 0px 2px #888;
-		width: 12%;
+		box-shadow: 0px 0px 2px #c5c8d5;
+		width: 100%;
 		margin: auto;
 		min-height: 3vw;
 		border-radius: 4%;
@@ -67,6 +78,20 @@
 		// display: -webkit-box;
 		display: block;
 		line-height: 3vw;
+	}
+	.device {
+		margin: auto;
+		width: 12%;
+		line-height: 2vw;
+	}
+	.device-name {
+		margin-top: 10px;
+		width: 50%;
+		background-color: rgba(245, 245, 245, 0.5);
+		border: 1px solid #dadde5;
+		border-radius: 2px;
+		font-size: 19px;
+		display: inline-block;
 	}
 }
 
@@ -78,22 +103,20 @@
 	display: none;
 	background-color: #f8f8fa;
 	padding: 10px;
-	border:1px solid #c0c0cf;
+	border: 1px solid #dadde5;
 	border-radius: 2px;
-	box-shadow: 0px 0px 6px #ccc;
 }
 
 .tank-info-canvas {
-	min-height: 82px;
+	min-height: 110px;
 }
 
 .water-device-info {
 	margin-top: 20px;
 	background-color: #f8f8fa;
 	padding: 10px;
-	border:1px solid #c0c0cf;
+	border:1px solid #dadde5;
 	border-radius: 2px;
-	box-shadow: 0px 0px 6px #ccc;
 	display: none;
 }
 
@@ -102,7 +125,7 @@
 		box-shadow: 1px 2px 1px #bbb;
 	  margin: 30px auto;
 	  height: 22vw;
-		width: 100%;
+		width: 85%;
 	  position: relative;
 	  border-style: none solid solid solid;
 	  border-width: 10px;
@@ -118,11 +141,15 @@
 	  bottom: 0;
 		//opacity: 0.9;
 	}
+	.device-canvas {
+		display: none;
+	  padding: 6%;
+	}
 }
 
 @media (max-width: 767px) {
   .tank {
-  	box-shadow: 1px 2px 1px #bbb;
+  		box-shadow: 1px 2px 1px #bbb;
       margin: 30px auto;
       height:50vw;
       position: relative;
@@ -140,11 +167,10 @@
       bottom: 0;
   		//opacity: 0.4;
   }
-}
-
-.device-canvas {
-	display: none;
-  padding: 10%;
+	.device-canvas {
+		display: none;
+	  padding: 10%;
+	}
 }
 
 .devices-canvas, .graph-canvas {

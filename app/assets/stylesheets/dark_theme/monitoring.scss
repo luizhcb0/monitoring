@@ -10,6 +10,16 @@
 	// border-bottom: 2px solid #ddd;
 }
 
+.water-device-info {
+	margin-top: 20px;
+	background-color: #f8f8fa;
+	padding: 10px;
+	border:1px solid #c0c0cf;
+	border-radius: 2px;
+	box-shadow: 0px 0px 6px #ccc;
+	display: none;
+}
+
 .box {
 	overflow: auto;
 	background-color: #0a0f15;
@@ -110,10 +120,6 @@
 	border-radius: 2px;
 	display: none;
 }
-
-// .water-device-info-canvas {
-// 	min-height: 102px !important;
-// }
 
 @media (min-width: 768px) {
 	.tank {

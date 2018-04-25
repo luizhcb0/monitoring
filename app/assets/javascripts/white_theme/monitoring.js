@@ -15,117 +15,241 @@ Highcharts.setOptions({
       shortMonths: [ "Jan" , "Fev" , "Mar" , "Abr" , "Mai" , "Jun" , "Jul" , "Ago" , "Set" , "Out" , "Nov" , "Dez"]
   },
 });
+
+$white_theme = Highcharts.theme = {
+  chart: {
+    backgroundColor: '#f8f8f8',
+    style: {
+       fontFamily: '\'Unica One\', sans-serif'
+    },
+  },
+  // colors: ['#2b908f', '#b0eeae', '#f45b5b', '#7798BF', '#aaeeee', '#ff0066',
+  //     '#eeaaee', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'],
+  title: {
+      style: {
+        color: "#233a67",
+        fontSize: "20px"
+      }
+  },
+  tooltip: {
+    borderRadius: 2,
+    valueDecimals: 2,
+    animation: false,
+    backgroundColor: 'rgba(245, 245, 245, 0.85)',
+    style: {
+       color: '#233a67'
+    }
+  },
+  plotOptions: {
+    series: {
+        shadow: true,
+        animation: false
+    }
+  },
+  legend: {
+    itemHoverStyle:{
+      color: '#536a97'
+    },
+    itemHiddenStyle:{
+      color: '#c5c8d5'
+    },
+    itemStyle: {
+      color: '#233a67',
+      fontWeight: 'bold'
+    }
+  },
+  xAxis: {
+    gridLineColor: '#dadde5',
+    title: {
+      style: {
+        color: "#404565"
+      }
+    },
+    labels: {
+      style: {
+        color: '#a5a8b5'
+      }
+    },
+    style: {
+      color: "#404565"
+    },
+    lineColor: '#b5b8c5'
+  },
+  yAxis: {
+    gridLineColor: '#dadde5',
+    title: {
+      style: {
+        color: "#404565"
+      }
+    },
+    labels: {
+      style: {
+        color: '#a5a8b5'
+      }
+    },
+    style: {
+      color: "#404565"
+    },
+    tickColor: '#b5b8c5'
+  },
+  rangeSelector: {
+    buttonTheme: { // styles for the buttons
+      fill: 'none',
+      stroke: 'none',
+      'stroke-width': 0,
+      r: 8,
+      style: {
+        color: '#233a67',
+        fontWeight: 'bold'
+      },
+      states: {
+        hover: {
+          fill: 'none',
+          style: {
+            color: '#536a97'
+          }
+        },
+        select: {
+          fill: '#233a67',
+          style: {
+            color: '#eaedf0'
+          }
+        },
+        disabled: {
+          style: {
+            color: '#c5c8d5'
+          }
+        }
+      }
+    },
+    inputBoxBorderColor: '#dadde5',
+    inputStyle: {
+        color: '#777'
+    },
+    labelStyle: {
+        color: '#233a67'
+    },
+  },
+  navigator: {
+    handles: {
+       backgroundColor: '#dadde5',
+       borderColor: '#233a67'
+    },
+    outlineColor: '#c5c8d5',
+    maskFill: 'rgba(170,180,240,0.2)',
+    // series: {
+    //    color: '#7798BF',
+    //    lineColor: '#A6C7ED'
+    // },
+    xAxis: {
+       gridLineColor: '#c5c8d5'
+    }
+   },
+  scrollbar: {
+      enabled: true,
+      barBackgroundColor: "#233a67",
+      barBorderColor: "#132a57",
+      barBorderRadius: 6,
+      barBorderWidth: 0,
+      buttonArrowColor: "#f1f1f5",
+      buttonBackgroundColor: "#233a67",
+      buttonBorderColor: "#132a57",
+      buttonBorderRadius: 4,
+      buttonBorderWidth: 0,
+      height: 25,
+      margin:10,
+      rifleColor: "#f1f1f5",
+      trackBackgroundColor: "#eaedf0",
+      trackBorderWidth: 0,
+      trackBorderRadius: 8,
+      trackBorderColor: 'none'
+  },
+  credits: {
+      enabled: false,
+      style: {
+        color: "#777"
+      },
+      position: {
+        align: 'right',
+        x: -10,
+        verticalAlign: 'bottom',
+        y: -5
+      },
+      href: 'javascript:window.open("http://lcasystems.com.br/", "_blank")',
+      text: 'LCA®'
+  }
+}
 $graphUpdateRate = 60000;
 $deviceUpdateRate = 1000;
 $dimensions = {};
 $devices = {};
 $chart = null;
 $options = {
-    chart: {
-        //renderTo: 'graph-canvas',
-        type: 'line',
-        backgroundColor: '#f8f8f8'
-    },
+  chart: {
+    //renderTo: 'graph-canvas',
+    type: 'spline'
+  },
+  title: {
+    text: 'Nível nos reservatórios'
+  },
+  tooltip: {
+    valueSuffix: '%',
+    xDateFormat: '%A, %e de %B, %H:%M:%S'
+  },
+  xAxis: {
     title: {
-        text: 'Nível nos reservatórios'
+      text: 'Horário',
     },
-    tooltip: {
-      borderRadius: 2,
-      valueDecimals: 2,
-      animation: false,
-      valueSuffix: '%',
-      xDateFormat: '%A, %e de %B, %H:%M:%S'
-    },
-    plotOptions: {
-      series: {
-          shadow: true,
-          animation: false
-      }
-    },
-    xAxis: {
-        title: {
-            text: 'Horário'
-        },
-        // 2 hours
-        range:  1 * 3600 * 1000 * 8,
-        type: 'datetime',
-        labels: {
-          formatter: function () {
-            if (Highcharts.dateFormat('%H:%M', this.value) == "00:00") {
-              if (Highcharts.dateFormat('%d/%m', this.value) == "01/01") {
-                return Highcharts.dateFormat('%H:%M<br>%e %b/%Y', this.value);
-              }
-              else {
-                return Highcharts.dateFormat('%H:%M<br>%e %b', this.value);
-              }
-            }
-            else {
-              return Highcharts.dateFormat('%H:%M', this.value);
-            }
-          },
-          dateTimeLabelFormats: {
-              minute: '%H:%M',
-              hour: '%H:%M',
-              day: '%e. %b',
-              week: '%e. %b',
-              month: '%b \'%y',
-              year: '%Y'
+    // 8 hours
+    range:  1 * 3600 * 1000 * 8,
+    type: 'datetime',
+    labels: {
+      formatter: function () {
+        if (Highcharts.dateFormat('%H:%M', this.value) == "00:00") {
+          if (Highcharts.dateFormat('%d/%m', this.value) == "01/01") {
+            return Highcharts.dateFormat('%H:%M<br>%e %b/%Y', this.value);
+          }
+          else {
+            return Highcharts.dateFormat('%H:%M<br>%e %b', this.value);
           }
         }
-    },
-    yAxis: {
-        title: {
-            text: 'Nível'
-        },
-        tickInterval: 10,
-        min: 0,
-        max: 100,
-        labels: {
-          formatter: function () {
-              return Highcharts.format(this.value + '%');
-          },
+        else {
+          return Highcharts.dateFormat('%H:%M', this.value);
         }
+      },
+      dateTimeLabelFormats: {
+          minute: '%H:%M',
+          hour: '%H:%M',
+          day: '%e. %b',
+          week: '%e. %b',
+          month: '%b \'%y',
+          year: '%Y'
+      }
+    }
+  },
+  yAxis: {
+    title: {
+      text: 'Nível'
     },
-    scrollbar: {
-        enabled: true,
-        barBackgroundColor: "#033a67",
-        barBorderColor: "#031a47",
-        barBorderRadius: 6,
-        buttonArrowColor: "#fff",
-        buttonBackgroundColor: "#033a67",
-        buttonBorderColor: "#031a47",
-        buttonBorderRadius: 2,
-        height: 25,
-        margin:10,
-        rifleColor: "#fff",
-        trackBackgroundColor: "#f3f4f5"
-    },
-    credits: {
-        enabled: true,
-        position: {
-          align: 'right',
-          x: -10,
-          verticalAlign: 'bottom',
-          y: -5
-        },
-        // href: 'javascript:window.open("http://lcasystems.com.br/", "_blank")',
-        text: 'LCA®'
-    },
-    // series: $dados
+    tickInterval: 10,
+    min: 0,
+    max: 100,
+    labels: {
+      formatter: function () {
+        return Highcharts.format(this.value + '%');
+      },
+    }
+  }
 };
 
 $historyOptions = {
     chart: {
         //renderTo: 'graph-canvas',
-        type: 'line',
+        type: 'spline',
         height: 490,
         backgroundColor: '#f8f8f8'
     },
     tooltip: {
-      borderRadius: 2,
-      borderWidth: 1,
-      valueDecimals: 2,
-      animation: false,
       valueSuffix: '%',
       xDateFormat: '%A, %e de %B, %H:%M:%S'
     },
@@ -143,8 +267,8 @@ $historyOptions = {
         title: {
             text: 'Horário'
         },
-        // 2 hours
-        range:  1 * 3600 * 1000 * 72,
+        // 72 hours
+        // range: 1 * 3600 * 1000 * 72,
         type: 'datetime',
         labels: {
           formatter: function () {
@@ -192,20 +316,6 @@ $historyOptions = {
 	    x: 0,
 	    y: 0
     },
-    scrollbar: {
-        enabled: true,
-        barBackgroundColor: "#033a67",
-        barBorderColor: "#031a47",
-        barBorderRadius: 6,
-        buttonArrowColor: "#fff",
-        buttonBackgroundColor: "#033a67",
-        buttonBorderColor: "#031a47",
-        buttonBorderRadius: 2,
-        height: 18,
-        margin:10,
-        rifleColor: "#fff",
-        trackBackgroundColor: "#f3f4f5"
-    },
     credits: {
         enabled: false,
     }
@@ -232,32 +342,36 @@ $(".monitoring.devices_history").ready(function() {
 });
 
 
-function updateDevice($level) {
+function updateDevice($response, $index) {
+  $level = $response[0]
+  $device = $response[1]
   $percentage = $level.percentage;
   $litters = ($percentage/100 * $dimensions[$level.device_id].volume).toFixed(2)
   $water.animate({
     height: $percentage+'%'
   }, 1000);
-  $tankInfo.html("Reservatório "+$level.device_id+"<br>Nível de água: "+$percentage+"%<br>Volume: "+$litters+" litros");
+  $tankInfo.html("Reservatório "+$index+"<br>"+$device.description+"<br>Nível de água: "+$percentage+"%<br>Volume: "+$litters+" litros");
   $tankInfo.css('display','block')
   return false;
 }
 
-function resumeDevice($level) {
+function resumeDevice($response, $index) {
+  $level = $response[0]
+  $device = $response[1]
   $percentage = $level.percentage;
   $litters = ($percentage/100 * $dimensions[$level.device_id].volume).toFixed(2)
-  $waterDeviceInfo.html('Reservatório '+$level.device_id+'<br>Nível: '+$level.percentage+'%');
+  $waterDeviceInfo.html('Reservatório '+$index+'<br>'+$device.description+'<br>Nível: '+$level.percentage+'%');
   $waterDeviceInfo.css('display', 'block')
   return false;
 }
 
-function deviceInfo($element) {
+function deviceInfo($element, $index) {
   if ($element.className.split(' ')[0] == 'water-device') {
     $device_id = $element.id.split('-')[1]
     clearInterval($allTimer);
     $oneTimer = setInterval(
       function() {
-        getLevel($device_id);
+        getLevel($device_id, $index);
         updateChart();
       },
       $deviceUpdateRate
@@ -281,10 +395,10 @@ function deviceInfo($element) {
   return false;
 }
 
-function deviceResumeShow($element) {
+function deviceResumeShow($element, $index) {
   if ($element.className.split(' ')[0] == 'water-device') {
     $device_id = $element.id.split('-')[1]
-    getResume($device_id);
+    getResume($device_id, $index);
   }
   return false;
 }
@@ -294,26 +408,26 @@ function deviceResumeHide($element) {
   return false;
 }
 
-function getLevel($device_id) {
+function getLevel($device_id, $index) {
   $.ajax({
     type: "GET",
     url: "/render_current_level/"+$device_id,
     dataType: "json",
     success: function(response){
-      updateDevice(response);
-      verifyDataSending(response)
+      updateDevice(response, $index);
+      verifyDataSending(response[0])
     }
   });
   return false;
 }
 
-function getResume($device_id) {
+function getResume($device_id, $index) {
   $.ajax({
     type: "GET",
     url: "/render_current_level/"+$device_id,
     dataType: "json",
     success: function(response){
-      resumeDevice(response);
+      resumeDevice(response, $index);
     }
   });
   return false;
@@ -396,6 +510,7 @@ function plotChart() {
     url: "/get_user_devices_levels/"+$("#hidden_id").val(),
     dataType: "json",
     success: function(response){
+      Highcharts.setOptions($white_theme);
       $options.series = response;
       $options.chart.renderTo = "graph-canvas";
       $chart = new Highcharts.Chart($options);
@@ -415,9 +530,15 @@ function plotHistoryChart() {
     success: function(response){
       $('#loading').hide();
       // $historyOptions.plotOptions.series.shadow = true;
+      Highcharts.setOptions($white_theme);
       $historyOptions.series = response;
       $historyOptions.chart.renderTo = "history-graph-canvas";
       $chart = new Highcharts.StockChart($historyOptions);
+      $ex = $chart.xAxis[0].getExtremes();
+      $chart.xAxis[0].update({
+        range: ($ex.dataMax - $ex.dataMin)/4
+      });
+      // $chart.xAxis[0].setExtremes($ex.dataMin + ($ex.dataMax - $ex.dataMin)/2, $ex.dataMax)
     }
   });
   return false;
