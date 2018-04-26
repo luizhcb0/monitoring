@@ -16,7 +16,6 @@
 	padding: 10px;
 	border:1px solid #c0c0cf;
 	border-radius: 2px;
-	box-shadow: 0px 0px 6px #ccc;
 	display: none;
 }
 
@@ -45,8 +44,8 @@
 
 @media (max-width: 767px) {
 	.water-device {
+		border: 1px solid #445;
 		width: 100%;
-		box-shadow: 0px 0px 2px #888;
 		margin: auto;
 		min-height: 9vw;
 		border-radius: 12%;
@@ -70,7 +69,7 @@
 
 @media (min-width: 768px) {
 	.water-device {
-		box-shadow: 0px 0px 2px #888;
+		border: 1px solid #445;
 		width: 100%;
 		margin: auto;
 		min-height: 3vw;
@@ -185,13 +184,13 @@
 // ***************************
 
 .full {
-	background-color: #25f580;
+	background-color: #00e070;
 	opacity: 0.8;
 	color: #fff;
 }
 
 .full:hover {
-	background-color: #10e06a;
+	background-color: #00d070;
 	cursor: pointer;
 }
 
@@ -206,13 +205,13 @@
 }
 
 .medium {
-	background-color: #f5e83f;
+	background-color: #f0e050;
 	opacity: 0.8;
 	color: #fff;
 }
 
 .medium:hover {
-	background-color: #d5c80a;
+	background-color: #e0d040;
 	cursor: pointer;
 }
 
@@ -227,7 +226,7 @@
 }
 
 .low {
-	background-color: #ea2020;
+	background-color: #e02020;
 	opacity: 0.8;
 	color: #fff;
 }
@@ -249,14 +248,12 @@
 
 .empty {
 	background-color: #fafafa;
-	border: 1px solid #889;
 	opacity: 0.7;
 	color: #ea2020;
 }
 
 .empty:hover {
 	background-color: #dadada;
-	border: 1px solid #889;
 	opacity: 0.7;
 	cursor: pointer;
 }
