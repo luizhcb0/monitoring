@@ -103,18 +103,26 @@ body {
  }
 
  .navbar-default .navbar-toggle {
-   border: 1px solid #dadde5;
+   border: none;
  }
 
  .navbar-default .navbar-toggle:hover,
  .navbar-default .navbar-toggle:focus {
-   background-color: #fff;
+   background-color: #eaedf0;
  }
 
  .navbar-default .navbar-toggle .icon-bar {
    color: #dadde5;
    background-color: #dadde5;
  }
+
+ .navbar-toggle:hover .icon-bar,
+ .navbar-toggle:focus .icon-bar {
+    background-color: #233a67;
+    -webkit-transition: background 0.4s linear;
+    -moz-transition: background 0.4s linear;
+    transition: background-color 0.4s linear;
+}
 
  .navbar-default .navbar-collapse,
  .navbar-default .navbar-form {
