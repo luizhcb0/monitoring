@@ -99,10 +99,9 @@
 
 .humidity-data {
   font-size: 100%;
-  color: #eee;
   width: 100%;
   top: 34%;
-  text-shadow: 1px 1px 1px #444;
+  color: #3a3d50;
   position: relative;
   // -webkit-transform: rotateZ(45deg)   ;
   // transform: rotateZ(45deg)   ;
@@ -168,9 +167,8 @@
 
 .luminosity-data {
   font-size: 75%;
-  color: rgba(255,255,255,1);
+  color: #3a3d50;
   width: 100%;
   top: 33%;
-  text-shadow: 1px 1px 1px #444;
   position: relative;
 }
