@@ -57,9 +57,9 @@
   left: 4%;
   position: relative;
   border-radius: 100%;
-  box-shadow: inset 0 2px 2px rgba(255, 255, 255, .4), 0 3px 13px rgba(0, 0, 0, .45);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 1), 0 1px 5px rgba(0, 0, 0, .4);
   // background: -webkit-linear-gradient(top, #f2f6f5 0%, #cbd5d6 100%);  //Skeumorphic
-  background: #d5d5d6;
+  background: #e5e8ea;
 }
 
 .temp-circle {
@@ -70,7 +70,7 @@
   left: 6%;
   border-radius: 100%;
   // background: -webkit-linear-gradient(top, #cbd5d6 0%, #f2f6f5 100%);    //Skeumorphic
-  background: #e2e6e5;
+  background: #eff2f4;
 }
 
 .water-drop {
@@ -133,7 +133,7 @@
   margin-top: 20px;
   margin-bottom: 10px;
   width: 100%;
-  border-top: 2px solid #bbc;
+  border-top: 2px solid #c5c8d5;
   height: 20px;
   display: flex;
 }
@@ -141,13 +141,13 @@
 .marker1 {
   width: 1px;
   height: 10px;
-  background: #bbc;
+  background: #c5c8d5;
   margin: auto;
 }
 .marker2 {
   width: 1px;
   height: 15px;
-  background: #bbc;
+  background: #c5c8d5;
   margin: auto;
 }
 
