@@ -45,10 +45,10 @@
 @media (max-width: 767px) {
 	.water-device {
 		width: 100%;
-		box-shadow: 0px 0px 2px #c5c8d5;
+		border: 1px solid #c5c8d5;
 		margin: auto;
 		min-height: 9vw;
-		border-radius: 5%;
+		border-radius: 12%;
 		line-height: 9vw;
 	}
 	.device {
@@ -69,13 +69,12 @@
 
 @media (min-width: 768px) {
 	.water-device {
-		box-shadow: 0px 0px 2px #c5c8d5;
+		border: 1px solid #c5c8d5;
 		width: 100%;
 		margin: auto;
 		min-height: 3vw;
-		border-radius: 4%;
+		border-radius: 12%;
 		font-size: 17px;
-		// display: -webkit-box;
 		display: block;
 		line-height: 3vw;
 	}
@@ -183,15 +182,13 @@
 // ***************************
 
 .full {
-	background-color: #2585f0;
-	border: 1px solid #1575e0;
-	opacity: 0.7;
+	background-color: #00e070;
+	opacity: 0.8;
 	color: #fff;
 }
 
 .full:hover {
-	background-color: #0060da;
-	opacity: 0.7;
+	background-color: #00d070;
 	cursor: pointer;
 }
 
@@ -206,15 +203,13 @@
 }
 
 .medium {
-	background-color: #f0ca30;
-	border: 1px solid #e0ba20;
-	opacity: 0.7;
+	background-color: #f0e050;
+	opacity: 0.8;
 	color: #fff;
 }
 
 .medium:hover {
-	background-color: #d0b020;
-	opacity: 0.7;
+	background-color: #e0d040;
 	cursor: pointer;
 }
 
@@ -229,15 +224,13 @@
 }
 
 .low {
-	background-color: #ea2020;
-	border: 1px solid #da1010;
-	opacity: 0.7;
+	background-color: #e02020;
+	opacity: 0.8;
 	color: #fff;
 }
 
 .low:hover {
 	background-color: #d00000;
-	opacity: 0.7;
 	cursor: pointer;
 }
 
@@ -245,7 +238,7 @@
 	box-shadow: 1px 0px 2px #888;
 	height: 12px;
 	width: 12px;
-	background-color: #ea2020;
+	background-color: #e02020;
 	opacity: 0.7;
 	border-radius: 50%;
 	display: inline-block;
@@ -253,14 +246,14 @@
 
 .empty {
 	background-color: #fafafa;
-	border: 1px solid #889;
+	border: 1px solid #99a;
 	opacity: 0.7;
-	color: #f35;
+	color: #ea2020;
 }
 
 .empty:hover {
-	background-color: #dadada;
-	border: 1px solid #889;
+	background-color: #eaedf0;
+	border: 1px solid #99a;
 	opacity: 0.7;
 	cursor: pointer;
 }
@@ -275,7 +268,6 @@
 	border-radius: 50%;
 	display: inline-block;
 }
-
 
 .sub {
 	text-align: left;
