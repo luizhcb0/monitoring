@@ -20,7 +20,8 @@ class Api::V1::MonitoringController < Api::V1::BaseController
     if device_id.present?
       device = Device.find(device_id)
     else
-      device = Device.find(2)
+      serial = monitoring_params[:serial]
+      device = Device.find_by(serial: serial)
     end
     if device.model == "sigfox" && monitoring_params[:batt].nil?
 
