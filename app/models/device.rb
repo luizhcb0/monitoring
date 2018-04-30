@@ -58,7 +58,7 @@ class Device < ApplicationRecord
         errors.add(:serial, "Número de Série em formato incorreto")
       end
     elsif model == "sigfox"
-      regexp = /^\d{6}$/.match(serial)
+      regexp = /^\w{6}$/.match(serial)
       if regexp.nil?
         errors.add(:serial, "Número de Série em formato incorreto")
       elsif regexp[0] != serial

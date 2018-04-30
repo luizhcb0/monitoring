@@ -5,7 +5,7 @@ $(".devices.edit, .devices.new, .devices.new_registration, .devices.edit_registr
   $serialRegister = $("#serial-register")
   $descField = $("#desc-field")
   $waterFormat = /^\d{4}-\d{4}-\d{2}$/
-  $sigfoxFormat = /^\d{6}$/
+  $sigfoxFormat = /^\w{6}$/
   $deviceId = null
 
   // $("#serial-field").mask('9999-9999-99');
