@@ -40,9 +40,10 @@ class MonitoringController < ApplicationController
   def render_current_level
     @level = Level.get_current_level(params[:device_id])
     @device = Device.find(params[:device_id])
+    @user_device = UserDevice.where(device: @device, user: current_user).first
     respond_to do |format|
-      format.html { render json: [@level, @device] }
-      format.json { render json: [@level, @device] }
+      format.html { render json: [@level, @device, @user_device, current_user.role] }
+      format.json { render json: [@level, @device, @user_device, current_user.role] }
     end
   end
 

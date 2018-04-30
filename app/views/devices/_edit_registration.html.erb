@@ -13,12 +13,15 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <%= f.label :description, "Descrição", class: "col-sm-4 control-label"%>
-      <div class="col-sm-6">
-        <%= f.text_field :description, class: "form-control", id: "desc-field"  %>
-      </div>
+    <div class="form-dimension">
+      <%= f.fields_for :dimension, @dimension do |d| %>
+        <%= render 'dimension_fields', f: d %>
+      <% end %>
     </div>
+
+    <%= fields_for :user_device, @user_device do |d| %>
+      <%= render 'user_devices_fields', f: d %>
+    <% end %>
 
     <%= f.submit "Atualizar", class: "btn btn-theme" %>
   </div>

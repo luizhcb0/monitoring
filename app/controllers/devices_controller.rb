@@ -8,11 +8,13 @@ class DevicesController < ApplicationController
       @devices = Device.all
     else
       @devices = current_user.devices
+      @user_devices = UserDevice.where(user: current_user)
     end
   end
 
   def show
     @device = Device.find(params[:id])
+    @user_device = UserDevice.where(user: current_user, device: @device).first
   end
 
   def new
@@ -21,6 +23,7 @@ class DevicesController < ApplicationController
   end
 
   def create
+    @dimension = Dimension.new
     @device = Device.new(device_params)
     if current_user.role != "admin"
       @device.user_id = current_user.id
@@ -34,7 +37,12 @@ class DevicesController < ApplicationController
 
   def edit
     @device = Device.find(params[:id])
-    @dimension = @device.dimension
+    @user_device = UserDevice.where(user: current_user, device: @device).first
+    if @device.dimension.present?
+      @dimension = @device.dimension
+    else
+      @dimension = Dimension.new
+    end
   end
 
   def update
@@ -56,23 +64,36 @@ class DevicesController < ApplicationController
   end
 
   def new_registration
+    @dimension = Dimension.new
     @device = Device.new
+    @user_device = UserDevice.new
   end
 
   def registration_process
+    @user_device = UserDevice.new
     @device = Device.where(serial: device_params[:serial]).first
-    @device.users << current_user
-    if @device.update_attributes(device_params)
-      render json: @device
+    if @device.nil?
+      @device = Device.new
+      @device.errors.add(:serial, "Número de Série inválido")
+      render :new_registration
     else
-      render json: @device
+      @user_device = @device.user_devices.build(user_device_params).with_user(current_user)
+      if @user_device.save
+        @device.update_attributes(device_params) if @device.model == "water_level"
+        render json: @user_device
+      else
+        render json: @user_device
+      end
     end
   end
 
   def edit_registration
     @device = Device.where(serial: device_params[:serial]).first
-    if @device.update_attributes(device_params)
+    @user_device = UserDevice.where(device: @device, user: current_user).first
+    if @device.update_attributes(device_params) && @user_device.update_attributes(user_device_params)
       redirect_to devices_path(@device)
+    else
+      render :edit
     end
   end
 

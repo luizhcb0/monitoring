@@ -9,13 +9,12 @@ class Device < ApplicationRecord
   has_many :user_devices
   has_many :users, through: :user_devices
   has_many :email_logs
-  accepts_nested_attributes_for :dimension, allow_destroy: true
+  accepts_nested_attributes_for :dimension, allow_destroy: true, reject_if: :all_blank
 
   after_create :set_first_level
+  validate :serial_format
 
   validates_uniqueness_of :serial, {message: "O Número de Série já existe"}
-  validates_format_of :serial, with: /\d{4}-\d{4}-\d{2}/,
-    message: "O Número de Série não está no formato correto"
 
   enum position: %w(top bottom)
   enum model: %w(water_level sigfox)
@@ -48,6 +47,24 @@ class Device < ApplicationRecord
       infos << info
     end
     return infos
+  end
+
+  def serial_format
+    if model == "water_level"
+      regexp = /^\d{4}-\d{4}-\d{2}$/.match(serial)
+      if regexp.nil?
+        errors.add(:serial, "Número de Série em formato incorreto")
+      elsif regexp[0] != serial
+        errors.add(:serial, "Número de Série em formato incorreto")
+      end
+    elsif model == "sigfox"
+      regexp = /^\d{6}$/.match(serial)
+      if regexp.nil?
+        errors.add(:serial, "Número de Série em formato incorreto")
+      elsif regexp[0] != serial
+        errors.add(:serial, "Número de Série em formato incorreto")
+      end
+    end
   end
 
   private

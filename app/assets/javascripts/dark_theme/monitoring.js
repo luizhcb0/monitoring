@@ -345,12 +345,24 @@ $(".monitoring.devices_history").ready(function() {
 function updateDevice($response, $index) {
   $level = $response[0]
   $device = $response[1]
+  $userDevice = $response[2]
+  $userRole = $response[3]
   $percentage = $level.percentage;
   $litters = ($percentage/100 * $dimensions[$level.device_id].volume).toFixed(2)
   $water.animate({
     height: $percentage+'%'
   }, 1000);
-  $tankInfo.html("Reservatório "+$index+"<br>"+$device.description+"<br>Nível de água: "+$percentage+"%<br>Volume: "+$litters+" litros");
+  if ($userDevice.description == null) {
+    if ($userRole == "admin") {
+      $tankInfo.html("Reservatório "+$index+"<br>"+$device.serial+"<br>Nível de água: "+$percentage+"%<br>Volume: "+$litters+" litros");
+    }
+    else {
+      $tankInfo.html("Reservatório "+$index+"<br>Nível de água: "+$percentage+"%<br>Volume: "+$litters+" litros");
+    }
+  }
+  else {
+    $tankInfo.html("Reservatório "+$index+"<br>"+$userDevice.description+"<br>Nível de água: "+$percentage+"%<br>Volume: "+$litters+" litros");
+  }
   $tankInfo.css('display','block')
   return false;
 }
@@ -358,9 +370,21 @@ function updateDevice($response, $index) {
 function resumeDevice($response, $index) {
   $level = $response[0]
   $device = $response[1]
+  $userDevice = $response[2]
+  $userRole = $response[3]
   $percentage = $level.percentage;
   $litters = ($percentage/100 * $dimensions[$level.device_id].volume).toFixed(2)
-  $waterDeviceInfo.html('Reservatório '+$index+'<br>'+$device.description+'<br>Nível: '+$level.percentage+'%');
+  if ($userDevice.description == null) {
+    if ($userRole == "admin") {
+      $waterDeviceInfo.html('Reservatório '+$index+'<br>'+$device.serial+'<br>Nível: '+$level.percentage+'%');
+    }
+    else {
+      $waterDeviceInfo.html('Reservatório '+$index+'<br>Nível: '+$level.percentage+'%');
+    }
+  }
+  else {
+    $waterDeviceInfo.html('Reservatório '+$index+'<br>'+$userDevice.description+'<br>Nível: '+$level.percentage+'%');
+  }
   $waterDeviceInfo.css('display', 'block')
   return false;
 }

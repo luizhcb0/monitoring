@@ -1,28 +1,46 @@
 <%= form_for @device, url: {action: :registration_process}, html: {class: 'form-horizontal'} do |f| %>
 <div class="row">
-  <div class="col-sm-8 col-sm-offset-2">
 
+  <div class="col-sm-8 col-sm-offset-2">
     <div class="">
       <h2>Cadastro de Módulo</h2>
     </div>
 
-    <div class="form-group">
+    <div class="form-group main-registration">
       <%= f.label :serial, "Número de Série", class: "col-sm-4 control-label"%>
       <div class="col-sm-8">
-        <%= f.text_field :serial, required: "required", placeholder: "XXXX-XXXX-XX", class: "form-control", id: "serial-register"  %>
+        <%#= f.text_field :serial, required: "required", placeholder: "XXXX-XXXX-XX", class: "form-control", id: "serial-register"  %>
+        <%= f.text_field :serial, required: "required", class: "form-control", id: "serial-register"  %>
         <div class="serial-error"><%= @device.errors[:serial].first %></div>
       </div>
     </div>
 
+    <div class="form-group main-registration">
+      <button type="button" class="btn btn-theme" name="button" id="btn-next">Próximo</button>
+    </div>
+  </div>
+
+  <div class="col-sm-8 col-sm-offset-2" id="detail-registration">
     <div class="form-group">
-      <%= f.label :description, "Descrição", class: "col-sm-4 control-label"%>
-      <div class="col-sm-8">
-        <%= f.text_field :description, class: "form-control", id: "desc-field"  %>
+      <%= f.label :serial, "Número de Série", class: "col-sm-4 control-label"%>
+      <div class="col-sm-4 control-label">
+        <div class="registering-serial"></div>
       </div>
     </div>
 
-    <%= f.submit "Cadastrar", class: "btn btn-theme", id: "btn-submit" %>
+    <div class="form-dimension">
+      <%= f.fields_for :dimension, @dimension do |d| %>
+        <%= render 'dimension_fields', f: d %>
+      <% end %>
+    </div>
 
+    <%= fields_for :user_device, @user_device do |d| %>
+      <%= render 'user_devices_fields', f: d %>
+    <% end %>
+
+    <button type="button" class="btn btn-theme" name="button" id="btn-back">Voltar</button>
+    <%= f.submit "Cadastrar", class: "btn btn-theme", id: "btn-submit" %>
   </div>
+
 </div>
 <% end %>

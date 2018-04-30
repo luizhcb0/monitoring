@@ -17,7 +17,9 @@
                 </div>
                 <div class="item-description"><%= @device.serial %></div>
                 <div class="item-description"><%= device_model(@device.model) %></div>
-                <div class="item-description"><%= @device.description if @device.description.present? %></div>
+                <% if current_user != "admin" && @user_device.present? %>
+                  <div class="item-description"><%= @user_device.description if @user_device.description.present? %></div>
+                <% end %>
               </div>
               <div class="col-xs-6 item-action">
                 <%= link_to edit_device_path(@device), class:"btn edit-item" do %>
