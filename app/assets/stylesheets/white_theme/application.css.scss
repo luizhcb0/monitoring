@@ -217,6 +217,10 @@ body {
    width: 100%;
  }
 
+ input[type=email], input[type=text], input[type=tel], textarea, input[type=password], input[type=checkbox], select {
+   border-color: #dadde5 !important;
+ }
+
  .btn-theme {
    background-color: #fff !important;
    color: #333 !important;
