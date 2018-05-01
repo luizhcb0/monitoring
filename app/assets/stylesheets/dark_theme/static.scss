@@ -13,6 +13,24 @@
   background-color: #0a0f15;
 }
 
+.index-container {
+  font-size: 120px;
+  color: #f1f5ff;
+  border: 1px solid #03080e !important;
+  border-radius: 2px;
+  background-color: #0a0f15;
+  min-height: -webkit-fill-available;
+}
+
+.full-screen-container {
+  padding: 30px;
+  color: #f1f5ff;
+  border: 1px solid #03080e !important;
+  border-radius: 2px;
+  background-color: #0a0f15;
+  min-height: -webkit-fill-available;
+}
+
 .solutions-container {
   color: #f1f5ff;
   border: 1px solid #03080e !important;
@@ -48,6 +66,12 @@
   font-size: 18px;
 }
 
+.index-label {
+  color: #f1f5ff;
+  font-size: 18px;
+  padding: 16px;
+}
+
 a:hover {
     text-decoration: none !important;
 }
@@ -60,11 +84,4 @@ a:hover {
   border-radius: 2px;
   margin-bottom: 20px;
   background-color: #0a0f15;
-}
-
-.full-screen-container {
-  //min-height: 89vh;
-  min-height: -webkit-calc(97vh - 130px);
-  min-height: -moz-calc(97vh - 130px);
-  min-height: calc(97vh - 130px);
 }

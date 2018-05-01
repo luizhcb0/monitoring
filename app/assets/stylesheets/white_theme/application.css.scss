@@ -25,17 +25,8 @@ body {
   background-color: #eaedf0;
   text-align: center;
   font-family: 'Verdana', sans-serif;
+  padding-top: 60px;
 }
-
- .affix {
- 	z-index: 4;
-   top: 0;
-   width: 100%;
- }
-
- .affix + .container-fluid {
-   margin-top: 60px;
- }
 
  .brand_logo {
    height: 100%;
@@ -50,7 +41,6 @@ body {
  .logo {
    width: 100%;
    padding: 30px;
-   margin-bottom: 30px;
  }
 
  .navbar-default {
@@ -134,7 +124,7 @@ body {
  .list-container {
    overflow: auto;
    min-height: 260px;
-   color: #404565;
+   color: #233a67;
    border:1px solid #dadde5 !important;
    border-radius: 2px;
    margin-bottom: 20px;

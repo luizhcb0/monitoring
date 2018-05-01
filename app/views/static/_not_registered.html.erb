@@ -3,7 +3,7 @@
 
     <div class="row">
       <div class="col-sm-12">
-          <div class="menu-container full-screen-container">
+          <div class="full-screen-container index-container">
             <!-- Logo -->
             <div class="row">
               <div class="col-sm-4 col-sm-offset-4">
@@ -17,11 +17,15 @@
             <!--  ------>
             <div class="row">
               <div class="col-sm-12">
-                <div class="bar"></div>
+                <div class="index-label">Sistemas Integrados de Monitoramento e Automação</div>
+                <div class="index-label">Inteligente e Simples</div>
               </div>
             </div>
-            <div class="menu-label">Sistemas Integrados de Monitoramento e Automação</div>
-            <div class="menu-label">Inteligente e Simples</div>
+            <div class="row">
+              <%= link_to new_user_session_path do %>
+                <button type="button" name="button" class="btn-theme btn">Entrar</button>
+              <% end %>
+            </div>
           </div>
       </div>
     </div>

@@ -13,6 +13,19 @@
   background-color: #f8f8f8;
 }
 
+.index-container {
+  font-size: 120px;
+}
+
+.full-screen-container {
+  padding: 30px;
+  color: #233a67;
+  border: 1px solid #dadde5 !important;
+  border-radius: 2px;
+  background-color: #f8f8f8;
+  min-height: -webkit-fill-available;
+}
+
 .solutions-container {
   color: #233a67;
   border:1px solid #dadde5 !important;
@@ -49,6 +62,12 @@
   font-size: 18px;
 }
 
+.index-label {
+  color: #233a67;
+  font-size: 18px;
+  padding: 16px;
+}
+
 a:hover {
     text-decoration: none !important;
 }
@@ -56,16 +75,9 @@ a:hover {
 .default-container {
   padding: 30px;
   min-height: 260px;
-  color: #404565;
+  color: #233a67;
   border: 1px solid #dadde5 !important;
   border-radius: 2px;
   margin-bottom: 20px;
   background-color: #f8f8f8;
-}
-
-.full-screen-container {
-  //min-height: 89vh;
-  min-height: -webkit-calc(97vh - 130px);
-  min-height: -moz-calc(97vh - 130px);
-  min-height: calc(97vh - 130px);
 }
