@@ -28,6 +28,27 @@ body {
   padding-top: 60px;
 }
 
+@media (max-width: 412px) {
+  .control-label, .form-control {
+    font-size: 90% !important;
+  }
+  .btn {
+    font-size: 95% !important;
+  }
+  body {
+    font-size: 110%;
+  }
+  h2 {
+    font-size: 200%;
+  }
+  h3 {
+    font-size: 160%;
+  }
+  h4 {
+    font-size: 120%;
+  }
+}
+
  .brand_logo {
    height: 100%;
  }
@@ -120,6 +141,24 @@ body {
  }
 
  // ***********************************************
+
+ @media (max-width: 412px) {
+   .list-container {
+     font-size: 95% !important;
+   }
+   .list-model-type {
+     font-size: 160% !important;
+   }
+   .add-item {
+     font-size: 130% !important;
+   }
+   .item-name {
+     font-size: 125% !important;
+   }
+   .btn.delete-item, .btn.show-item, .btn.edit-item {
+     font-size: 130% !important;
+   }
+ }
 
  .list-container {
    overflow: auto;

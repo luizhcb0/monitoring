@@ -172,3 +172,26 @@
   top: 33%;
   position: relative;
 }
+
+@media (max-width: 412px) {
+  .luminosity-data {
+    font-size: 55%;
+  }
+  .atm-data {
+    font-size: 70%;
+  }
+  .humidity-data {
+    font-size: 70%;
+  }
+  .temperature-integer {
+    display: inline-block;
+    font-size: 215%;
+  }
+  .temperature-decimal {
+    display: inline-block;
+    font-size: 80%;
+  }
+  .temperature-metric {
+    font-size: 60%;
+  }
+}
