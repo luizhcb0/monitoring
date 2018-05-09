@@ -175,6 +175,14 @@
   position: relative;
 }
 
+.device-serial {
+  margin-bottom: 12px;
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 10px;
+  border:1px solid #32374a;
+	border-radius: 2px;
+}
+
 @media (max-width: 412px) {
   .luminosity-data {
     font-size: 55%;

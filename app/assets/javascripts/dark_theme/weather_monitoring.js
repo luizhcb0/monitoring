@@ -29,7 +29,7 @@ function cacheInfo() {
     dataType: "json",
     success: function(response){
       for (i = 0; i < response.length; i++) {
-        $devices[i] = $('#device-'+response[i][0].id);
+        $devices[i] = $('#device-'+response[i][0].serial);
         $devices_temperature_integer[i] = $('#device-'+response[i][0].id+"-temperature-integer");
         $devices_temperature_decimal[i] = $('#device-'+response[i][0].id+"-temperature-decimal");
         $devices_temperature_rainbow[i] = $('#device-'+response[i][0].id+"-temp-rainbow");
@@ -60,6 +60,7 @@ function getInfo() {
         changeHumidity($devices_humidity[i], $devices_humidity_data[i], response[i][2].data.toFixed(1)) //Humidity
         changeLuminosity($devices_luminosity[i], $devices_sun[i], response[i][3].data)  //Luminosity
         $devices_atm_pressure[i].html(response[i][4].data+" hPa")  //Atm Pressure
+        $devices[i].html(response[i][0].serial)
       }
     }
   });
