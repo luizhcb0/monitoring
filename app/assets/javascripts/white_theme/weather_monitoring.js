@@ -56,7 +56,7 @@ function getInfo() {
         $decPart = ($temp+"").split(".")[1];
         $devices_temperature_integer[i].html($intPart)  //Temperature
         $devices_temperature_decimal[i].html($decPart)  //Temperature
-        changeTemperatureColor($devices_temperature_rainbow[i], $intPart) //Temperature
+        changeTemperatureColor($devices_temperature_rainbow[i], $temp) //Temperature
         changeHumidity($devices_humidity[i], $devices_humidity_data[i], response[i][2].data.toFixed(1)) //Humidity
         changeLuminosity($devices_luminosity[i], $devices_sun[i], response[i][3].data)  //Luminosity
         $devices_atm_pressure[i].html(response[i][4].data+" hPa")  //Atm Pressure
@@ -100,25 +100,25 @@ function changeTemperatureColor($object, $temp) {
   else if ($temp > 10 && $temp <= 15) {
     $object.css('background', '#65e0d5');
   }
-  else if ($temp > 15 && $temp <= 20) {
+  else if ($temp > 15 && $temp <= 18) {
     $object.css('background', '#8ff8c5');
   }
-  else if ($temp > 20 && $temp <= 25) {
+  else if ($temp > 18 && $temp <= 22) {
     $object.css('background', '#bfeab5');
   }
-  else if ($temp > 25 && $temp <= 30) {
+  else if ($temp > 22 && $temp <= 25) {
     $object.css('background', '#cfeaab');
   }
-  else if ($temp > 30 && $temp <= 35) {
+  else if ($temp > 25 && $temp <= 28) {
     $object.css('background', '#f6e58b');
   }
-  else if ($temp > 35 && $temp <= 40) {
+  else if ($temp > 28 && $temp <= 33) {
     $object.css('background', '#f6c57b');
   }
-  else if ($temp > 40 && $temp <= 45) {
+  else if ($temp > 33 && $temp <= 40) {
     $object.css('background', '#f6855b');
   }
-  else if ($temp > 45) {
+  else if ($temp > 40) {
     $object.css('background', '#f6655b');
   }
   return false;

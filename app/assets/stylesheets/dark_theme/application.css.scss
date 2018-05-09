@@ -35,6 +35,9 @@ body {
   .btn {
     font-size: 95% !important;
   }
+  #btn-login {
+    font-size: 15% !important;
+  }
   body {
     font-size: 110%;
   }
@@ -155,7 +158,9 @@ body {
    .item-name {
      font-size: 125% !important;
    }
-   .btn.delete-item, .btn.show-item, .btn.edit-item {
+   .btn.delete-item, .btn.show-item, .btn.edit-item,
+   .btn.delete-item:focus, .btn.show-item:focus, .btn.edit-item:focus,
+   .btn.delete-item:active, .btn.show-item:active, .btn.edit-item:active {
      font-size: 130% !important;
    }
  }
