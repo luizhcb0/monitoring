@@ -8,10 +8,33 @@ $devices_humidity_data = []
 $devices_luminosity = []
 $devices_sun = []
 $devices_atm_pressure = []
+$deviceId = []
+$chart = null
 
 $(".monitoring.weather_monitoring").ready(function() {
   //caching
   cacheInfo()
+
+  $(".temp-container").click(function() {
+    $deviceId = $(this).children("div:first").attr("id")
+    $deviceId = $deviceId.split("-")
+    showGraph($deviceId[1], "temperatures")
+  });
+  $(".water-drop").click(function() {
+    $deviceId = $(this).children("div:first").attr("id")
+    $deviceId = $deviceId.split("-")
+    showGraph($deviceId[1], "humidities")
+  });
+  $(".luminosity-container").click(function() {
+    $deviceId = $(this).children("div:first").attr("id")
+    $deviceId = $deviceId.split("-")
+    showGraph($deviceId[1], "luminosities")
+  });
+  $(".atm-pressure-container").click(function() {
+    $deviceId = $(this).children("div:first").attr("id")
+    $deviceId = $deviceId.split("-")
+    showGraph($deviceId[1], "atm_pressures")
+  });
 
   $allTimer = setInterval(
     function() {
@@ -20,7 +43,79 @@ $(".monitoring.weather_monitoring").ready(function() {
     $updateRate
   );
   return false;
+
 });
+
+function showGraph($id, $type) {
+  $(".box-zoom").show()
+  $(".box").hide()
+  plotWeatherChart($id, $type)
+}
+
+function goBack() {
+  $(".box").show()
+  $(".box-zoom").hide()
+}
+
+function plotWeatherChart($id, $type) {
+  $.ajax({
+    type: "GET",
+    // #hidden_id is at _infos.html.erb. It shows the user who owns the devices.
+    // Must be changed if more than a user has a device
+    url: "/get_"+$type+"/"+$id,
+    dataType: "json",
+    success: function(response){
+      Highcharts.setOptions($white_theme);
+      $options.series = response;
+      switch ($type) {
+        case "temperatures":
+          $options.tooltip.valueSuffix = "ºC"
+          $options.yAxis.max = 50
+          $options.yAxis.tickInterval = null
+          $options.yAxis.title.text = "Temperatura"
+          $options.yAxis.labels.formatter = function () {
+            return Highcharts.format(this.value + 'ºC');
+          }
+          $options.title.text = "Temperatura"
+          break;
+        case "humidities":
+          $options.tooltip.valueSuffix = "%"
+          $options.yAxis.max = 100
+          $options.yAxis.tickInterval = null
+          $options.yAxis.title.text = "Umidade"
+          $options.yAxis.labels.formatter = function () {
+            return Highcharts.format(this.value + '%');
+          }
+          $options.title.text = "Umidade"
+          break;
+        case "luminosities":
+          $options.tooltip.valueSuffix = ""
+          $options.yAxis.max = 65500
+          $options.yAxis.tickInterval = null
+          $options.yAxis.title.text = "Luminosidade"
+          $options.yAxis.labels.formatter = function () {
+            return Highcharts.format(this.value + '');
+          }
+          $options.title.text = "Luminosidade"
+          break;
+        case "atm_pressures":
+          $options.tooltip.valueSuffix = "hPA"
+          $options.yAxis.max = 1000
+          $options.yAxis.tickInterval = null
+          $options.yAxis.title.text = "Pressão Atmosférica"
+          $options.yAxis.labels.formatter = function () {
+            return Highcharts.format(this.value + 'hPa');
+          }
+          $options.title.text = "Pressão Atmosférica"
+          break;
+        default:
+      }
+      $options.chart.renderTo = "graph-canvas";
+      $chart = new Highcharts.Chart($options);
+    }
+  });
+  return false;
+}
 
 function cacheInfo() {
   $.ajax({

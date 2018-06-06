@@ -36,6 +36,16 @@
   height: 160px;
 }
 
+.temp-container:hover {
+  .temp-circle {
+    background: #dfe0e6;
+  }
+  .temp-circle-wrap {
+    background: #d5d2db;
+  }
+  cursor: pointer;
+}
+
 .temp-rainbow {
   width: 100%;
   height: 100%;
@@ -88,6 +98,14 @@
   position: relative;
 }
 
+.water-drop:hover {
+  cursor: pointer;
+  background-color: #eaeaea;
+  .water-drop-fill {
+    background-color: #85ccdf;
+  }
+}
+
 .water-drop-fill {
   width: 100%;
   height: 0%;
@@ -125,6 +143,16 @@
   height: 85px;
 }
 
+.atm-pressure-container:hover {
+  cursor: pointer;
+  .barometer {
+    border-top: 6px solid #a0a0b5;
+  }
+  .marker1, .marker2 {
+    background: #a0a0b5;
+  }
+}
+
 .atm-data {
   font-size: 90%;
 }
@@ -133,19 +161,19 @@
   margin-top: 20px;
   margin-bottom: 10px;
   width: 100%;
-  border-top: 2px solid #c5c8d5;
+  border-top: 6px solid #c5c8d5;
   height: 20px;
   display: flex;
 }
 
 .marker1 {
-  width: 1px;
+  width: 3px;
   height: 10px;
   background: #c5c8d5;
   margin: auto;
 }
 .marker2 {
-  width: 1px;
+  width: 3px;
   height: 15px;
   background: #c5c8d5;
   margin: auto;
@@ -163,6 +191,11 @@
   -webkit-transition: background 2s linear;
   -moz-transition: background 2s linear;
   transition: background-color 2s linear;
+}
+
+.luminosity-container:hover {
+  cursor: pointer;
+  filter: brightness(90%);
 }
 
 .luminosity-data {
@@ -202,4 +235,16 @@
   .temperature-metric {
     font-size: 60%;
   }
+}
+
+// #################################
+
+.box-zoom {
+  display: none;
+  overflow: auto;
+	background-color: #f8f8f8;
+	padding: 10px;
+	margin-bottom: 10px;
+  border:1px solid #dadde5 !important;
+  border-radius: 2px;
 }
