@@ -15,11 +15,10 @@ class GraphsController < ApplicationController
 
     respond_to do |format|
       format.html {
-        render json: @array.each_with_index.map {
-          |a, index| {
-            name: "Reservatório #{index + 1}", data: a.map {|b| b }
-          }
-        }
+        render json: [
+          name: "Reservatório #{device_id}",
+          data: @hash.map {|a| a }
+        ]
       }
       format.json {
         render json: [

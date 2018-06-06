@@ -60,4 +60,9 @@ Rails.application.routes.draw do
   get "/solutions", to: "static#solutions", as: "solutions"
   get "/institutional", to: "static#institutional", as: "institutional"
 
+  get "/get_temperatures/:id", to: "weather_graphs#get_temperatures", as: "get_temperatures"
+  get "/get_humidities/:id", to: "weather_graphs#get_humidities", as: "get_humidities"
+  get "/get_luminosities/:id", to: "weather_graphs#get_luminosities", as: "get_luminosities"
+  get "/get_atm_pressures/:id", to: "weather_graphs#get_atm_pressures", as: "get_atm_pressures"
+
 end

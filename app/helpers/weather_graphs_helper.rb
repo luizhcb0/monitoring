@@ -1,0 +1,2 @@
+module WeatherGraphsHelper
+end
