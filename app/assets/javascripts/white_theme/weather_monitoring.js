@@ -71,7 +71,7 @@ function plotWeatherChart($id, $type) {
         case "temperatures":
           $options.tooltip.valueSuffix = "ºC"
           $options.yAxis.max = 50
-          $options.yAxis.tickInterval = null
+          $options.yAxis.tickInterval = 5
           $options.yAxis.title.text = "Temperatura"
           $options.yAxis.labels.formatter = function () {
             return Highcharts.format(this.value + 'ºC');
