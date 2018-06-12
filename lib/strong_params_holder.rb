@@ -22,7 +22,7 @@ module StrongParamsHolder
   end
 
   def setting_params
-    params.require(:setting).permit(:active, :alert_level, :theme)
+    params.require(:setting).permit(:active, :alert_level, :temperature_alert, :humidity_alert, :atm_pressure_alert, :luminosity_alert, :theme)
   end
 
   def contact_params

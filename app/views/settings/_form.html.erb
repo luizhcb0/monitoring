@@ -1,12 +1,27 @@
 <%= form_for @setting, html: {class: "form-horizontal"} do |f| %>
 
   <div class="form-group">
+    <button class="btn btn-theme" type="button" data-toggle="collapse" data-target="#level-setting" aria-expanded="false">
+      Alertas de Nível
+    </button>
+  </div>
+
+  <div class="collapse form-group" id="level-setting">
     <%= f.label :alert_level, "Nível Crítico (%)", class: "col-sm-offset-1 col-sm-4 control-label"%>
     <div class="col-sm-2">
       <%= f.text_field :alert_level, required: "required", class: "form-control" %>
     </div>
   </div>
 
+  <div class="form-group">
+    <button class="btn btn-theme" type="button" data-toggle="collapse" data-target="#weather-settings" aria-expanded="false">
+      Alertas Meteorológicos
+    </button>
+  </div>
+
+  <div id="weather-settings" class="collapse">
+    <%= render "weather_settings", f: f %>
+  </div>
 
   <div class="form-group">
     <%= f.label :active, "Alertas", class: "col-sm-offset-1 col-sm-4 control-label" %>

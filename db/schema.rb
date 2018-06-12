@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180404182912) do
+ActiveRecord::Schema.define(version: 20180612043820) do
 
   create_table "atm_pressures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "device_id",             null: false
@@ -64,16 +64,32 @@ ActiveRecord::Schema.define(version: 20180404182912) do
   end
 
   create_table "email_logs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id",       null: false
-    t.integer  "device_id",     null: false
-    t.integer  "new_level_id",  null: false
-    t.integer  "last_level_id", null: false
-    t.integer  "alert_type",    null: false
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "user_id",              null: false
+    t.integer  "device_id",            null: false
+    t.integer  "alert_type",           null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "new_level_id"
+    t.integer  "last_level_id"
+    t.integer  "new_temperature_id"
+    t.integer  "last_temperature_id"
+    t.integer  "new_humidity_id"
+    t.integer  "last_humidity_id"
+    t.integer  "new_atm_pressure_id"
+    t.integer  "last_atm_pressure_id"
+    t.integer  "new_luminosity_id"
+    t.integer  "last_luminosity_id"
     t.index ["device_id"], name: "index_email_logs_on_device_id", using: :btree
+    t.index ["last_atm_pressure_id"], name: "index_email_logs_on_last_atm_pressure_id", using: :btree
+    t.index ["last_humidity_id"], name: "index_email_logs_on_last_humidity_id", using: :btree
     t.index ["last_level_id"], name: "index_email_logs_on_last_level_id", using: :btree
+    t.index ["last_luminosity_id"], name: "index_email_logs_on_last_luminosity_id", using: :btree
+    t.index ["last_temperature_id"], name: "index_email_logs_on_last_temperature_id", using: :btree
+    t.index ["new_atm_pressure_id"], name: "index_email_logs_on_new_atm_pressure_id", using: :btree
+    t.index ["new_humidity_id"], name: "index_email_logs_on_new_humidity_id", using: :btree
     t.index ["new_level_id"], name: "index_email_logs_on_new_level_id", using: :btree
+    t.index ["new_luminosity_id"], name: "index_email_logs_on_new_luminosity_id", using: :btree
+    t.index ["new_temperature_id"], name: "index_email_logs_on_new_temperature_id", using: :btree
     t.index ["user_id"], name: "index_email_logs_on_user_id", using: :btree
   end
 
@@ -105,11 +121,15 @@ ActiveRecord::Schema.define(version: 20180404182912) do
 
   create_table "settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
-    t.float    "alert_level", limit: 24
-    t.boolean  "active",                 default: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.integer  "theme",                  default: 1
+    t.float    "alert_level",        limit: 24
+    t.boolean  "active",                        default: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.integer  "theme",                         default: 1
+    t.float    "temperature_alert",  limit: 24
+    t.float    "humidity_alert",     limit: 24
+    t.float    "atm_pressure_alert", limit: 24
+    t.float    "luminosity_alert",   limit: 24
     t.index ["user_id"], name: "index_settings_on_user_id", using: :btree
   end
 
@@ -122,10 +142,14 @@ ActiveRecord::Schema.define(version: 20180404182912) do
   end
 
   create_table "user_devices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id",             null: false
-    t.integer  "device_id",           null: false
+    t.integer  "user_id",                    null: false
+    t.integer  "device_id",                  null: false
     t.datetime "last_critical_level"
     t.string   "description"
+    t.datetime "last_critical_temperature"
+    t.datetime "last_critical_humidity"
+    t.datetime "last_critical_atm_pressure"
+    t.datetime "last_critical_luminosity"
     t.index ["device_id"], name: "index_user_devices_on_device_id", using: :btree
     t.index ["user_id", "device_id"], name: "index_user_devices_on_user_id_and_device_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_user_devices_on_user_id", using: :btree
