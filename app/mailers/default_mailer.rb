@@ -2,6 +2,7 @@ class DefaultMailer < ApplicationMailer
   default from: '"LCA Systems" <atendimento@lcasystems.com.br>'
 
   after_action :set_last_critical_level, only: :alert_email
+  after_action :set_last_critical_weather, only: :weather_alert_email
 
   def alert_email(user_device, level)
     @user_device = user_device
@@ -42,8 +43,77 @@ class DefaultMailer < ApplicationMailer
     mail(to: "atendimento@lcasystems.com.br", from: "#{contact.name} <#{contact.email}>", subject: contact.subject)
   end
 
+  def weather_alert_email(user_device, weather, alert_type)
+    @alert_type = alert_type
+    @user_device = user_device
+    @user = user_device.user
+    @device = user_device.device
+    @weather = weather
+    @created_at = weather.created_at
+    case @alert_type
+      when "temperature"
+        @metric = "ºC"
+        @alert = "temperatura"
+        @last_critical = user_device.last_critical_temperature
+      when "humidity"
+        @metric = "%"
+        @alert = "umidade"
+        @last_critical = user_device.last_critical_humidity
+      when "atm_pressure"
+        @metric = "hPa"
+        @alert = "pressão atmosférica"
+        @last_critical = user_device.last_critical_atm_pressure
+      when "luminosity"
+        @metric = ""
+        @alert = "luminosidade"
+        @last_critical = user_device.last_critical_luminosity
+    end
+    mail(to: @user.email, subject: 'Alerta Meteorológico')
+  end
+
+  def normal_weather_email(user_device, weather, alert_type)
+    @alert_type = alert_type
+    @user_device = user_device
+    @user = user_device.user
+    @device = user_device.device
+    @weather = weather
+    @created_at = weather.created_at
+    case @alert_type
+      when "temperature"
+        @metric = "ºC"
+        @alert = "temperatura"
+        @last_critical = user_device.last_critical_temperature
+      when "humidity"
+        @metric = "%"
+        @alert = "umidade"
+        @last_critical = user_device.last_critical_humidity
+      when "atm_pressure"
+        @metric = "hPa"
+        @alert = "pressão atmosférica"
+        @last_critical = user_device.last_critical_atm_pressure
+      when "luminosity"
+        @metric = ""
+        @alert = "luminosidade"
+        @last_critical = user_device.last_critical_luminosity
+    end
+    mail(to: @user.email, subject: 'Condições Meteorológicas Normalizadas')
+  end
+
   private
     def set_last_critical_level
       @user_device.update_attributes(last_critical_level: @level.created_at)
+    end
+
+    def set_last_critical_weather
+      case @alert_type
+        when "temperature"
+          @user_device.update_attributes(last_critical_temperature: @weather.created_at)
+        when "humidity"
+          @user_device.update_attributes(last_critical_humidity: @weather.created_at)
+        when "atm_pressure"
+          @user_device.update_attributes(last_critical_atm_pressure: @weather.created_at)
+        when "luminosity"
+          @user_device.update_attributes(last_critical_luminosity: @weather.created_at)
+      end
     end
 end
