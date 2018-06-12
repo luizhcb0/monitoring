@@ -2,7 +2,9 @@ class Api::V1::MonitoringController < Api::V1::BaseController
   include StrongParamsHolder
 
   before_action :set_contact, only: [:show, :update, :destroy]
-  before_action :require_authorization!, only: [:show, :update, :destroy]
+  # before_action :require_authorization!, only: [:show, :update, :destroy]
+  skip_before_action :verify_authenticity_token
+
 
   # GET /api/v1/monitoring
   def index
@@ -54,55 +56,66 @@ class Api::V1::MonitoringController < Api::V1::BaseController
           user_device = UserDevice.where(device: device, user: user).first
           if user.setting.active?
             # Temperature Alert
-            if temperature.data <= user.setting.temperature_alert
-              if user_device.last_critical_temperature.nil?
-                user_device.update_attributes(last_critical_temperature: temperature.created_at)
-              end
-              if last_temperature.data > user.setting.temperature_alert
-                SendEmailJob.set(wait: 8.seconds).perform_later(temperature, user_device, last_temperature, "temperature")
-              end
-            else
-              if last_temperature.data <= user.setting.temperature_alert
-                SendEmailJob.set(wait: 8.seconds).perform_later(temperature, user_device, last_temperature, "temperature")
+            if user.setting.temperature_alert.present?
+              if temperature.data <= user.setting.temperature_alert
+                if user_device.last_critical_temperature.nil?
+                  user_device.update_attributes(last_critical_temperature: temperature.created_at)
+                end
+                if last_temperature.data > user.setting.temperature_alert
+                  SendEmailJob.set(wait: 8.seconds).perform_later(temperature, user_device, last_temperature, "temperature")
+                end
+              else
+                if last_temperature.data <= user.setting.temperature_alert
+                  SendEmailJob.set(wait: 8.seconds).perform_later(temperature, user_device, last_temperature, "temperature")
+                end
               end
             end
+
             # Humidity Alert
-            if humidity.data <= user.setting.humidity_alert
-              if user_device.last_critical_humidity.nil?
-                user_device.update_attributes(last_critical_humidity: humidity.created_at)
-              end
-              if last_humidity.data > user.setting.humidity_alert
-                SendEmailJob.set(wait: 8.seconds).perform_later(humidity, user_device, last_humidity, "humidity")
-              end
-            else
-              if last_humidity.data <= user.setting.humidity_alert
-                SendEmailJob.set(wait: 8.seconds).perform_later(humidity, user_device, last_humidity, "humidity")
+            if user.setting.humidity_alert.present?
+              if humidity.data <= user.setting.humidity_alert
+                if user_device.last_critical_humidity.nil?
+                  user_device.update_attributes(last_critical_humidity: humidity.created_at)
+                end
+                if last_humidity.data > user.setting.humidity_alert
+                  SendEmailJob.set(wait: 8.seconds).perform_later(humidity, user_device, last_humidity, "humidity")
+                end
+              else
+                if last_humidity.data <= user.setting.humidity_alert
+                  SendEmailJob.set(wait: 8.seconds).perform_later(humidity, user_device, last_humidity, "humidity")
+                end
               end
             end
+
             # Atm Pressure Alert
-            if atm_pressure.data <= user.setting.atm_pressure_alert
-              if user_device.last_critical_atm_pressure.nil?
-                user_device.update_attributes(last_critical_atm_pressure: atm_pressure.created_at)
-              end
-              if last_atm_pressure.data > user.setting.atm_pressure_alert
-                SendEmailJob.set(wait: 8.seconds).perform_later(atm_pressure, user_device, last_atm_pressure, "atm_pressure")
-              end
-            else
-              if last_atm_pressure.data <= user.setting.atm_pressure_alert
-                SendEmailJob.set(wait: 8.seconds).perform_later(atm_pressure, user_device, last_atm_pressure, "atm_pressure")
+            if user.setting.atm_pressure_alert.present?
+              if atm_pressure.data <= user.setting.atm_pressure_alert
+                if user_device.last_critical_atm_pressure.nil?
+                  user_device.update_attributes(last_critical_atm_pressure: atm_pressure.created_at)
+                end
+                if last_atm_pressure.data > user.setting.atm_pressure_alert
+                  SendEmailJob.set(wait: 8.seconds).perform_later(atm_pressure, user_device, last_atm_pressure, "atm_pressure")
+                end
+              else
+                if last_atm_pressure.data <= user.setting.atm_pressure_alert
+                  SendEmailJob.set(wait: 8.seconds).perform_later(atm_pressure, user_device, last_atm_pressure, "atm_pressure")
+                end
               end
             end
+
             # Luminosity Alert
-            if luminosity.data <= user.setting.luminosity_alert
-              if user_device.last_critical_luminosity.nil?
-                user_device.update_attributes(last_critical_luminosity: luminosity.created_at)
-              end
-              if last_luminosity.data > user.setting.luminosity_alert
-                SendEmailJob.set(wait: 8.seconds).perform_later(luminosity, user_device, last_luminosity, "luminosity")
-              end
-            else
-              if last_luminosity.data <= user.setting.luminosity_alert
-                SendEmailJob.set(wait: 8.seconds).perform_later(luminosity, user_device, last_luminosity, "luminosity")
+            if user.setting.luminosity_alert.present?
+              if luminosity.data <= user.setting.luminosity_alert
+                if user_device.last_critical_luminosity.nil?
+                  user_device.update_attributes(last_critical_luminosity: luminosity.created_at)
+                end
+                if last_luminosity.data > user.setting.luminosity_alert
+                  SendEmailJob.set(wait: 8.seconds).perform_later(luminosity, user_device, last_luminosity, "luminosity")
+                end
+              else
+                if last_luminosity.data <= user.setting.luminosity_alert
+                  SendEmailJob.set(wait: 8.seconds).perform_later(luminosity, user_device, last_luminosity, "luminosity")
+                end
               end
             end
 
@@ -133,16 +146,18 @@ class Api::V1::MonitoringController < Api::V1::BaseController
         device.users.each do |user|
           user_device = UserDevice.where(device: device, user: user).first
           if user.setting.active?
-            if level.percentage <= user.setting.alert_level
-              if user_device.last_critical_level.nil?
-                user_device.update_attributes(last_critical_level: level.created_at)
-              end
-              if last.percentage > user.setting.alert_level
-                SendEmailJob.set(wait: 8.seconds).perform_later(level, user_device, last)
-              end
-            else
-              if last.percentage <= user.setting.alert_level
-                SendEmailJob.set(wait: 8.seconds).perform_later(level, user_device, last)
+            if user.setting.alert_level.present?
+              if level.percentage <= user.setting.alert_level
+                if user_device.last_critical_level.nil?
+                  user_device.update_attributes(last_critical_level: level.created_at)
+                end
+                if last.percentage > user.setting.alert_level
+                  SendEmailJob.set(wait: 8.seconds).perform_later(level, user_device, last)
+                end
+              else
+                if last.percentage <= user.setting.alert_level
+                  SendEmailJob.set(wait: 8.seconds).perform_later(level, user_device, last)
+                end
               end
             end
           end
